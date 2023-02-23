@@ -1,0 +1,31 @@
+{
+    "name": "platform",
+    "private": true,
+    "version": "1.0.0",
+    "description": "",
+    "workspaces": [
+        "api",
+        "management-app",
+        "student-app"
+    ],
+    "main": "index.js",
+    "scripts": {
+        "start:api": "npm run start --workspace=api",
+        "dev:api": "npm run dev --workspace=api",
+        "start:student": "npm run start --workspace=student-app",
+        "build:student": "npm run build --workspace=student-app",
+        "start:management": "npm run start --workspace=management-app",
+        "build:management": "npm run build --workspace=management-app"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/corecodeio/platform.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/corecodeio/platform/issues"
+    },
+    "homepage": "https://github.com/corecodeio/platform#readme"
+}
