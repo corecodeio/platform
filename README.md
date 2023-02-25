@@ -13,60 +13,59 @@
 3. [Environment Variables](#3-environment-variables)
 4. [Scripts](#4-scripts)
 5. [Recommended resources](#5-recommended-resources)
+6. [README of the different projects](#6-readme-of-the-different-projects)
 
 ---
 
 ## 1. Introduction 🚀
 
-Bienvenido/a al repositorio 'Platform' de Core Code. Antes de poder iniciar el repositorio de forma
-local, es necesario realizar ciertas configuraciones para su utilización. Además, nos gustaría
-brindarte algunos recursos que te ayuden a comprender mejor cada parte del proceso. Esperamos que
-disfrutes y aprendas mucho de este repositorio, cuya finalidad principal es proporcionar una
-experiencia laboral real a nuestros graduados en el mundo del desarrollo.
+Welcome to the Core Code 'Platform' repository. Before you can start the repository
+local, it is necessary to perform certain configurations for its use. In addition, we would like
+provide you with some resources to help you better understand each part of the process. We hope you can enjoy and learn a lot from this repository, whose main purpose is to provide a
+real work experience to our graduates in the development world.
 
 ## 2. Workspaces
 
-Desde la versión 7, npm tiene soporte para espacios de trabajo (workspace), lo que facilita mucho el
-proceso de desarrollo. Un ejemplo de ello es la unificación al momento de instalar dependencias.
-Anteriormente, si en un repositorio se usaban varias carpetas de proyectos, se tenía que instalar
-las dependencias carpeta por carpeta de proyecto:
+Since version 7, npm has support for "workspace", which makes it much easier to
+development process. An example of this is unification when installing dependencies.
+Previously, if multiple project folders were used in a repository, you had to install
+the folder dependencies per project folder:
 
 ```
     npm install
 ```
 
-Con esta unificación, solo es necesario hacer la instalación una vez en el proyecto principal,
-mediante un archivo package.json que unifica todo, sin quitar el archivo package.json individual de
-cada proyecto. Esto también se aplica a los scripts.
+With this unification, it is only necessary to do the installation once in the main project,
+using one package.json file that unifies everything, without removing the individual package.json file from each project. this also applies to scripts.
 
 En nuestros espacios de trabajo, tendremos 3 proyectos:
 
--   api: backend general de la plataforma con diferentes rutas para cada frontend:
-    -   endpoint para cada frontend con diferentes funcionalidades y validación de permisos y roles.
-    -   centralización de datos (DB).
-    -   conexión con las diferentes APIs a utilizar:
-        -   Google Calendar (Google API).
-        -   WhatsApp (Meta for Developers).
-        -   Slack (Slack API).
--   student-app: frontend para estudiantes de la plataforma. Entre sus funciones principales
-    estarán: -sign Up y log In de nuevos aplicantes.
-    -   Validación de información:
-        -   Teléfono mediante WhatsApp.
-        -   GitHub.
-        -   LinkedIn.
-    -   Dashboard centralizado de enseñanza:
-        -   Estados del proceso actual.
-        -   Información de asistencias y cronogramas de eventos en Zoom y Google Calendar.
-        -   Información generalizada del curso inscripto.
--   management-app: frontend para la parte administrativa. Funciones:
-    -   Creación de nuevos cursos.
-    -   Sistema de roles y permisos para los diferentes tipos de cuentas.
-    -   Dashboard para la administración de las diferentes APIs y cursos generados.
+- api: general backend of the platform with different paths for each frontend:
+    - endpoint for each frontend with different functionalities and validation of permissions and roles.
+    - data centralization (DB).
+    - connection with the different APIs to use:
+        - Google Calendar (Google API).
+        - WhatsApp (Meta for Developers).
+        - Slack (Slack API).
+-   student-app: frontend for students of the platform. Among its main functions will be:
+    - sign Up and log In of new applicants.
+    - Information validation:
+        - Phone using WhatsApp verification code.
+        - GitHub authentication to get user and be able to invite to course repositories.
+        - LinkedIn.
+    - Centralized Teaching Dashboard:
+        - States of the current process.
+        - Attendance information and event schedules on Zoom and Google Calendar.
+        - Generalized information of the enrolled course.
+-   management-app: frontend for the administrative part. functions:
+    - Creation of new courses.
+    - System of roles and permissions for the different types of accounts.
+    - Dashboard for the administration of the different APIs and generated courses.
 
 ## 3. Environment Variables
 
-En cada proyecto, necesitas un archivo .env. Aquí dejaremos registros del nombre de estas variables
-para cada proyecto individualmente:
+In each project, you need an .env file. Here we will leave records of the name of these variables
+for each project individually:
 
 student-app:
 
@@ -121,3 +120,9 @@ api:
 ## 5. Recommended resources
 
 [Here](https://www.youtube.com/watch?v=KEkRy4q_0oI) workspaces
+
+## 6. README of the different projects
+
+- api: [README](/api/README.md)
+- student-app: [README](/student-app/README.md)
+- management-app: [README](/management-app/README.md)
