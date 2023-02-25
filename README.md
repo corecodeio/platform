@@ -12,6 +12,7 @@
 2. [Workspaces](#2-workspaces)
 3. [Environment Variables](#3-environment-variables)
 4. [Scripts](#4-scripts)
+5. [Recommended resources](#5-recommended-resources)
 
 ---
 
@@ -38,8 +39,6 @@ Con esta unificación, solo es necesario hacer la instalación una vez en el pro
 mediante un archivo package.json que unifica todo, sin quitar el archivo package.json individual de
 cada proyecto. Esto también se aplica a los scripts.
 
-Si deseas saber más sobre los workspaces, te dejamos un enlace [aquí](https://www.youtube.com/watch?v=KEkRy4q_0oI)
-
 En nuestros espacios de trabajo, tendremos 3 proyectos:
 
 -   api: backend general de la plataforma con diferentes rutas para cada frontend:
@@ -65,19 +64,28 @@ En nuestros espacios de trabajo, tendremos 3 proyectos:
     -   Dashboard para la administración de las diferentes APIs y cursos generados.
 
 ## 3. Environment Variables
-En cada proyecto, necesitas un archivo .env. Aquí dejaremos registros del nombre de estas variables para cada proyecto individualmente:
+
+En cada proyecto, necesitas un archivo .env. Aquí dejaremos registros del nombre de estas variables
+para cada proyecto individualmente:
+
 student-app:
+
 ```
     PORT=3500
 ```
+
 management-app:
+
 ```
     PORT=4000
 ```
+
 api:
+
 ```
     #Server configurations
-    SERVER_PORT=
+    SERVER_PORT=3001
+    SERVER_MODE=
     #Database configurations
     SERVER_DB_USER=
     SERVER_DB_PASS=
@@ -85,8 +93,18 @@ api:
     SERVER_DB_PORT=
     SERVER_DB_NAME=
     #URL frontend configurations
-    CLIENT_STUDENT_URL=http://localhost:3500/
-    CLIENT_MANAGEMENT_URL=http://localhost:4000/
+    CLIENT_STUDENT_URL=http://localhost:3500
+    CLIENT_MANAGEMENT_URL=http://localhost:4000
+    #jwt configurations
+    JWT_SECRET_KEY_STUDENT=
+    JWT_EXPIRES_STUDENT=
+    JWT_SECRET_KEY_MANAGEMENT=
+    JWT_EXPIRES_MANAGEMENT=
+    #nodemailer configurations
+    NODE_MAILER_HOST=
+    NODE_MAILER_PORT=
+    NODE_MAILER_USER=
+    NODE_MAILER_PASSWORD=
 ```
 
 ## 4. Scripts
@@ -99,3 +117,7 @@ api:
         "start:management": "npm run start --workspace=management-app",
         "build:management": "npm run build --workspace=management-app"
 ```
+
+## 5. Recommended resources
+
+[Here](https://www.youtube.com/watch?v=KEkRy4q_0oI) workspaces
