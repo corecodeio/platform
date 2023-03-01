@@ -41,7 +41,8 @@ module.exports.logIn = async (req, res, next) => {
                     last_name: userResult.last_name,
                     email: userResult.email,
                     validate_email: userResult.validate_email,
-                    phone: userResult.phone
+                    phone: userResult.phone,
+                    surveyID: userResult.surveyID
                 }
             });
         } else {
@@ -94,7 +95,8 @@ module.exports.signUp = async (req, res, next) => {
                 last_name: newUser.last_name,
                 email: newUser.email,
                 validate_email: newUser.validate_email,
-                phone: newUser.phone
+                phone: newUser.phone,
+                surveyID: newUser.surveyID
             }
         });
     } catch (error) {
@@ -122,7 +124,8 @@ module.exports.checkToken = async (req, res, next) => {
                 last_name: userResult.last_name,
                 email: userResult.email,
                 validate_email: userResult.validate_email,
-                phone: userResult.phone
+                phone: userResult.phone,
+                surveyID: userResult.surveyID
             }
         });
     } catch (error) {

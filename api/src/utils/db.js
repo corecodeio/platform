@@ -3,10 +3,13 @@ const fs = require('fs');
 const path = require('path');
 const { postgresConfig } = require('./../config/index.js');
 
-const sequelize = new Sequelize(`postgres://${postgresConfig.user}:${postgresConfig.password}@${postgresConfig.host}:${postgresConfig.port}/${postgresConfig.name}`, {
-    logging: false,
-    native: false
-});
+const sequelize = new Sequelize(
+    `postgres://${postgresConfig.user}:${postgresConfig.password}@${postgresConfig.host}:${postgresConfig.port}/${postgresConfig.name}`,
+    {
+        logging: false,
+        native: false
+    }
+);
 
 const basename = path.basename(__filename);
 
@@ -28,8 +31,11 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { } = sequelize.models;
+const { User, Survey } = sequelize.models;
 
+Survey.hasOne(User, {
+    foreignKey: 'surveyID'
+});
 
 module.exports = {
     ...sequelize.models,
