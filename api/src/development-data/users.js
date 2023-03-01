@@ -8,7 +8,7 @@ const users = [
         last_name: 'Agreda',
         email: 'testing@gmail.com',
         validate_email: true,
-        country: 'guatemala',
+        country: 'Argentina',
         password: bcrypt.hashSync('123456', bcryptConfig.rounds)
     }
 ];
