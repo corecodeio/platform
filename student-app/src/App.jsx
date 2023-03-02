@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 //actions
-import { changeLoading, logIn } from './redux/authSlice';
+import { setLoading, logIn } from './redux/authSlice';
 //views
 import MainPage from './views/MainPage';
 import NotFound from './views/NotFound';
@@ -15,31 +15,39 @@ import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import ForgotPassword from './components/ForgotPassword';
 import ProtectedRoutes from './components/ProtectedRoutes';
+import Questions from './components/Questions';
+import Postulation from './components/Postulation';
+import Courses from './components/Courses';
 
 const App = () => {
     const { isLoading } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const checkToken = async () => {
-        const token = localStorage.getItem('core_code_tk');
-        if (token) {
-            const response = await axios.post(
-                '/api_student_v1/user/checkToken',
-                {},
-                {
-                    headers: {
-                        'Content-type': 'application/json',
-                        Authorization: token
+        try {
+            const token = window.localStorage.getItem('core_code_tk');
+            if (token) {
+                const response = await axios.post(
+                    '/api/student/user/check-token',
+                    {},
+                    {
+                        headers: {
+                            'Content-type': 'application/json',
+                            Authorization: token
+                        }
                     }
+                );
+                if (response.data.successful) {
+                    dispatch(logIn(response.data.user));
+                } else {
+                    window.localStorage.removeItem('core_code_tk');
                 }
-            );
-            if (response.data.successful) {
-                dispatch(logIn(response.data.user));
+                dispatch(setLoading(false));
             } else {
-                localStorage.removeItem('core_code_tk');
+                dispatch(setLoading(false));
             }
-            dispatch(changeLoading(false));
-        } else {
-            dispatch(changeLoading(false));
+        } catch (error) {
+            window.localStorage.removeItem('core_code_tk');
+            dispatch(setLoading(false));
         }
     };
     useEffect(() => {
@@ -52,11 +60,10 @@ const App = () => {
     return (
         <Routes>
             <Route path="/" element={<MainPage />}>
-                <Route path="/login" element={<LogIn />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="log-in" element={<LogIn />} />
+                <Route path="sign-up" element={<SignUp />} />
+                <Route path="forgot-password" element={<ForgotPassword />} />
             </Route>
-            <Route path="/validate-email/:activate_token" element={<Authentication />} />
             <Route
                 path="/dashboard"
                 element={
@@ -64,7 +71,12 @@ const App = () => {
                         <Dashboard />
                     </ProtectedRoutes>
                 }
-            />
+            >
+                <Route path="questions" element={<Questions />} />
+                <Route path="postulation" element={<Postulation />} />
+                <Route path="courses" element={<Courses />} />
+            </Route>
+            <Route path="/validate-email/:activate_token" element={<Authentication />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     );

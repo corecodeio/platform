@@ -15,9 +15,9 @@ const LogIn = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api_student_v1/user/logIn', data);
+            const response = await axios.post('/api/student/user/log-in', data);
             if (response.data.successful) {
-                localStorage.setItem('core_code_tk', `Bearer ${response.data.token}`);
+                window.localStorage.setItem('core_code_tk', `Bearer ${response.data.token}`);
                 dispatch(logIn(response.data.user));
             } else {
                 setError(response.data.message);
@@ -70,7 +70,7 @@ const LogIn = () => {
             {error && <p className={Styles[`form-error`]}>{error}</p>}
             <p>
                 ¿Aún no tienes una cuenta?{' '}
-                <Link className={Styles[`form-link`]} to="/signup">
+                <Link className={Styles[`form-link`]} to="/sign-up">
                     Regístrate aquí
                 </Link>
             </p>

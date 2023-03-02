@@ -10,14 +10,16 @@ module.exports.logIn = async (req, res, next) => {
     try {
         const { email, password } = req.body;
         if (!email || !password) {
-            return res.status(200).json({ successful: false, message: 'missing to enter data.' });
+            return res.status(200).json({ successful: false, message: 'Falta ingresar datos' });
         }
         const userResult = await User.findOne({ where: { email: email } });
         if (!userResult) {
-            return res.status(200).json({ successful: false, message: 'email does not exist.' });
+            return res
+                .status(200)
+                .json({ successful: false, message: 'El email o la contraseña son incorrectos' });
         }
         if (userResult.locked) {
-            return res.status(200).json({ successful: false, message: 'blocked user.' });
+            return res.status(200).json({ successful: false, message: 'Usuario bloqueado' });
         }
         if (bcrypt.compareSync(password, userResult.password)) {
             let token = jwt.sign(
@@ -34,7 +36,7 @@ module.exports.logIn = async (req, res, next) => {
             );
             res.status(200).json({
                 successful: true,
-                message: 'login successful.',
+                message: 'Inicio de sesión exitoso',
                 token: token,
                 user: {
                     first_name: userResult.first_name,
@@ -46,7 +48,10 @@ module.exports.logIn = async (req, res, next) => {
                 }
             });
         } else {
-            res.status(200).json({ successful: false, message: 'password is incorrect.' });
+            res.status(200).json({
+                successful: false,
+                message: 'El email o la contraseña son incorrectos'
+            });
         }
     } catch (error) {
         console.log(error);
@@ -59,11 +64,11 @@ module.exports.signUp = async (req, res, next) => {
     try {
         const { first_name, last_name, email, password } = req.body;
         if (!first_name || !last_name || !email || !password) {
-            return res.status(200).json({ successful: false, message: 'missing to enter data.' });
+            return res.status(200).json({ successful: false, message: 'Falta ingresar datos' });
         }
         const emailAvailable = await User.findOne({ where: { email: email } });
         if (emailAvailable) {
-            return res.status(200).json({ successful: false, message: 'email is busy.' });
+            return res.status(200).json({ successful: false, message: 'El email ya está en uso' });
         }
         const passwordCrypt = bcrypt.hashSync(password, bcryptConfig.rounds);
         const newUser = await User.create({
@@ -88,7 +93,7 @@ module.exports.signUp = async (req, res, next) => {
         sendEmailWelcome({ id: newUser.id, first_name, last_name, email });
         res.status(200).json({
             successful: true,
-            message: 'successful registration',
+            message: 'Registro exitoso',
             token: token,
             user: {
                 first_name: newUser.first_name,
@@ -111,14 +116,14 @@ module.exports.checkToken = async (req, res, next) => {
         const { id } = req.user;
         const userResult = await User.findOne({ where: { id: id } });
         if (!userResult) {
-            return res.status(200).send({ successful: false, message: 'user does not exist.' });
+            return res.status(200).send({ successful: false, message: 'Usuario no existe' });
         }
         if (userResult.locked) {
-            return res.status(200).json({ successful: false, message: 'blocked user.' });
+            return res.status(200).json({ successful: false, message: 'Usuario bloqueado' });
         }
         res.status(200).json({
             successful: true,
-            message: 'login successful.',
+            message: 'Inicio de sesión exitoso',
             user: {
                 first_name: userResult.first_name,
                 last_name: userResult.last_name,
@@ -137,4 +142,9 @@ module.exports.checkToken = async (req, res, next) => {
 //Recover Password
 module.exports.recoverPassword = async (req, res, next) => {
     res.status(200).json({ successful: true, message: 'Recover Password' });
+};
+
+//Validate Email
+module.exports.validateEmail = async (req, res, next) => {
+    res.status(200).json({ successful: true, message: 'Validate Email' });
 };

@@ -9,7 +9,7 @@ const MainPage = () => {
     const navigate = useNavigate();
     useEffect(() => {
         if (!isAuth && location.pathname === '/') {
-            navigate('/login');
+            navigate('/log-in');
         }
         // eslint-disable-next-line
     }, []);

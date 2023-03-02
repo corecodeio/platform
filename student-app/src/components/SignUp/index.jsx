@@ -19,9 +19,9 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api_student_v1/user/signUp', data);
+            const response = await axios.post('/api/student/user/sign-up', data);
             if (response.data.successful) {
-                localStorage.setItem('core_code_tk', `Bearer ${response.data.token}`);
+                window.localStorage.setItem('core_code_tk', `Bearer ${response.data.token}`);
                 dispatch(logIn(response.data.user));
             } else {
                 setError(response.data.message);
@@ -106,7 +106,7 @@ const SignUp = () => {
             {error && <p className={Styles[`form-error`]}>{error}</p>}
             <p>
                 ¿Ya tienes una cuenta?{' '}
-                <Link className={Styles[`form-link`]} to="/login">
+                <Link className={Styles[`form-link`]} to="/log-in">
                     Ingresa aquí
                 </Link>
             </p>
