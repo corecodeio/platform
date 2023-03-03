@@ -16,17 +16,17 @@ export const authSlice = createSlice({
             state.isAuth = true;
         },
         logOut: (state, action) => {
-            localStorage.removeItem('core_code_tk');
+            window.localStorage.removeItem('core_code_tk');
             state.isAuth = false;
             state.user = {};
         },
-        changeLoading: (state, action) => {
+        setLoading: (state, action) => {
             const { payload } = action;
             state.isLoading = payload;
         }
     }
 });
 
-export const { logIn, changeLoading, logOut } = authSlice.actions;
+export const { logIn, setLoading, logOut } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -12,6 +12,7 @@
     "scripts": {
         "start:api": "npm run start --workspace=api",
         "dev:api": "npm run dev --workspace=api",
+        "test:api": "npm run test --workspace=api",
         "start:student": "npm run start --workspace=student-app",
         "build:student": "npm run build --workspace=student-app",
         "start:management": "npm run start --workspace=management-app",
