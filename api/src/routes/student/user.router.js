@@ -4,16 +4,20 @@ const {
     logIn,
     signUp,
     recoverPassword,
-    checkToken
+    checkToken,
+    validateEmail
 } = require('./../../controllers/student/user.controllers');
 const authStudent = require('./../../middlewares/auth.student');
+
 //log In
-router.post('/logIn', logIn);
+router.post('/log-in', logIn);
 //Sign Up
-router.post('/signUp', signUp);
+router.post('/sign-up', signUp);
 //Recover Password
-router.post('/checkToken', authStudent, checkToken);
+router.post('/check-token', authStudent, checkToken);
 //Recover Password
-router.post('/recoverPassword', recoverPassword);
+router.post('/recover-password', recoverPassword);
+//Validate Email
+router.post('/validate-email', validateEmail);
 
 module.exports = router;
