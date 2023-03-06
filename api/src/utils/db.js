@@ -31,10 +31,22 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Survey } = sequelize.models;
+const { User, Survey, Role, Permission, Staff } = sequelize.models;
 
 Survey.hasOne(User, {
     foreignKey: 'surveyID'
+});
+
+Staff.belongsToMany(Role, { as: 'roles', through: 'StaffRole' });
+Role.belongsToMany(Staff, { as: 'roles', through: 'StaffRole' });
+
+Role.belongsToMany(Permission, {
+    as: 'permissions',
+    through: 'RolePermission'
+});
+Permission.belongsToMany(Role, {
+    as: 'permissions',
+    through: 'RolePermission'
 });
 
 module.exports = {
