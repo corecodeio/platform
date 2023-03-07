@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const { jwtStudentConfig, bcryptConfig } = require('./../../config/index.js');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
-const sendEmailWelcome = require('./../../helpers/email.welcome');
+const { sendWelcome } = require('./../../helpers/email.student');
 
 //log In
 module.exports.logIn = async (req, res, next) => {
@@ -90,7 +90,7 @@ module.exports.signUp = async (req, res, next) => {
                 algorithm: jwtStudentConfig.algorithms[0]
             }
         );
-        sendEmailWelcome({ id: newUser.id, first_name, last_name, email });
+        sendWelcome({ id: newUser.id, first_name, last_name, email });
         res.status(200).json({
             successful: true,
             message: 'Registro exitoso',

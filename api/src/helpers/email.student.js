@@ -2,9 +2,11 @@ const { nodeMailerConfig, clientConfig, jwtStudentConfig } = require('./../confi
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
-module.exports = ({ id, first_name, last_name, email }) => {
+const transport = nodemailer.createTransport(nodeMailerConfig);
+
+module.exports.sendWelcome = ({ id, first_name, last_name, email }) => {
     try {
-        const transport = nodemailer.createTransport(nodeMailerConfig);
+        
         const tokenEmail = jwt.sign(
             {
                 user: {
