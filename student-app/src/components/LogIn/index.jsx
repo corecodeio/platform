@@ -15,7 +15,7 @@ const LogIn = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api_student_v1/user/log-in', data);
+            const response = await axios.post('/api/student/user/log-in', data);
             if (response.data.successful) {
                 window.localStorage.setItem('core_code_tk', `Bearer ${response.data.token}`);
                 dispatch(logIn(response.data.user));

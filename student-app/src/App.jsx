@@ -27,7 +27,7 @@ const App = () => {
             const token = window.localStorage.getItem('core_code_tk');
             if (token) {
                 const response = await axios.post(
-                    '/api_student_v1/user/check-token',
+                    '/api/student/user/check-token',
                     {},
                     {
                         headers: {

@@ -19,7 +19,7 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api_student_v1/user/sign-up', data);
+            const response = await axios.post('/api/student/user/sign-up', data);
             if (response.data.successful) {
                 window.localStorage.setItem('core_code_tk', `Bearer ${response.data.token}`);
                 dispatch(logIn(response.data.user));
