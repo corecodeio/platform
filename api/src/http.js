@@ -41,10 +41,6 @@ if (serverConfig.mode) {
 server.use('/api/student', studentRoutes);
 server.use('/api/management', managementsRoutes);
 
-server.get('/', (req, res) => res.send("This is the API's Home Page."));
-
-server.get('/api/testing', (req, res) => res.send("This is the testing Page."));
-
 ////////////////////////////////////////////////
 
 /*********** ERROR HANDLER ********************/
