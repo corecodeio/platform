@@ -38,8 +38,9 @@ if (serverConfig.mode) {
 //////////////// ENDS CORS CONFIG ///////////////////////
 
 /********** ROUTES ****************************/
-server.use('/api_student_v1', studentRoutes);
-server.use('/api_management_v1', managementsRoutes);
+server.use('/api/student', studentRoutes);
+server.use('/api/management', managementsRoutes);
+
 ////////////////////////////////////////////////
 
 /*********** ERROR HANDLER ********************/
