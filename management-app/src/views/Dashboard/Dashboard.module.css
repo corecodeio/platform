@@ -1,0 +1,32 @@
+.container-main-light {
+    width: 100%;
+    height: calc(100% - 50px);
+    background-color: #f3f5f9;
+    display: flex;
+    color: #0f1f39;
+    overflow: hidden;
+    transition: 0.5s;
+}
+.container-main-dark {
+    width: 100%;
+    height: calc(100% - 50px);
+    background-color: #0a0a0a;
+    display: flex;
+    color: #ffffff;
+    overflow: hidden;
+    transition: 0.5s;
+}
+.container-component {
+    width: calc(100% - 250px);
+    height: 100%;
+    overflow: auto;
+}
+@media only screen and (max-width: 1440px) and (min-width: 1281px) {
+}
+@media only screen and (max-width: 1280px) and (min-width: 801px) {
+}
+@media only screen and (max-width: 800px) {
+    .container-component {
+        width: 100%;
+    }
+}
