@@ -1,8 +1,9 @@
-const { User, Staff, Permission, Role } = require('./../utils/db');
+const { User, Staff, Permission, Role, CourseType } = require('./../utils/db');
 const users = require('./users');
 const staffs = require('./staff');
 const roles = require('./roles');
 const permissions = require('./permissions');
+const courseType = require('./courseType');
 
 const preload = async () => {
     try {
@@ -40,6 +41,8 @@ const preload = async () => {
         await rolesCreated[1].addPermission(permissionsCreated[11].id);
         // Role: techlead add permissions:
         await rolesCreated[2].addPermission(permissionsCreated[8].id);
+        //-------------- Courses --------------
+        const courseTypesCreated = await CourseType.bulkCreate(courseType);
         console.log('development data uploaded successfully');
     } catch (error) {
         console.log('error loading development data');
