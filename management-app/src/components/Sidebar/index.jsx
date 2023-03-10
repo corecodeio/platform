@@ -35,7 +35,13 @@ const Sidebar = ({ menu, setMenu }) => {
                             }}
                         >
                             <option.icon className={Styles[`menu-icon`]} />
-                            <p onClick={() => navigate(option.url)} className={Styles[`menu-text`]}>
+                            <p
+                                onClick={() => {
+                                    navigate(option.url);
+                                    setMenu(false);
+                                }}
+                                className={Styles[`menu-text`]}
+                            >
                                 {option.title}
                             </p>
                         </div>
@@ -46,13 +52,18 @@ const Sidebar = ({ menu, setMenu }) => {
                                     className={Styles[`item-${mode}`]}
                                     style={{
                                         borderLeft: `${
-                                            pathname === `/dashboard/${option.url}/${item.url}` ? '3' : '0'
+                                            pathname === `/dashboard/${option.url}/${item.url}`
+                                                ? '3'
+                                                : '0'
                                         }px solid ${mode === 'light' ? '#0f1f39' : '#ffffff'}`
                                     }}
                                 >
                                     <item.icon className={Styles[`item-icon`]} />
                                     <p
-                                        onClick={() => navigate(`${option.url}/${item.url}`)}
+                                        onClick={() => {
+                                            navigate(`${option.url}/${item.url}`);
+                                            setMenu(false);
+                                        }}
                                         className={Styles[`item-text`]}
                                     >
                                         {item.title}

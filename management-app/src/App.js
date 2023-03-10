@@ -12,6 +12,7 @@ import Loading from './views/Loading';
 //components
 import ProtectedRoutes from './components/ProtectedRoutes';
 import Statistics from './components/Statistics';
+import CourseCreateCourse from './views/Dashboard/CoursesCreateCourse';
 
 const App = () => {
     const { isLoading } = useSelector((state) => state.auth);
@@ -71,7 +72,7 @@ const App = () => {
                 <Route path="staff/send-invitation" element={<p>send-invitation</p>} />
                 <Route path="staff/staff-list" element={<p>staff-list</p>} />
                 <Route path="courses" element={<p>courses</p>} />
-                <Route path="courses/create-course" element={<p>create-course</p>} />
+                <Route path="courses/create-course" element={<CourseCreateCourse />} />
                 <Route path="courses/course-list" element={<p>course-list</p>} />
                 <Route path="permissions-and-roles" element={<p>permissions and roles</p>} />
                 <Route
