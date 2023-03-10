@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
 //actions
-import { setLoading, logIn } from './redux/authSlice';
+import { checkTokenAsync } from './redux/actions/auth';
 //views
 import MainPage from './views/MainPage';
 import Dashboard from './views/Dashboard';
@@ -17,36 +16,8 @@ import CourseCreateCourse from './views/Dashboard/CoursesCreateCourse';
 const App = () => {
     const { isLoading } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
-    const checkToken = async () => {
-        try {
-            const token = window.localStorage.getItem('mgmt_tk');
-            if (token) {
-                const response = await axios.post(
-                    '/api/management/staff/check-token',
-                    {},
-                    {
-                        headers: {
-                            'Content-type': 'application/json',
-                            Authorization: token
-                        }
-                    }
-                );
-                if (response.data.successful) {
-                    dispatch(logIn(response.data.user));
-                } else {
-                    window.localStorage.removeItem('mgmt_tk');
-                }
-                dispatch(setLoading(false));
-            } else {
-                dispatch(setLoading(false));
-            }
-        } catch (error) {
-            window.localStorage.removeItem('mgmt_tk');
-            dispatch(setLoading(false));
-        }
-    };
     useEffect(() => {
-        checkToken();
+        dispatch(checkTokenAsync());
         // eslint-disable-next-line
     }, []);
     if (isLoading) {
