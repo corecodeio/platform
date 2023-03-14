@@ -1,5 +1,3 @@
-# platform
-
 <a href="https://www.core-code.io/">
 
 ![alt text](./src/images/logo.png 'corecodeio') </a>
@@ -10,7 +8,7 @@
 
 1. [Introduction](#1-introduction)
 2. [Workspaces](#2-workspaces)
-3. [Environment Variables](#3-environment-variables)
+3. [Setting environment variables](#3-setting-environment-variables)
 4. [Scripts](#4-scripts)
 5. [Recommended resources](#5-recommended-resources)
 6. [README of the different projects](#6-readme-of-the-different-projects)
@@ -62,36 +60,44 @@ En nuestros espacios de trabajo, tendremos 3 proyectos:
     - System of roles and permissions for the different types of accounts.
     - Dashboard for the administration of the different APIs and generated courses.
 
-## 3. Environment Variables
+## 3. Setting environment variables
 
 In each project, you need an .env file. Here we will leave records of the name of these variables
 for each project individually:
 
-student-app:
+### student-app:
 
-```
+```bash
     PORT=3500
 ```
 
-management-app:
+### management-app:
 
-```
+```bash
     PORT=4000
 ```
 
-api:
+### api:
+- Variable necessary for all configurations of the api project more details of everything in its [README](/api/README.md)
 
-```
+```bash
     #Server configurations
     SERVER_PORT=3001
     SERVER_MODE=
+    SERVER_DEVELOPMENT_FIRST_NAME=
+    SERVER_DEVELOPMENT_LAST_NAME=
+    SERVER_DEVELOPMENT_COUNTRY=
+    SERVER_DEVELOPMENT_EMAIL=
+    SERVER_DEVELOPMENT_PASSWORD=
+    SERVER_DEVELOPMENT_PHONE=
+    SERVER_DEVELOPMENT_SLACK_ID=
     #Database configurations
     SERVER_DB_USER=
     SERVER_DB_PASS=
     SERVER_DB_HOST=
     SERVER_DB_PORT=
     SERVER_DB_NAME=
-    #URL frontend configurations
+    #Frontend configurations
     CLIENT_STUDENT_URL=http://localhost:3500
     CLIENT_MANAGEMENT_URL=http://localhost:4000
     #jwt configurations
@@ -104,6 +110,14 @@ api:
     NODE_MAILER_PORT=
     NODE_MAILER_USER=
     NODE_MAILER_PASSWORD=
+    #slack configurations
+    SLACK_BOT_USER_OAUTH_TOKEN=
+    SLACK_APP_LEVEL_TOKEN=
+    SERVER_MODE_SLACK=
+    #google calendar configurations
+    GOOGLE_CLIENT_ID=
+    GOOGLE_SECRET_CLIENT=
+    GOOGLE_REFRESH_TOKEN=
 ```
 
 ## 4. Scripts

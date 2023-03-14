@@ -1,9 +1,9 @@
-const { Permission } = require('./../../utils/db.js');
+const { Role } = require('./../../utils/db.js');
 
-//List Permissions
-module.exports.listPermissions = async (req, res, next) => {
+//List Roles
+module.exports.listRoles = async (req, res, next) => {
     try {
-        const responseList = await Permission.findAll();
+        const responseList = await Role.findAll();
         res.status(200).json({
             successful: true,
             list: responseList

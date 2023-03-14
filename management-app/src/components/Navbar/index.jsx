@@ -54,16 +54,19 @@ const Navbar = ({ setMenu }) => {
                 <div className={Styles[`menu-right-config`]}>
                     <CgMenuGridR className={Styles[`menu-right-config-icon-${mode}`]} />
                     <div className={Styles[`menu-right-config-options-${mode}`]}>
-                        <p className={Styles[`menu-right-config-options-p`]}>
+                        <p
+                            className={Styles[`menu-right-config-options-p`]}
+                            onClick={() => navigate('account-settings')}
+                        >
                             <FiSettings className={Styles[`menu-right-config-options-icon`]} />
-                            Configuracion de cuenta
+                            Account settings
                         </p>
                         <p
                             className={Styles[`menu-right-config-options-p`]}
                             onClick={() => dispatch(logOut())}
                         >
                             <FiLogOut className={Styles[`menu-right-config-options-icon`]} />
-                            Cerrar Session
+                            Log Out
                         </p>
                     </div>
                 </div>

@@ -40,5 +40,16 @@ module.exports = {
             pass: process.env.NODE_MAILER_PASSWORD
         },
         validateEmailExpiresIn: '20m'
+    },
+    slackConfig: {
+        token: process.env.SLACK_BOT_USER_OAUTH_TOKEN,
+        appToken: process.env.SLACK_APP_LEVEL_TOKEN,
+        socketMode: true,
+        developerMode: process.env.SERVER_MODE_SLACK === 'dev' ? true : false
+    },
+    googleConfig: {
+        client_id: process.env.GOOGLE_CLIENT_ID,
+        secret_client: process.env.GOOGLE_SECRET_CLIENT,
+        refresh_token: process.env.GOOGLE_REFRESH_TOKEN
     }
 };

@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { listPermissions } = require('./../../controllers/management/permission.controllers');
+const { listRoles } = require('./../../controllers/management/role.controllers');
 const authManagement = require('./../../middlewares/auth.management');
 const checkPermissionAuth = require('./../../middlewares/auth.permissions.js');
 
-//List Permissions
-router.get('/', authManagement, checkPermissionAuth('read:permission'), listPermissions);
+//List Roles
+router.get('/', authManagement, checkPermissionAuth('read:role'), listRoles);
 
 module.exports = router;

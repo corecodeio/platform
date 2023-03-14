@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Styles from './CourseCreateCourse.module.css';
+import Styles from './Permissions.module.css';
 import axios from 'axios';
 //components
 import Table, { Cell } from '../../../components/Table';
@@ -47,15 +47,7 @@ const CourseCreateCourse = () => {
     }, []);
     return (
         <Table>
-            <Cell title="Guide">
-                <p>
-                    Complete all the data, in case any name is not available, but if the main name,
-                    the new course will be created and later it will be You can finish completing
-                    the other channels that could not be created (channel from slack, google
-                    calendar, etc.)
-                </p>
-            </Cell>
-            <Cell title="New Course Registration">
+            <Cell title="Create permission">
                 <form onSubmit={handleSubmit} className={Styles[`form`]}>
                     <div className={Styles[`form-input`]}>
                         <label htmlFor="course_name">Name*</label>
@@ -88,50 +80,6 @@ const CourseCreateCourse = () => {
                             })}
                         </select>
                     </div>
-                    <div className={Styles[`form-input`]}>
-                        <label htmlFor="course_slack_name">Slack Name*</label>
-                        <input
-                            onChange={handlechange}
-                            id="course_slack_name"
-                            name="slack_name"
-                            type="text"
-                            value={data.slack_name}
-                            placeholder="channel slack..."
-                        />
-                    </div>
-                    <div className={Styles[`form-input`]}>
-                        <label htmlFor="course_google_calendar_name">Name google calendar*</label>
-                        <input
-                            onChange={handlechange}
-                            id="course_google_calendar_name"
-                            name="google_calendar_name"
-                            type="text"
-                            value={data.google_calendar_name}
-                            placeholder="name google calendar..."
-                        />
-                    </div>
-                    <div className={Styles[`form-input`]}>
-                        <label htmlFor="course_zoom_url">Zoom Link</label>
-                        <input
-                            onChange={handlechange}
-                            id="course_zoom_url"
-                            name="zoom_url"
-                            type="text"
-                            value={data.zoom_url}
-                            placeholder="zoom link..."
-                        />
-                    </div>
-                    <div className={Styles[`form-input`]}>
-                        <label htmlFor="course_zoom_code">Zoom Code</label>
-                        <input
-                            onChange={handlechange}
-                            id="course_zoom_code"
-                            name="zoom_code"
-                            type="text"
-                            value={data.zoom_code}
-                            placeholder="zoom code..."
-                        />
-                    </div>
                     {error && <p className={Styles[`form-error`]}>{error}</p>}
                     <button
                         disabled={
@@ -143,9 +91,12 @@ const CourseCreateCourse = () => {
                         }
                         type="submit"
                     >
-                        {!send ? 'CREATE COURSE' : 'processing...'}
+                        {!send ? 'CREATE PERMISSION' : 'processing...'}
                     </button>
                 </form>
+            </Cell>
+            <Cell title="Full list of permissions">
+
             </Cell>
         </Table>
     );

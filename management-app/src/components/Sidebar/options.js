@@ -8,7 +8,6 @@ import {
     MdAutoGraph
 } from 'react-icons/md';
 import { FaUsers, FaUserTie } from 'react-icons/fa';
-import { VscSymbolClass } from 'react-icons/vsc';
 import { TbContrast2 } from 'react-icons/tb';
 import { HiChatAlt2 } from 'react-icons/hi';
 import { SiPowerpages } from 'react-icons/si';
@@ -42,13 +41,10 @@ const options = [
         ]
     },
     {
-        url: 'courses',
+        url: 'course',
         title: 'Courses',
         icon: MdOutlinePlayLesson,
-        list: [
-            { url: 'create-course', title: 'Create Course', icon: MdOutlineCreateNewFolder },
-            { url: 'course-list', title: 'Course List', icon: VscSymbolClass }
-        ]
+        list: []
     },
     {
         url: 'permissions-and-roles',
