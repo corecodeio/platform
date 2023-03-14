@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Styles from './LogIn.module.css';
 import { useDispatch } from 'react-redux';
-import { logIn } from './../../redux/authSlice';
-import axios from 'axios';
+//actions
+import { logInAsync } from './../../redux/actions/auth';
 
 const LogIn = () => {
     const dispatch = useDispatch();
@@ -13,17 +13,7 @@ const LogIn = () => {
     const [error, setError] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post('/api/management/staff/log-in', data);
-            if (response.data.successful) {
-                window.localStorage.setItem('mgmt_tk', `Bearer ${response.data.token}`);
-                dispatch(logIn(response.data.user));
-            } else {
-                setError(response.data.message);
-            }
-        } catch (error) {
-            setError(error.message);
-        }
+        dispatch(logInAsync({ data, setError }));
     };
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });

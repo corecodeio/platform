@@ -25,6 +25,13 @@ module.exports = (sequelize) => {
             password: {
                 type: DataTypes.STRING
             },
+            slack_id:{
+                type: DataTypes.STRING
+            },
+            invite_slack:{
+                type: DataTypes.BOOLEAN,
+                defaultValue: false
+            },
             locked:{
                 type: DataTypes.BOOLEAN,
                 defaultValue: false

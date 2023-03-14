@@ -236,7 +236,7 @@ module.exports.readStaff = async (req, res, next) => {
         res.status(400).json({ successful: false, message: error });
     }
 };
-//Create Staff generatePassword
+//Create Staff
 module.exports.createStaff = async (req, res, next) => {
     try {
         const { first_name, last_name, email, phone } = req.body;

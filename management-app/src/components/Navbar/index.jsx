@@ -1,7 +1,7 @@
 import React from 'react';
 import Styles from './Navbar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { logOut, setMode } from './../../redux/authSlice';
+import { setMode, logOut } from './../../redux/actions/auth';
 import { useNavigate } from 'react-router-dom';
 //icons
 import { TbPointFilled } from 'react-icons/tb';
@@ -16,15 +16,6 @@ const Navbar = ({ setMenu }) => {
     const { mode, user } = useSelector((state) => state.auth);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const handlerMode = () => {
-        if (mode === 'light') {
-            window.localStorage.setItem('mgmt_mode', 'dark');
-            dispatch(setMode('dark'));
-        } else {
-            window.localStorage.setItem('mgmt_mode', 'light');
-            dispatch(setMode('light'));
-        }
-    };
     return (
         <div className={Styles[`container-${mode}`]}>
             <div className={Styles[`menu-left-${mode}`]}>
@@ -35,7 +26,7 @@ const Navbar = ({ setMenu }) => {
                     alt="logo"
                     onClick={() => navigate('/dashboard')}
                 />
-                <div className={Styles[`mode`]} onClick={handlerMode}>
+                <div className={Styles[`mode`]} onClick={() => dispatch(setMode())}>
                     <TbPointFilled className={Styles[`mode-icon-${mode}`]} />
                 </div>
             </div>
@@ -63,16 +54,19 @@ const Navbar = ({ setMenu }) => {
                 <div className={Styles[`menu-right-config`]}>
                     <CgMenuGridR className={Styles[`menu-right-config-icon-${mode}`]} />
                     <div className={Styles[`menu-right-config-options-${mode}`]}>
-                        <p className={Styles[`menu-right-config-options-p`]}>
+                        <p
+                            className={Styles[`menu-right-config-options-p`]}
+                            onClick={() => navigate('account-settings')}
+                        >
                             <FiSettings className={Styles[`menu-right-config-options-icon`]} />
-                            Configuracion de cuenta
+                            Account settings
                         </p>
                         <p
                             className={Styles[`menu-right-config-options-p`]}
                             onClick={() => dispatch(logOut())}
                         >
                             <FiLogOut className={Styles[`menu-right-config-options-icon`]} />
-                            Cerrar Session
+                            Log Out
                         </p>
                     </div>
                 </div>
