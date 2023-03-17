@@ -36,3 +36,21 @@ body {
     font-style: normal;
     font-display: swap;
 }
+@font-face {
+    font-family: 'SourceSansPro-Regular';
+    src: url('./../public/fonts/SourceSansPro-Regular.ttf');
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'SourceSansPro-SemiBold';
+    src: url('./../public/fonts/SourceSansPro-SemiBold.ttf');
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Rubik-Bold';
+    src: url('./../public/fonts/Rubik-Bold.ttf');
+    font-style: normal;
+    font-display: swap;
+}

@@ -31,7 +31,7 @@ const Sidebar = ({ menu, setMenu }) => {
                                     pathname === `/dashboard${option.url ? '/' + option.url : ''}`
                                         ? '3'
                                         : '0'
-                                }px solid ${mode === 'light' ? '#0f1f39' : '#ffffff'}`
+                                }px solid ${mode === 'light' ? '#0D1E38' : '#0D1E38'}`
                             }}
                         >
                             <option.icon className={Styles[`menu-icon`]} />

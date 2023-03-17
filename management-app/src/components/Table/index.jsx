@@ -1,21 +1,22 @@
 import React from 'react';
 import Styles from './Table.module.css';
-import { useSelector } from 'react-redux';
+
 const Table = ({ children }) => {
-    return <div className={Styles[`container`]}>{children}</div>;
+    return <div className={Styles[`main`]}>{children}</div>;
 };
 
 export const Cell = ({ columns = 6, space = 6, title = 'Title', children }) => {
-    const { mode } = useSelector((state) => state.auth);
     return (
         <div
-            className={Styles[`cell-${mode}`]}
+            className={Styles[`cell`]}
             style={{
-                width: `calc(calc(100% / ${columns}  * ${space} ) - 40px`
+                width: `calc(calc(100% / ${columns}  * ${space} ) - 20px`
             }}
         >
             <p className={Styles[`title`]}>{title}</p>
+            <div className={Styles[`container`]}>
             {children}
+            </div>
         </div>
     );
 };

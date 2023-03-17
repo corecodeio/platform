@@ -1,13 +1,12 @@
 .container-light-false {
     width: 250px;
     height: 100%;
-    background-color: #ffffff;
+    background-color: #f5f9fb;
     position: relative;
     z-index: 40;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0px 0px 10px #00000056;
     user-select: none;
     overflow: auto;
     transition: 0.5s;
@@ -15,13 +14,12 @@
 .container-dark-false {
     width: 250px;
     height: 100%;
-    background-color: #2c2c34;
+    background-color: #f5f9fb;
     position: relative;
     z-index: 40;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0px 0px 10px #00000056;
     user-select: none;
     overflow: auto;
     transition: 0.5s;
@@ -29,13 +27,12 @@
 .container-light-true {
     width: 250px;
     height: 100%;
-    background-color: #ffffff;
+    background-color: #f5f9fb;
     position: relative;
     z-index: 40;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0px 0px 10px #00000056;
     user-select: none;
     overflow: auto;
     transition: 0.5s;
@@ -43,13 +40,12 @@
 .container-dark-true {
     width: 250px;
     height: 100%;
-    background-color: #2c2c34;
+    background-color: #f5f9fb;
     position: relative;
     z-index: 40;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0px 0px 10px #00000056;
     user-select: none;
     overflow: auto;
     transition: 0.5s;
@@ -63,8 +59,8 @@
     width: 95%;
     align-items: center;
     margin-top: 10px;
-    border-bottom: 1px solid #0f1f39;
-    color: #0f1f39;
+    border-bottom: 1px solid #0d1e38;
+    color: #0d1e38;
     transition: 0.5s;
 }
 .title-dark {
@@ -82,7 +78,7 @@
     margin-right: 10px;
 }
 .title-text {
-    font-family: 'Montserrat-SemiBold', serif;
+    font-family: 'Rubik-Bold', serif;
     font-size: 20px;
 }
 .title-text:hover {
@@ -94,7 +90,7 @@
     align-items: center;
     margin-top: 15px;
     margin-bottom: 5px;
-    color: #0f1f39;
+    color: #0d1e38;
 }
 .menu-dark {
     display: flex;
@@ -110,7 +106,7 @@
     margin-right: 10px;
 }
 .menu-text {
-    font-family: 'Montserrat-SemiBold', serif;
+    font-family: 'Rubik-Bold', serif;
     font-size: 14px;
 }
 .menu-text:hover {
@@ -121,7 +117,7 @@
     width: 80%;
     align-items: center;
     margin-top: 5px;
-    color: #0f1f39;
+    color: #0d1e38;
 }
 .item-dark {
     display: flex;
@@ -136,12 +132,12 @@
     margin-left: 5px;
 }
 .item-text {
-    font-family: 'Montserrat-Regular', serif;
+    font-family: 'SourceSansPro-Regular', serif;
     font-size: 12px;
 }
 .item-text:hover {
     cursor: pointer;
-    font-family: 'Montserrat-SemiBold', serif;
+    font-family: 'SourceSansPro-SemiBold', serif;
 }
 @media only screen and (max-width: 1440px) and (min-width: 1281px) {
 }

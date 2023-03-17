@@ -1,20 +1,17 @@
-.container-main-light {
+.main {
     width: 100%;
-    height: calc(100% - 50px);
-    background-color: #f3f5f9;
+    height: calc(100% - 144px);
+    background: linear-gradient(to right, #f5f9fb 0, #f5f9fb 30%, #ffffff 30%, #ffffff);
+}
+.container {
+    width: 90%;
+    max-width: 1236px;
+    margin: auto;
+    height: 100%;
+    background-color: #ffffff;
     display: flex;
     color: #0f1f39;
     overflow: hidden;
-    transition: 0.5s;
-}
-.container-main-dark {
-    width: 100%;
-    height: calc(100% - 50px);
-    background-color: #0a0a0a;
-    display: flex;
-    color: #ffffff;
-    overflow: hidden;
-    transition: 0.5s;
 }
 .container-component {
     width: calc(100% - 250px);
@@ -28,5 +25,10 @@
 @media only screen and (max-width: 800px) {
     .container-component {
         width: 100%;
+    }
+    .main {
+        width: 100%;
+        height: calc(100% - 108px);
+        background: #ffffff;
     }
 }

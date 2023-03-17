@@ -16,11 +16,11 @@ export const logInAsync = createAsyncThunk(
                     return rejectWithValue();
                 }
             } catch (error) {
-                setError(error);
+                setError('server error');
                 return rejectWithValue();
             }
         } catch (error) {
-            setError(error);
+            setError('server error');
             return rejectWithValue();
         }
     }
