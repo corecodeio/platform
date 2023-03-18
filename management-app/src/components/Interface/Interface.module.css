@@ -8,37 +8,55 @@
     font-family: 'SourceSansPro-Regular', serif;
     font-size: 14px;
 }
-.cell {
+.block {
     margin-top: 20px;
     margin-left: 20px;
     border-radius: 4px;
     position: relative;
     color: #0f1f39;
-    transition: 0.5s;
 }
-.cell .title {
+.block .block-title {
     background-color: #cadbe3;
     border-radius: 4px 4px 0 0;
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
 }
-.title {
+.block-title {
     font-family: 'Rubik-Bold', serif;
     font-size: 16px;
     margin-bottom: 10px;
 }
-.container{
+.block-container {
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.thead {
+    background-color: #cadbe3;
+    height: 28px;
+}
+.tbody .tr:nth-of-type(2n) {
+    background-color: #ebf3f7;
+}
+.tbody .tr {
+    height: 39px;
+}
+.td {
+    padding-left: 10px;
+    text-align: center;
+    padding-right: 10px;
 }
 @media only screen and (max-width: 1440px) and (min-width: 1281px) {
 }
 @media only screen and (max-width: 1280px) and (min-width: 801px) {
 }
 @media only screen and (max-width: 800px) {
-    .cell {
+    .block {
         width: 100% !important;
         margin-left: 0px;
     }

@@ -1,14 +1,14 @@
 import React from 'react';
 //components
-import Table, { Cell } from './../Table';
+import Interface, { Block } from './../Interface';
 
 const AccountSettings = () => {
     return (
-        <Table>
-            <Cell title='Account settings'>
+        <Interface>
+            <Block title='Account settings'>
               
-            </Cell>
-        </Table>
+            </Block>
+        </Interface>
     );
 };
 

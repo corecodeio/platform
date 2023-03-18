@@ -1,28 +1,33 @@
-import React from 'react';
-//import Styles from './Course.module.css';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+//actions
+import { getCoursesAsync } from './../../redux/actions/dashboard';
 //components
-import Table, { Cell } from './../Table';
+import Interface, { Block } from './../Interface';
 import CreateCourse from './CreateCourse';
 import CourseList from './CourseList';
 
 const Course = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getCoursesAsync({ page: 1 }));
+        // eslint-disable-next-line
+    }, []);
     return (
-        <Table>
-            <Cell title="Guide" space={3}>
+        <Interface>
+            <Block title="Guide" space={2}>
                 <p>
-                    Complete all the data, in case any name is not available, but if the main name,
-                    the new course will be created and later it will be You can finish completing
-                    the other channels that could not be created (channel from slack, google
-                    calendar, etc.)
+                    To create new courses, you only need a name and select the type of course, all
+                    other data can be added or modified later.
                 </p>
-            </Cell>
-            <Cell title="New course registration" space={3}>
+            </Block>
+            <Block title="New course registration" space={4}>
                 <CreateCourse />
-            </Cell>
-            <Cell title="Courses">
+            </Block>
+            <Block>
                 <CourseList />
-            </Cell>
-        </Table>
+            </Block>
+        </Interface>
     );
 };
 

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Styles from './Dashboard.module.css';
-import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 //components
 import Navbar from './../../components/Navbar';

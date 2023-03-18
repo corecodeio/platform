@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Styles from './Permissions.module.css';
 import axios from 'axios';
 //components
-import Table, { Cell } from '../../../components/Table';
+import Interface, { Block } from '../../../components/Interface';
 
 const CourseCreateCourse = () => {
     const [options, setOptions] = useState([]);
@@ -46,8 +46,8 @@ const CourseCreateCourse = () => {
         // eslint-disable-next-line
     }, []);
     return (
-        <Table>
-            <Cell title="Create permission">
+        <Interface>
+            <Block title="Create permission">
                 <form onSubmit={handleSubmit} className={Styles[`form`]}>
                     <div className={Styles[`form-input`]}>
                         <label htmlFor="course_name">Name*</label>
@@ -94,11 +94,11 @@ const CourseCreateCourse = () => {
                         {!send ? 'CREATE PERMISSION' : 'processing...'}
                     </button>
                 </form>
-            </Cell>
-            <Cell title="Full list of permissions">
+            </Block>
+            <Block title="Full list of permissions">
 
-            </Cell>
-        </Table>
+            </Block>
+        </Interface>
     );
 };
 

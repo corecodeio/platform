@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { enqueueSnackbar } from 'notistack';
 import Styles from './CreateCourse.module.css';
 import axios from 'axios';
+//icons
+import { BiError } from 'react-icons/bi';
 
 const CreateCourse = () => {
     const [options, setOptions] = useState([]);
     const [error, setError] = useState('');
     const [send, setSend] = useState(false);
     const [data, setData] = useState({
-        name: '',
+        name_bootcamp: '',
         type: '',
-        slack_name: '',
-        google_calendar_name: '',
         zoom_url: '',
         zoom_code: ''
     });
@@ -18,10 +19,31 @@ const CreateCourse = () => {
         setData({ ...data, [e.target.name]: e.target.value });
         setError('');
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setSend(true);
-        console.log(data);
+        try {
+            const token = window.localStorage.getItem('mgmt_tk');
+            if (token) {
+                const response = await axios.post('/api/management/course/', data, {
+                    headers: {
+                        'Content-type': 'application/json',
+                        Authorization: token
+                    }
+                });
+                if (response.data.successful) {
+                    enqueueSnackbar('course created successfully', { variant: 'success' });
+                    setData({ ...data, name_bootcamp: '', zoom_url: '', zoom_code: '' });
+                } else {
+                    enqueueSnackbar(response.data.message, { variant: 'error' });
+                    setError(response.data.message);
+                }
+                setSend(false);
+            }
+        } catch (error) {
+            console.log(error);
+            setError('500 server error');
+        }
     };
     const getCourseType = async () => {
         try {
@@ -37,7 +59,9 @@ const CreateCourse = () => {
                     setOptions(response.data.list);
                 }
             }
-        } catch (error) {}
+        } catch (error) {
+            console.log(error);
+        }
     };
     useEffect(() => {
         getCourseType();
@@ -50,9 +74,9 @@ const CreateCourse = () => {
                 <input
                     onChange={handlechange}
                     id="course_name"
-                    name="name"
+                    name="name_bootcamp"
                     type="text"
-                    value={data.name}
+                    value={data.name_bootcamp}
                     placeholder="Name bootcamp..."
                 />
             </div>
@@ -70,28 +94,6 @@ const CreateCourse = () => {
                         );
                     })}
                 </select>
-            </div>
-            <div className={Styles[`form-input`]}>
-                <label htmlFor="course_slack_name">Slack Name*</label>
-                <input
-                    onChange={handlechange}
-                    id="course_slack_name"
-                    name="slack_name"
-                    type="text"
-                    value={data.slack_name}
-                    placeholder="channel slack..."
-                />
-            </div>
-            <div className={Styles[`form-input`]}>
-                <label htmlFor="course_google_calendar_name">Name google calendar*</label>
-                <input
-                    onChange={handlechange}
-                    id="course_google_calendar_name"
-                    name="google_calendar_name"
-                    type="text"
-                    value={data.google_calendar_name}
-                    placeholder="name google calendar..."
-                />
             </div>
             <div className={Styles[`form-input`]}>
                 <label htmlFor="course_zoom_url">Zoom Link</label>
@@ -115,19 +117,15 @@ const CreateCourse = () => {
                     placeholder="zoom code..."
                 />
             </div>
-            {error && <p className={Styles[`form-error`]}>{error}</p>}
-            <button
-                disabled={
-                    !data.name ||
-                    !data.type ||
-                    !data.slack_name ||
-                    !data.google_calendar_name ||
-                    send
-                }
-                type="submit"
-            >
-                {!send ? 'CREATE COURSE' : 'processing...'}
+            <button disabled={!data.name_bootcamp || !data.type || send} type="submit">
+                {!send ? 'Create Course' : 'Processing...'}
             </button>
+            {error && (
+                <p className={Styles[`form-error`]}>
+                    <BiError className={Styles[`form-icon-error`]} />
+                    {error}
+                </p>
+            )}
         </form>
     );
 };

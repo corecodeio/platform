@@ -1,12 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 //actions
-import { logInAsync, checkTokenAsync, logOut, setMode } from './../actions/auth';
+import { logInAsync, checkTokenAsync, logOut } from './../actions/auth';
 
-const mode = window.localStorage.getItem('mgmt_mode');
 const initialState = {
     isAuth: false,
     isLoading: true,
-    mode: mode ? mode : 'light',
     user: {}
 };
 
@@ -33,9 +31,6 @@ export const authSlice = createSlice({
             .addCase(logOut, (state, action) => {
                 state.isAuth = false;
                 state.user = {};
-            })
-            .addCase(setMode, (state, action) => {
-                state.mode = action.payload;
             });
     }
 });

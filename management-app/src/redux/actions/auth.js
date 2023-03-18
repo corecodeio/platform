@@ -62,18 +62,3 @@ export const logOut = createAction('auth/logOut', () => {
     window.localStorage.removeItem('mgmt_tk');
     return {};
 });
-
-export const setMode = createAction('auth/setMode', () => {
-    let mode = window.localStorage.getItem('mgmt_mode');
-    if (mode === 'light') {
-        window.localStorage.setItem('mgmt_mode', 'dark');
-        return {
-            payload: 'dark'
-        };
-    } else {
-        window.localStorage.setItem('mgmt_mode', 'light');
-        return {
-            payload: 'light'
-        };
-    }
-});
