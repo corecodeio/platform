@@ -5,6 +5,13 @@
     font-family: 'Montserrat-Regular', serif;
     font-size: 14px;
 }
+@media (max-width:800px) {
+    .container{
+        width: 100%;
+        padding: 10px;
+    }
+}
+
 .logo {
     width: 60%;
     margin-bottom: 15px;
@@ -19,14 +26,27 @@
     display: flex;
     justify-content: space-between;
 }
+@media (max-width:800px) {
+    .full-name {
+        gap:11px;
+    }
+}
+
 .form-input {
-    padding-left: 5px;
+    /* padding-left: 5px; */
     height: 35px;
     font-size: 14px;
     border-radius: 5px;
     border: 1px solid #000000;
     margin-top: 10px;
 }
+@media (max-width:800px) {
+    .form-input{
+        width: 100%;
+        text-indent: 5px;
+    }
+}
+
 .form-button {
     background-color: #0085ff;
     color: #ffffff;

@@ -17,7 +17,7 @@ const MainPage = () => {
         return <Navigate to="/dashboard" />;
     }
     return (
-        <>
+        <div className={Styles[`content`]}>
             <div className={Styles[`container`]}>
                 <div className={Styles[`details`]}>
                     <img src="/images/template.png" alt="template" />
@@ -29,13 +29,10 @@ const MainPage = () => {
             <div className={Styles[`container-footer`]}>
                 <div className={Styles[`footer`]}>
                     <img src="/images/logo.svg" alt="core code" />
-                    <p>Core Code © 2023 | Todos los derechos reservados.</p>
-                    <p>
-                        ¿Consultas y dudas? Escríbenos a <strong>admisiones@core-code.io</strong>
-                    </p>
+                    <p>Core Code © 2023 | Todos los derechos reservados.</p><p>¿Consultas y dudas? Escríbenos a <strong>admisiones@core-code.io</strong></p>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

@@ -5,6 +5,13 @@
     font-family: 'Montserrat-Regular', serif;
     font-size: 14px;
 }
+@media (max-width:800px) {
+    .container{
+        width: 100%;
+        padding: 10px;
+    }
+}
+
 .logo {
     width: 60%;
     margin-bottom: 15px;

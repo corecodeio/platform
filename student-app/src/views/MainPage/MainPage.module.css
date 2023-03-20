@@ -1,4 +1,118 @@
+
+.content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
 .container {
+    width: 100%;
+    height: calc(100vh - 45px);
+    display: flex;
+    flex-direction: row;
+}
+@media (max-width:800px) {
+    .container{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+}
+
+.details {
+    background-color: #2764ff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+@media (max-width:800px) {
+    .details{
+        display: none;
+    }
+}
+
+.details img {
+    width: 80%;
+}
+
+
+.panel {
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width:800px) {
+    .panel{
+        width: 100%;
+    }
+}
+
+.container-footer {
+    width: 100%;
+    height: 45px;
+    background-color: #12213c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+@media (max-width:800px) {
+    .container-footer{
+        height:35%;
+        width: 100%;
+        border: 1px solid #12213c;
+        margin-bottom: -22px;
+        margin-right: -5px;
+        overflow:visible;
+    }
+    
+}
+
+.footer{
+    width: 95%;
+    max-width: 1350px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+@media (max-width:800px) {
+    .footer{
+        overflow: hidden;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        height: 100%;
+    }
+}
+
+.footer img {
+    height: 60px;
+}
+@media (max-width:800px) {
+    .footer img{
+        height: 87px;
+    }
+}
+
+.footer p {
+    color: #ffffff;
+    font-family: 'Montserrat-Regular', serif;
+    font-size: 12px;
+    line-height: 15px;
+}
+
+/* .container {
     width: 100%;
     height: calc(100% - 45px);
     display: flex;
@@ -48,4 +162,4 @@
     color: #ffffff;
     font-family: 'Montserrat-Regular', serif;
     font-size: 12px;
-}
+} */
