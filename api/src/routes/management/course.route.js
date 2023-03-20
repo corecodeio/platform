@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { createCourse, listCourse } = require('./../../controllers/management/course.controllers');
+const {
+    createCourse,
+    listCourse,
+    editCourse,
+    createSlack
+} = require('./../../controllers/management/course.controllers');
 const authManagement = require('./../../middlewares/auth.management');
 const checkPermissionAuth = require('./../../middlewares/auth.permissions.js');
 
@@ -8,5 +13,9 @@ const checkPermissionAuth = require('./../../middlewares/auth.permissions.js');
 router.get('/', authManagement, checkPermissionAuth('read:course'), listCourse);
 //Create Course
 router.post('/', authManagement, checkPermissionAuth('write:course'), createCourse);
+//Create Slack
+router.post('/slack', authManagement, checkPermissionAuth('edit:course'), createSlack);
+//Edit Course
+router.put('/', authManagement, checkPermissionAuth('edit:course'), editCourse);
 
 module.exports = router;

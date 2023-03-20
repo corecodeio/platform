@@ -1,18 +1,18 @@
 //icons
-import { AiOutlineTeam, AiOutlineControl, AiOutlineSlack } from 'react-icons/ai';
+//import { AiOutlineTeam, AiOutlineControl, AiOutlineSlack } from 'react-icons/ai';
 import {
-    MdOutlineAdminPanelSettings,
+    //MdOutlineAdminPanelSettings,
     MdOutlinePlayLesson,
-    MdSettingsApplications,
-    MdOutlineCreateNewFolder,
+    //MdSettingsApplications,
+    //MdOutlineCreateNewFolder,
     MdAutoGraph
 } from 'react-icons/md';
-import { FaUsers, FaUserTie } from 'react-icons/fa';
-import { TbContrast2 } from 'react-icons/tb';
-import { HiChatAlt2 } from 'react-icons/hi';
-import { SiPowerpages } from 'react-icons/si';
-import { TbFilePower } from 'react-icons/tb';
-import { IoLogoGoogle } from 'react-icons/io';
+//import { FaUsers, FaUserTie } from 'react-icons/fa';
+//import { TbContrast2 } from 'react-icons/tb';
+//import { HiChatAlt2 } from 'react-icons/hi';
+//import { SiPowerpages } from 'react-icons/si';
+//import { TbFilePower } from 'react-icons/tb';
+//import { IoLogoGoogle } from 'react-icons/io';
 
 const options = [
     {
@@ -21,7 +21,7 @@ const options = [
         icon: MdAutoGraph,
         list: []
     },
-    {
+    /*{
         url: 'users',
         title: 'Users',
         icon: FaUsers,
@@ -39,14 +39,14 @@ const options = [
             { url: 'send-invitation', title: 'Send Invitation', icon: MdOutlineCreateNewFolder },
             { url: 'staff-list', title: 'Staff List', icon: FaUserTie }
         ]
-    },
+    },*/
     {
-        url: 'course',
+        url: 'course/1',
         title: 'Courses',
         icon: MdOutlinePlayLesson,
         list: []
-    },
-    {
+    }
+    /*{
         url: 'permissions-and-roles',
         title: 'Permissions and Roles',
         icon: MdOutlineAdminPanelSettings,
@@ -64,7 +64,7 @@ const options = [
             { url: 'slack', title: 'Slack', icon: AiOutlineSlack },
             { url: 'google-calendar', title: 'Google Calendar', icon: IoLogoGoogle }
         ]
-    }
+    }*/
 ];
 
 export default options;

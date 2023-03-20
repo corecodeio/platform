@@ -1,0 +1,40 @@
+.button-create-slack {
+    border-radius: 12px;
+    border: 0;
+    background-color: #537689;
+    color: #ffffff;
+    height: 24px;
+    margin: auto;
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.button-create-slack-icon {
+    width: 16px;
+    height: 16px;
+    margin-left: 6px;
+}
+.button-create-slack:hover {
+    cursor: pointer;
+}
+.edit {
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+.edit-icon {
+    width: 16px;
+    height: 16px;
+    margin-left: 6px;
+}
+.edit-icon:hover {
+    cursor: pointer;
+}
+.detail:hover {
+    cursor: pointer;
+}
+
+
+

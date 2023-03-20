@@ -1,4 +1,4 @@
-.container-light-false {
+.container-false {
     width: 250px;
     height: 100%;
     background-color: #f5f9fb;
@@ -11,33 +11,7 @@
     overflow: auto;
     transition: 0.5s;
 }
-.container-dark-false {
-    width: 250px;
-    height: 100%;
-    background-color: #f5f9fb;
-    position: relative;
-    z-index: 40;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    user-select: none;
-    overflow: auto;
-    transition: 0.5s;
-}
-.container-light-true {
-    width: 250px;
-    height: 100%;
-    background-color: #f5f9fb;
-    position: relative;
-    z-index: 40;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    user-select: none;
-    overflow: auto;
-    transition: 0.5s;
-}
-.container-dark-true {
+.container-true {
     width: 250px;
     height: 100%;
     background-color: #f5f9fb;
@@ -53,7 +27,7 @@
 .cross {
     display: none;
 }
-.title-light {
+.title {
     display: flex;
     justify-content: center;
     width: 95%;
@@ -61,16 +35,6 @@
     margin-top: 10px;
     border-bottom: 1px solid #0d1e38;
     color: #0d1e38;
-    transition: 0.5s;
-}
-.title-dark {
-    display: flex;
-    justify-content: center;
-    width: 95%;
-    align-items: center;
-    margin-top: 10px;
-    border-bottom: 1px solid #a8a8a8;
-    color: #a8a8a8;
     transition: 0.5s;
 }
 .title-icon {
@@ -84,21 +48,13 @@
 .title-text:hover {
     cursor: pointer;
 }
-.menu-light {
+.menu {
     display: flex;
     width: 95%;
     align-items: center;
     margin-top: 15px;
     margin-bottom: 5px;
     color: #0d1e38;
-}
-.menu-dark {
-    display: flex;
-    width: 95%;
-    align-items: center;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    color: #ffffff;
 }
 .menu-icon {
     font-size: 22px;
@@ -112,19 +68,12 @@
 .menu-text:hover {
     cursor: pointer;
 }
-.item-light {
+.item {
     display: flex;
     width: 80%;
     align-items: center;
     margin-top: 5px;
     color: #0d1e38;
-}
-.item-dark {
-    display: flex;
-    width: 80%;
-    align-items: center;
-    margin-top: 5px;
-    color: #ffffff;
 }
 .item-icon {
     font-size: 18px;
@@ -144,28 +93,14 @@
 @media only screen and (max-width: 1280px) and (min-width: 801px) {
 }
 @media only screen and (max-width: 800px) {
-    .container-light-true {
+    .container-true {
         position: fixed;
         z-index: 200;
         top: 0px;
         left: 0px;
         height: 100%;
     }
-    .container-dark-true {
-        position: fixed;
-        z-index: 200;
-        top: 0px;
-        left: 0px;
-        height: 100%;
-    }
-    .container-light-false {
-        position: fixed;
-        z-index: 200;
-        top: 0px;
-        left: -250px;
-        height: 100%;
-    }
-    .container-dark-false {
+    .container-false {
         position: fixed;
         z-index: 200;
         top: 0px;

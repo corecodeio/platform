@@ -1,20 +1,18 @@
 import React from 'react';
 import Styles from './Sidebar.module.css';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import options from './options';
 //icons
 import { AiOutlineDashboard } from 'react-icons/ai';
 import { RxCross2 } from 'react-icons/rx';
 
 const Sidebar = ({ menu, setMenu }) => {
-    const { mode } = useSelector((state) => state.auth);
     const navigate = useNavigate();
     const { pathname } = useLocation();
 
     return (
-        <div className={Styles[`container-${mode}-${menu}`]}>
-            <div className={Styles[`title-${mode}`]}>
+        <div className={Styles[`container-${menu}`]}>
+            <div className={Styles[`title`]}>
                 <AiOutlineDashboard className={Styles[`title-icon`]} />
                 <p onClick={() => navigate('/dashboard')} className={Styles[`title-text`]}>
                     Dashboard
@@ -25,13 +23,13 @@ const Sidebar = ({ menu, setMenu }) => {
                 return (
                     <React.Fragment key={`option-${x}`}>
                         <div
-                            className={Styles[`menu-${mode}`]}
+                            className={Styles[`menu`]}
                             style={{
                                 borderLeft: `${
                                     pathname === `/dashboard${option.url ? '/' + option.url : ''}`
                                         ? '3'
                                         : '0'
-                                }px solid ${mode === 'light' ? '#0D1E38' : '#0D1E38'}`
+                                }px solid #0D1E38`
                             }}
                         >
                             <option.icon className={Styles[`menu-icon`]} />
@@ -49,13 +47,13 @@ const Sidebar = ({ menu, setMenu }) => {
                             return (
                                 <div
                                     key={`item-${y}`}
-                                    className={Styles[`item-${mode}`]}
+                                    className={Styles[`item`]}
                                     style={{
                                         borderLeft: `${
                                             pathname === `/dashboard/${option.url}/${item.url}`
                                                 ? '3'
                                                 : '0'
-                                        }px solid ${mode === 'light' ? '#0f1f39' : '#ffffff'}`
+                                        }px solid #0f1f39`
                                     }}
                                 >
                                     <item.icon className={Styles[`item-icon`]} />
