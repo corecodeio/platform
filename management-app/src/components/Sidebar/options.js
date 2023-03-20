@@ -41,7 +41,7 @@ const options = [
         ]
     },*/
     {
-        url: 'course',
+        url: 'course/1',
         title: 'Courses',
         icon: MdOutlinePlayLesson,
         list: []

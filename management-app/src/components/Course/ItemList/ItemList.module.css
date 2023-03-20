@@ -35,27 +35,6 @@
 .detail:hover {
     cursor: pointer;
 }
-.pagination {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.button-pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #537689;
-    width: 26px;
-    height: 26px;
-    background-color: #537689;
-    color: #ffffff;
-    border-radius: 4px;
-}
-.button-pagination:enabled {
-    cursor: pointer;
-}
-.button-pagination:disabled {
-    background-color: #ffffff;
-    color: #000000;
-}
+
+
+

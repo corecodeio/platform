@@ -1,0 +1,103 @@
+.form-slack {
+    width: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.input-slack {
+    padding: 4px;
+    font-family: 'SourceSansPro-Regular', serif;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: 1px solid #cadbe3;
+    color: #335065;
+    width: calc(100% - 44px);
+}
+.input-slack:placeholder-shown {
+    background-color: #ffffff;
+}
+.icon-slack {
+    width: 16px;
+    height: 16px;
+    padding: 2px;
+    background-color: #cadbe3;
+    margin-left: 4px;
+    border-radius: 4px;
+}
+.icon-slack:hover {
+    background-color: #335065;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.notification {
+    background-color: #ffffff;
+    border-radius: 4px;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.notification-strong {
+    font-size: 12px;
+    width: calc(100% - 8px);
+    border-radius: 4px;
+    background-color: #33506518;
+    padding: 4px;
+    margin-top: 6px;
+}
+.notification-close {
+    position: absolute;
+    background-color: #335065;
+    color: #ffffff;
+    padding: 3px;
+    border-radius: 4px;
+    top: 3px;
+    right: 3px;
+    cursor: pointer;
+}
+.notification .notification-title {
+    width: calc(100% - 10px);
+    background-color: #cadbe3;
+    border-radius: 4px 4px 0 0;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.notification-title {
+    font-family: 'Rubik-Bold', serif;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.notification-container {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+.options-button-slack {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+.button-slack {
+    border-radius: 12px;
+    border: 0;
+    background-color: #537689;
+    border: 1px solid #537689;
+    color: #ffffff;
+    height: 24px;
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+    align-items: center;
+    font-family: 'SourceSansPro-SemiBold', serif;
+}
+.button-slack:hover {
+    background-color: #ffffff;
+    color: #537689;
+    cursor: pointer;
+}

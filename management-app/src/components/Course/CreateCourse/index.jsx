@@ -5,7 +5,7 @@ import axios from 'axios';
 //icons
 import { BiError } from 'react-icons/bi';
 
-const CreateCourse = () => {
+const CreateCourse = ({searchList}) => {
     const [options, setOptions] = useState([]);
     const [error, setError] = useState('');
     const [send, setSend] = useState(false);
@@ -34,6 +34,7 @@ const CreateCourse = () => {
                 if (response.data.successful) {
                     enqueueSnackbar('course created successfully', { variant: 'success' });
                     setData({ ...data, name_bootcamp: '', zoom_url: '', zoom_code: '' });
+                    searchList()
                 } else {
                     enqueueSnackbar(response.data.message, { variant: 'error' });
                     setError(response.data.message);

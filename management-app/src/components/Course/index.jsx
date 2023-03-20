@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 //actions
 import { getCoursesAsync } from './../../redux/actions/dashboard';
@@ -6,13 +7,18 @@ import { getCoursesAsync } from './../../redux/actions/dashboard';
 import Interface, { Block } from './../Interface';
 import CreateCourse from './CreateCourse';
 import CourseList from './CourseList';
+import Pagination from './Pagination';
 
 const Course = () => {
     const dispatch = useDispatch();
+    const { page } = useParams();
+    const searchList = () => {
+        dispatch(getCoursesAsync({ page }));
+    };
     useEffect(() => {
-        dispatch(getCoursesAsync({ page: 1 }));
+        searchList();
         // eslint-disable-next-line
-    }, []);
+    }, [page]);
     return (
         <Interface>
             <Block title="Guide" space={2}>
@@ -22,10 +28,11 @@ const Course = () => {
                 </p>
             </Block>
             <Block title="New course registration" space={4}>
-                <CreateCourse />
+                <CreateCourse searchList={searchList}/>
             </Block>
             <Block>
-                <CourseList />
+                <CourseList searchList={searchList} />
+                <Pagination/>
             </Block>
         </Interface>
     );

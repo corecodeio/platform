@@ -45,7 +45,7 @@ const App = () => {
                 <Route path="staff" element={<p>staff</p>} />
                 <Route path="staff/send-invitation" element={<p>send-invitation</p>} />
                 <Route path="staff/staff-list" element={<p>staff-list</p>} />
-                <Route path="course" element={<Course/>} />
+                <Route path="course/:page" element={<Course/>} />
                 <Route path="permissions-and-roles" element={<p>permissions and roles</p>} />
                 <Route
                     path="permissions-and-roles/administer-powers"
