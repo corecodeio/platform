@@ -10,8 +10,10 @@
 2. [Workspaces](#2-workspaces)
 3. [Setting environment variables](#3-setting-environment-variables)
 4. [Scripts](#4-scripts)
-5. [Recommended resources](#5-recommended-resources)
-6. [README of the different projects](#6-readme-of-the-different-projects)
+5. [Structure styles](#5-structure-styles)
+6. [Response structure in API](#6-response-structure-in-api)
+7. [Recommended resources](#7-recommended-resources)
+8. [README of the different projects](#8-readme-of-the-different-projects)
 
 ---
 
@@ -131,11 +133,47 @@ for each project individually:
         "build:management": "npm run build --workspace=management-app"
 ```
 
-## 5. Recommended resources
+## 5. Structure styles
+
+As it is a project open to students, it was decided to use react module.css, so that each view or component has its own separate style and revisions are easier.
+
+![css module](./src/images/css-module.png 'css module')
+
+To adjust the styles to each resolution, media queries will be used:
+- default style for views larger than 1440px.
+- media query for views between 1440px and 1281px.
+- media query for views between 1280px and 801px.
+- media query for views 800px or less.
+
+```css
+@media only screen and (max-width: 1440px) and (min-width: 1281px) {
+}
+@media only screen and (max-width: 1280px) and (min-width: 801px) {
+}
+@media only screen and (max-width: 800px) {
+}
+```
+
+## 6. Response structure in API
+
+Responses from API endpoints must meet certain parameters.
+- return a json.
+- include the "successful" variable with true if the endpoint succeeds or false if it fails for any reason.
+- the "message" variable, if included, must be in lowercase and without a period at the end
+
+example:
+```javascript
+            res.status(200).json({
+                successful: true,
+                message: 'login successful'
+            });
+```
+
+## 7. Recommended resources
 
 [Here](https://www.youtube.com/watch?v=KEkRy4q_0oI) workspaces
 
-## 6. README of the different projects
+## 8. README of the different projects
 
 - api: [README](/api/README.md)
 - student-app: [README](/student-app/README.md)
