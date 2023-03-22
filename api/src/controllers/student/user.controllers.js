@@ -156,11 +156,11 @@ module.exports.validateEmail = async (req, res, next) => {
         if (userResult) {
             userResult.validate_email = true;
             await userResult.save();
-            res.status(200).json({ successful: true, message: 'Email confirmed successfully.' });
+            res.status(200).json({ successful: true, message: 'email confirmed successfully' });
         } else {
-            res.send({ successful: false, message: 'User Id not found' });
+            res.status(200).json({ successful: false, message: 'User Id not found' });
         }
     } catch (err) {
-        res.send({ successful: false, message: err });
+        res.status(400).json({ successful: false, message: err });
     }
 };
