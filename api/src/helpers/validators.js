@@ -9,3 +9,9 @@ module.exports.validateNumber = (number) => {
     const regex = /^[0-9]*$/;
     return regex.test(number);
 };
+
+//validate Email
+module.exports.validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+};

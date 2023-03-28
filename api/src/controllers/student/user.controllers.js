@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt');
 const { jwtStudentConfig, bcryptConfig } = require('./../../config/index.js');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
-const { sendWelcome } = require('./../../helpers/email.student');
+const { sendWelcome, sendRecoverPassword } = require('./../../helpers/email.student');
+const { validateEmail } = require('./../../helpers/validators');
 
 //log In
 module.exports.logIn = async (req, res, next) => {
@@ -141,7 +142,17 @@ module.exports.checkToken = async (req, res, next) => {
 
 //Recover Password
 module.exports.recoverPassword = async (req, res, next) => {
-    res.status(200).json({ successful: true, message: 'Recover Password' });
+    const secret = jwtStudentConfig.secret_key;
+    const { email } = req.body;    
+
+    if (validateEmail(email)) {
+        const token = jwt.sign(email, secret);
+        sendRecoverPassword({ tokenRecover: token, email})
+        res.status(200).json({ successful: true, message: 'email enviado' });
+    } else {
+        res.status(400).json({ successful: false, message: 'input is not a valid email' });
+    }
+
 };
 
 //Validate Email
