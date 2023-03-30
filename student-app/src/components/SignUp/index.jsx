@@ -1,117 +1,167 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Styles from './SignUp.module.css';
-import countries from './countries';
 import { useDispatch } from 'react-redux';
-import { logIn } from './../../redux/authSlice';
-import axios from 'axios';
+//actions
+import { signUpAsync } from './../../redux/actions/auth';
+//icons
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
+import { BiError } from 'react-icons/bi';
 
-const SignUp = () => {
+const LogIn = () => {
     const dispatch = useDispatch();
+    const [hidden, setHidden] = useState(false);
+    const [hiddenRepeat, setHiddenRepeat] = useState(false);
     const [data, setData] = useState({
         first_name: '',
         last_name: '',
-        country: 'Argentina',
         email: '',
-        password: ''
+        password: '',
+        password_repeat: ''
     });
     const [error, setError] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post('/api/student/user/sign-up', data);
-            if (response.data.successful) {
-                window.localStorage.setItem('core_code_tk', `Bearer ${response.data.token}`);
-                dispatch(logIn(response.data.user));
-            } else {
-                setError(response.data.message);
-            }
-        } catch (error) {
-            setError(error.message);
-        }
+        setError('');
+        dispatch(signUpAsync({ data, setError }));
     };
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
+        setError('');
+    };
+    const handleHidden = () => {
+        setHidden(!hidden);
+    };
+    const handleHiddenRepeat = () => {
+        setHiddenRepeat(!hiddenRepeat);
+    };
+    const validateEmail = (string) => {
+        const regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        return regex.test(string);
     };
     return (
-        <form className={Styles[`container`]} onSubmit={handleSubmit}>
-            <img
-                className={Styles[`logo`]}
-                src="/images/logo-core-code-color.png"
-                alt="core code"
-            />
-            <p className={Styles[`title`]}>Despega tu futuro🚀</p>
-            <p>Regístrate para ingresar a nuestra plataforma</p>
-            <div className={Styles[`full-name`]}>
+        <div className={Styles[`main`]}>
+            <img className={Styles[`logo`]} src="/images/logo-app.png" alt="core code" />
+            <form className={Styles[`form`]} onSubmit={handleSubmit}>
+                <p className={Styles[`title`]}>Register to enter</p>
                 <input
                     className={Styles[`form-input`]}
+                    style={
+                        !validateEmail(data.email) && data.email !== ''
+                            ? { border: '1px solid #D83341' }
+                            : {}
+                    }
                     type="text"
-                    name="first_name"
-                    value={data.first_name}
+                    name="email"
+                    value={data.email}
                     onChange={handleChange}
-                    placeholder="Nombre"
+                    placeholder="Email"
                 />
-                <input
-                    className={Styles[`form-input`]}
-                    type="text"
-                    name="last_name"
-                    value={data.last_name}
-                    onChange={handleChange}
-                    placeholder="Apellido"
-                />
-            </div>
-            <select
-                className={Styles[`form-input`]}
-                onChange={handleChange}
-                name="country"
-                value={data.country}
-            >
-                {countries.map((country, index) => {
-                    return (
-                        <option key={index} value={country}>
-                            {country}
-                        </option>
-                    );
-                })}
-            </select>
-            <input
-                className={Styles[`form-input`]}
-                type="text"
-                name="email"
-                value={data.email}
-                onChange={handleChange}
-                placeholder="Email"
-            />
-            <input
-                className={Styles[`form-input`]}
-                type="password"
-                name="password"
-                value={data.password}
-                onChange={handleChange}
-                placeholder="Contraseña"
-            />
-            <button
-                disabled={
-                    !data.email ||
-                    !data.password ||
-                    !data.first_name ||
-                    !data.last_name ||
-                    !data.country
-                }
-                className={Styles[`form-button`]}
-                type="submit"
-            >
-                Registrarme
-            </button>
-            {error && <p className={Styles[`form-error`]}>{error}</p>}
-            <p>
-                ¿Ya tienes una cuenta?{' '}
-                <Link className={Styles[`form-link`]} to="/log-in">
-                    Ingresa aquí
-                </Link>
-            </p>
-        </form>
+                <div className={Styles[`full-name`]}>
+                    <input
+                        className={Styles[`form-input2`]}
+                        type="text"
+                        name="first_name"
+                        value={data.first_name}
+                        onChange={handleChange}
+                        placeholder="First Name"
+                    />
+                    <input
+                        className={Styles[`form-input2`]}
+                        type="text"
+                        name="last_name"
+                        value={data.last_name}
+                        onChange={handleChange}
+                        placeholder="Last Name"
+                    />
+                </div>
+                <div className={Styles[`form-div-password`]}>
+                    <input
+                        className={Styles[`form-input`]}
+                        type={hidden ? 'text' : 'password'}
+                        name="password"
+                        value={data.password}
+                        onChange={handleChange}
+                        placeholder="Password"
+                    />
+                    {hidden ? (
+                        <AiOutlineEyeInvisible
+                            className={Styles[`form-icon-eye`]}
+                            onClick={handleHidden}
+                        />
+                    ) : (
+                        <AiOutlineEye className={Styles[`form-icon-eye`]} onClick={handleHidden} />
+                    )}
+                </div>
+                <div className={Styles[`form-div-password`]}>
+                    <input
+                        className={Styles[`form-input`]}
+                        type={hiddenRepeat ? 'text' : 'password'}
+                        style={
+                            data.password !== data.password_repeat &&
+                            data.password_repeat !== '' &&
+                            data.password !== ''
+                                ? { border: '1px solid #D83341' }
+                                : {}
+                        }
+                        name="password_repeat"
+                        value={data.password_repeat}
+                        onChange={handleChange}
+                        placeholder="Repeat Password"
+                    />
+                    {hiddenRepeat ? (
+                        <AiOutlineEyeInvisible
+                            className={Styles[`form-icon-eye`]}
+                            onClick={handleHiddenRepeat}
+                        />
+                    ) : (
+                        <AiOutlineEye
+                            className={Styles[`form-icon-eye`]}
+                            onClick={handleHiddenRepeat}
+                        />
+                    )}
+                    {data.password !== data.password_repeat &&
+                        data.password !== '' &&
+                        data.password_repeat !== '' && (
+                            <p className={Styles[`form-error`]}>
+                                <BiError className={Styles[`form-icon-error`]} />
+                                password is not the same
+                            </p>
+                        )}
+                </div>
+                <button
+                    className={Styles[`form-button`]}
+                    disabled={
+                        !data.email ||
+                        !data.first_name ||
+                        !data.last_name ||
+                        !data.password ||
+                        !data.password_repeat ||
+                        data.password_repeat !== data.password ||
+                        !validateEmail(data.email)
+                    }
+                    type="submit"
+                >
+                    Sign Up
+                </button>
+                <div className={Styles[`additional-text`]}>
+                    <p className={Styles[`additional-text2`]}>
+                        Already have an account?{' '}
+                        <Link to="/log-in" className={Styles[`additional-link`]}>
+                            Sign Up
+                        </Link>
+                    </p>
+                    {error && (
+                        <p className={Styles[`form-error`]}>
+                            <BiError className={Styles[`form-icon-error`]} />
+                            {error}
+                        </p>
+                    )}
+                </div>
+            </form>
+            <img className={Styles[`logo-footer`]} src="/images/group-1.png" alt="core code" />
+        </div>
     );
 };
 
-export default SignUp;
+export default LogIn;

@@ -4,22 +4,26 @@ const { jwtStudentConfig, bcryptConfig } = require('./../../config/index.js');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 const { sendWelcome } = require('./../../helpers/email.student');
+const { validateEmail } = require('./../../helpers/validators');
 
 //log In
 module.exports.logIn = async (req, res, next) => {
     try {
         const { email, password } = req.body;
         if (!email || !password) {
-            return res.status(200).json({ successful: false, message: 'Falta ingresar datos' });
+            return res.status(200).json({ successful: false, message: 'missing data entry' });
+        }
+        if (!validateEmail(email)) {
+            return res.status(200).json({ successful: false, message: 'email is invalid' });
         }
         const userResult = await User.findOne({ where: { email: email } });
         if (!userResult) {
             return res
                 .status(200)
-                .json({ successful: false, message: 'El email o la contraseña son incorrectos' });
+                .json({ successful: false, message: 'email or password are incorrect' });
         }
         if (userResult.locked) {
-            return res.status(200).json({ successful: false, message: 'Usuario bloqueado' });
+            return res.status(200).json({ successful: false, message: 'user blocked' });
         }
         if (bcrypt.compareSync(password, userResult.password)) {
             let token = jwt.sign(
@@ -36,7 +40,7 @@ module.exports.logIn = async (req, res, next) => {
             );
             res.status(200).json({
                 successful: true,
-                message: 'Inicio de sesión exitoso',
+                message: 'login successful',
                 token: token,
                 user: {
                     first_name: userResult.first_name,
@@ -50,7 +54,7 @@ module.exports.logIn = async (req, res, next) => {
         } else {
             res.status(200).json({
                 successful: false,
-                message: 'El email o la contraseña son incorrectos'
+                message: 'email or password are incorrect'
             });
         }
     } catch (error) {
@@ -64,11 +68,14 @@ module.exports.signUp = async (req, res, next) => {
     try {
         const { first_name, last_name, email, password } = req.body;
         if (!first_name || !last_name || !email || !password) {
-            return res.status(200).json({ successful: false, message: 'Falta ingresar datos' });
+            return res.status(200).json({ successful: false, message: 'missing data entry' });
+        }
+        if (!validateEmail(email)) {
+            return res.status(200).json({ successful: false, message: 'email is invalid' });
         }
         const emailAvailable = await User.findOne({ where: { email: email } });
         if (emailAvailable) {
-            return res.status(200).json({ successful: false, message: 'El email ya está en uso' });
+            return res.status(200).json({ successful: false, message: 'email is already in use' });
         }
         const passwordCrypt = bcrypt.hashSync(password, bcryptConfig.rounds);
         const newUser = await User.create({
@@ -93,7 +100,7 @@ module.exports.signUp = async (req, res, next) => {
         sendWelcome({ id: newUser.id, first_name, last_name, email });
         res.status(200).json({
             successful: true,
-            message: 'Registro exitoso',
+            message: 'successful registration',
             token: token,
             user: {
                 first_name: newUser.first_name,
@@ -113,17 +120,18 @@ module.exports.signUp = async (req, res, next) => {
 //check token
 module.exports.checkToken = async (req, res, next) => {
     try {
+        console.log('hola')
         const { id } = req.user;
         const userResult = await User.findOne({ where: { id: id } });
         if (!userResult) {
-            return res.status(200).send({ successful: false, message: 'Usuario no existe' });
+            return res.status(200).send({ successful: false, message: 'user does not exist' });
         }
         if (userResult.locked) {
-            return res.status(200).json({ successful: false, message: 'Usuario bloqueado' });
+            return res.status(200).json({ successful: false, message: 'user blocked' });
         }
         res.status(200).json({
             successful: true,
-            message: 'Inicio de sesión exitoso',
+            message: 'login successful',
             user: {
                 first_name: userResult.first_name,
                 last_name: userResult.last_name,
