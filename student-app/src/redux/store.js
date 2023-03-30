@@ -1,12 +1,8 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import authSlice from './authSlice';
-import postulationSlice from './postulationSlice';
-import bootcampSlice from './bootcampSlice';
+import authSlice from './reducers/auth';
 
 const reducer = combineReducers({
-    auth: authSlice,
-    postulation: postulationSlice,
-    bootcamp: bootcampSlice
+    auth: authSlice
 });
 
 export const store = configureStore({

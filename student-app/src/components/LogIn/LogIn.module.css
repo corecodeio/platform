@@ -1,52 +1,66 @@
-.container {
-    width: 360px;
+.main {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    font-family: 'Montserrat-Regular', serif;
-    font-size: 14px;
-}
-.logo {
-    width: 60%;
-    margin-bottom: 15px;
-}
-.title {
-    font-family: 'Montserrat-SemiBold', serif;
-    font-size: 25px;
-    margin-bottom: 5px;
-}
-.full-remember {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-.full-remember label {
-    display: flex;
     align-items: center;
 }
-.form-link {
-    color: #000;
-    font-family: 'Montserrat-SemiBold', serif;
+.logo {
+    width: 130px;
+    padding-right: calc(68% - 130px);
+    margin-top: 24%;
+    margin-bottom: auto;
+}
+.form {
+    width: 68%;
+    display: flex;
+    flex-direction: column;
+}
+.title {
+    font-family: 'Rubik-Bold', serif;
+    font-size: 28px;
+    margin-bottom: 22px;
+    color: #0d1e38;
 }
 .form-input {
-    padding-left: 5px;
-    height: 35px;
-    font-size: 14px;
-    border-radius: 5px;
-    border: 1px solid #000000;
+    padding: 12px 16px 12px 16px;
+    font-family: 'SourceSansPro-Regular', serif;
+    font-size: 18px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: 1px solid #cadbe3;
+    color: #335065;
+    width: calc(100% - 34px);
     margin-top: 10px;
+    margin-bottom: 6px;
+}
+.form-input:placeholder-shown {
+    background-color: #ffffff;
+}
+.form-div-password {
+    position: relative;
+}
+.form-icon-eye {
+    position: absolute;
+    right: 18px;
+    top: calc(50% - 10px);
+    width: 24px;
+    height: 24px;
+    color: #7291a0;
+}
+.form-icon-eye:hover {
+    cursor: pointer;
 }
 .form-button {
-    background-color: #0085ff;
+    background-color: #6254ff;
     color: #ffffff;
     border: 0;
-    height: 50px;
-    margin-top: 10px;
-    border-radius: 10px;
-    font-family: 'Montserrat-SemiBold', serif;
-    font-size: 16px;
+    height: 47px;
+    margin-top: 25px;
     margin-bottom: 10px;
+    border-radius: 4px;
+    font-family: 'SourceSansPro-Regular', serif;
+    font-size: 16px;
     transition: 0.2s;
 }
 .form-button:enabled:hover {
@@ -55,12 +69,63 @@
 .form-button:disabled {
     background-color: #f0f0f0;
 }
-.form-error{
-    border-radius: 5px;
-    border: 1px solid #ff0b0b;
-    height: 40px;
-    width: 80%;
-    margin: auto;
+.additional-text {
+    width: 100%;
+    height: 160px;
+}
+.additional-text2 {
+    font-family: 'SourceSansPro-Regular', serif;
+    font-size: 14px;
     text-align: center;
-    vertical-align: middle;
+}
+.additional-link {
+    font-family: 'SourceSansPro-Bold', serif;
+    color: #2764FF;
+    text-decoration: none;
+}
+.form-error {
+    border-radius: 5px;
+    font-family: 'SourceSansPro-Regular', serif;
+    /*border: 1px solid #D83341;*/
+    margin-top: 10px;
+    color: #d83341;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.form-icon-error {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+}
+.logo-footer {
+    margin-top: auto;
+    margin-bottom: 7.5%;
+}
+@media only screen and (max-width: 1440px) and (min-width: 1281px) {
+}
+@media only screen and (max-width: 1280px) and (min-width: 801px) {
+    .form {
+        width: 80%;
+    }
+    .logo {
+        width: 120px;
+        padding-right: calc(80% - 120px);
+        margin-bottom: auto;
+    }
+    .additional-text {
+        width: 100%;
+        height: auto;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .form {
+        width: 90%;
+    }
+    .logo {
+        width: 120px;
+        padding-right: calc(90% - 120px);
+        margin-top: auto;
+        margin-bottom: auto;
+    }
 }

@@ -62,24 +62,32 @@ We will create a file called .env positioned in "/api"
 - Server configurations: these variables are for basic configuration and development mode.
     - SERVER_PORT: api project execution port
     - SERVER_MODE: variable to run development mode, should be filled with the value "dev" (if you use the console, it will display additional data when an endpoint is triggered and preload the information from the "development-data" folder to the database ).
-    - SERVER_DEVELOPMENT: are the variables to customize the USER and PERSONNEL registry of the development mode. If these variables are not created, the user for development mode by default will be:
+    - SERVER_DEVELOPMENT_USER: are the variables to customize the USER and STAFF registry of the development mode. If these variables are not created, the user for development mode by default will be:
     ```json
     {
         "email" : "testing@gmail.com",
         "password" : "123456"
     }
     ```
+    -SERVER_DEVELOPMENT_COURSE: they are the variables to create a default course and you can make testing easier without having to create channels repeatedly
 ```bash
     #Server configurations
     SERVER_PORT=3001
     SERVER_MODE=
-    SERVER_DEVELOPMENT_FIRST_NAME=
-    SERVER_DEVELOPMENT_LAST_NAME=
-    SERVER_DEVELOPMENT_COUNTRY=
-    SERVER_DEVELOPMENT_EMAIL=
-    SERVER_DEVELOPMENT_PASSWORD=
-    SERVER_DEVELOPMENT_PHONE=
-    SERVER_DEVELOPMENT_SLACK_ID=
+    #User / Staff Testing
+    SERVER_DEVELOPMENT_USER_FIRST_NAME=
+    SERVER_DEVELOPMENT_USER_LAST_NAME=
+    SERVER_DEVELOPMENT_USER_COUNTRY=
+    SERVER_DEVELOPMENT_USER_EMAIL=
+    SERVER_DEVELOPMENT_USER_PASSWORD=
+    SERVER_DEVELOPMENT_USER_PHONE=
+    SERVER_DEVELOPMENT_USER_SLACK_ID=
+    #Course Testing
+    SERVER_DEVELOPMENT_COURSE_NAME=
+    SERVER_DEVELOPMENT_COURSE_SLACK_ID=
+    SERVER_DEVELOPMENT_COURSE_NAME_SLACK=
+    SERVER_DEVELOPMENT_COURSE_CALENDAR_ID=
+    SERVER_DEVELOPMENT_COURSE_CALENDAR_NAME=
 ```
 
 - Database configurations: These variables are for the connection to the database, the api project is configured to use Postgresql with the "sequelize" ORM.
@@ -121,6 +129,7 @@ You can also avoid using your private email password by creating an application 
 ```
 
 - Slack configurations: variable necessary for the socket connection of our slack app.
+if SERVER_MODE_SLACK is filled with "dev" the console logs additional data
 ```bash
     #slack configurations
     SLACK_BOT_USER_OAUTH_TOKEN=
