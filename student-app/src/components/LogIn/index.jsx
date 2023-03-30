@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Styles from './LogIn.module.css';
 import { useDispatch } from 'react-redux';
-import { logIn } from './../../redux/authSlice';
-import axios from 'axios';
+//actions
+import { logInAsync } from './../../redux/actions/auth';
+//icons
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
+import { BiError } from 'react-icons/bi';
 
 const LogIn = () => {
     const dispatch = useDispatch();
+    const [type, setType] = useState(false);
     const [data, setData] = useState({
         email: '',
         password: ''
@@ -14,67 +18,80 @@ const LogIn = () => {
     const [error, setError] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post('/api/student/user/log-in', data);
-            if (response.data.successful) {
-                window.localStorage.setItem('core_code_tk', `Bearer ${response.data.token}`);
-                dispatch(logIn(response.data.user));
-            } else {
-                setError(response.data.message);
-            }
-        } catch (error) {
-            setError(error.message);
-        }
+        setError('');
+        dispatch(logInAsync({ data, setError }));
     };
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
         setError('');
     };
+    const handleType = () => {
+        setType(!type);
+    };
+    const validateEmail = (string) => {
+        const regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        return regex.test(string);
+    };
     return (
-        <form className={Styles[`container`]} onSubmit={handleSubmit}>
-            <img
-                className={Styles[`logo`]}
-                src="/images/logo-core-code-color.png"
-                alt="core code"
-            />
-            <p className={Styles[`title`]}>¡Hola otra vez! 👋</p>
-            <p>Continuá tu experiencia en Henry plataforma</p>
-            <input
-                className={Styles[`form-input`]}
-                type="text"
-                name="email"
-                value={data.email}
-                onChange={handleChange}
-                placeholder="Email"
-            />
-            <input
-                className={Styles[`form-input`]}
-                type="password"
-                name="password"
-                value={data.password}
-                onChange={handleChange}
-                placeholder="Contraseña"
-            />
-            <div className={Styles[`full-remember`]}>
-                <Link className={Styles[`form-link`]} to="/forgot-password">
-                    Olvidé mi contraseña
-                </Link>
-            </div>
-            <button
-                className={Styles[`form-button`]}
-                disabled={!data.email || !data.password}
-                type="submit"
-            >
-                Ingresar
-            </button>
-            {error && <p className={Styles[`form-error`]}>{error}</p>}
-            <p>
-                ¿Aún no tienes una cuenta?{' '}
-                <Link className={Styles[`form-link`]} to="/sign-up">
-                    Regístrate aquí
-                </Link>
-            </p>
-        </form>
+        <div className={Styles[`main`]}>
+            <img className={Styles[`logo`]} src="/images/logo-app.png" alt="core code" />
+            <form className={Styles[`form`]} onSubmit={handleSubmit}>
+                <p className={Styles[`title`]}>Welcome back!</p>
+                <input
+                    className={Styles[`form-input`]}
+                    style={
+                        !validateEmail(data.email) && data.email !== ''
+                            ? { border: '1px solid #D83341' }
+                            : {}
+                    }
+                    type="email"
+                    name="email"
+                    value={data.email}
+                    onChange={handleChange}
+                    placeholder="Email"
+                />
+                <div className={Styles[`form-div-password`]}>
+                    <input
+                        className={Styles[`form-input`]}
+                        type={type ? 'text' : 'password'}
+                        name="password"
+                        value={data.password}
+                        onChange={handleChange}
+                        placeholder="Password"
+                    />
+                    {type ? (
+                        <AiOutlineEyeInvisible
+                            className={Styles[`form-icon-eye`]}
+                            onClick={handleType}
+                        />
+                    ) : (
+                        <AiOutlineEye className={Styles[`form-icon-eye`]} onClick={handleType} />
+                    )}
+                </div>
+                <button
+                    className={Styles[`form-button`]}
+                    disabled={!data.email || !data.password || !validateEmail(data.email)}
+                    type="submit"
+                >
+                    Login
+                </button>
+                <div className={Styles[`additional-text`]}>
+                    <p className={Styles[`additional-text2`]}>
+                        Dont have an account?{' '}
+                        <Link to="/sign-up" className={Styles[`additional-link`]}>
+                            Sign up now
+                        </Link>
+                    </p>
+                    {error && (
+                        <p className={Styles[`form-error`]}>
+                            <BiError className={Styles[`form-icon-error`]} />
+                            {error}
+                        </p>
+                    )}
+                </div>
+            </form>
+            <img className={Styles[`logo-footer`]} src="/images/group-1.png" alt="core code" />
+        </div>
     );
 };
 

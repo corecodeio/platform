@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 const { jwtManagementConfig, bcryptConfig } = require('./../../config/index.js');
-const { validateNumber, validateID } = require('./../../helpers/validators');
+const { validateNumber, validateID, validateEmail } = require('./../../helpers/validators');
 const { generatePassword } = require('./../../helpers/generator');
 const { sendAccountGenerated } = require('./../../helpers/email.management');
 const Sequelize = require('sequelize');
@@ -15,7 +15,10 @@ module.exports.logIn = async (req, res, next) => {
     try {
         const { email, password } = req.body;
         if (!email || !password) {
-            return res.status(200).json({ successful: false, message: 'Falta ingresar datos' });
+            return res.status(200).json({ successful: false, message: 'missing data entry' });
+        }
+        if (!validateEmail(email)) {
+            return res.status(200).json({ successful: false, message: 'email is invalid' });
         }
         const userResult = await Staff.findOne({
             where: { email: email },
@@ -43,10 +46,10 @@ module.exports.logIn = async (req, res, next) => {
         if (!userResult) {
             return res
                 .status(200)
-                .json({ successful: false, message: 'El email o la contraseña son incorrectos' });
+                .json({ successful: false, message: 'email or password are incorrect' });
         }
         if (userResult.locked) {
-            return res.status(200).json({ successful: false, message: 'Usuario bloqueado' });
+            return res.status(200).json({ successful: false, message: 'user blocked' });
         }
         const rolesAndPermissions = permissionReader(userResult.roles);
         if (bcrypt.compareSync(password, userResult.password)) {
@@ -65,7 +68,7 @@ module.exports.logIn = async (req, res, next) => {
             );
             res.status(200).json({
                 successful: true,
-                message: 'Inicio de sesión exitoso',
+                message: 'login successful',
                 token: token,
                 user: {
                     first_name: userResult.first_name,
@@ -79,7 +82,7 @@ module.exports.logIn = async (req, res, next) => {
         } else {
             res.status(200).json({
                 successful: false,
-                message: 'El email o la contraseña son incorrectos'
+                message: 'email or password are incorrect'
             });
         }
     } catch (error) {
@@ -114,15 +117,15 @@ module.exports.checkToken = async (req, res, next) => {
             ]
         });
         if (!userResult) {
-            return res.status(200).send({ successful: false, message: 'Failed to authenticate.' });
+            return res.status(200).send({ successful: false, message: 'failed to authenticate' });
         }
         if (userResult.locked) {
-            return res.status(200).json({ successful: false, message: 'Usuario bloqueado' });
+            return res.status(200).json({ successful: false, message: 'user blocked' });
         }
         const rolesAndPermissions = permissionReader(userResult.roles);
         return res.status(200).json({
             successful: true,
-            message: 'Inicio de sesión exitoso',
+            message: 'login successful',
             user: {
                 first_name: userResult.first_name,
                 last_name: userResult.last_name,
@@ -141,10 +144,10 @@ module.exports.listStaff = async (req, res, next) => {
     try {
         const { page, order_type, order, text_search, search_type } = req.query;
         if (!page) {
-            return res.status(200).json({ successful: false, message: 'Missing to enter data.' });
+            return res.status(200).json({ successful: false, message: 'missing to enter data' });
         }
         if (!validateNumber(page)) {
-            return res.status(200).json({ successful: false, message: 'Not a valid number.' });
+            return res.status(200).json({ successful: false, message: 'not a valid number' });
         }
         let limit = 10;
         let offset = 0 + (page - 1) * limit;
@@ -160,14 +163,14 @@ module.exports.listStaff = async (req, res, next) => {
             ) {
                 arg.order = [[order_type, order]];
             } else {
-                return res.status(200).json({ successful: false, message: 'invalid data.' });
+                return res.status(200).json({ successful: false, message: 'invalid data' });
             }
         }
         if (search_type && text_search) {
             if (['first_name', 'last_name', 'email'].includes(search_type)) {
                 arg.where = { [search_type]: { [Op.iLike]: `%${text_search}%` } };
             } else {
-                return res.status(200).json({ successful: false, message: 'invalid data.' });
+                return res.status(200).json({ successful: false, message: 'invalid data' });
             }
         }
         const responseList = await Staff.findAndCountAll(arg);
@@ -186,10 +189,10 @@ module.exports.readStaff = async (req, res, next) => {
     try {
         const { id } = req.query;
         if (!id) {
-            return res.status(200).json({ successful: false, message: 'Missing to enter data.' });
+            return res.status(200).json({ successful: false, message: 'missing to enter data' });
         }
         if (!validateID(id)) {
-            return res.status(200).json({ successful: false, message: 'Invalid ID.' });
+            return res.status(200).json({ successful: false, message: 'invalid id' });
         }
         const userResult = await Staff.findOne({
             where: { id: id },
@@ -215,12 +218,12 @@ module.exports.readStaff = async (req, res, next) => {
             ]
         });
         if (!userResult) {
-            return res.status(200).json({ successful: false, message: 'ID does not exist.' });
+            return res.status(200).json({ successful: false, message: 'id does not exist' });
         }
         const rolesAndPermissions = permissionReader(userResult.roles);
         res.status(200).json({
             successful: true,
-            message: 'Información encontrada',
+            message: 'information found',
             user: {
                 id: userResult.id,
                 first_name: userResult.first_name,
@@ -241,13 +244,13 @@ module.exports.createStaff = async (req, res, next) => {
     try {
         const { first_name, last_name, email, phone } = req.body;
         if (!first_name || !last_name || !email || !phone) {
-            return res.status(200).json({ successful: false, message: 'Missing to enter data.' });
+            return res.status(200).json({ successful: false, message: 'missing to enter data' });
         }
         const emailAvailable = await Staff.findOne({
             where: { email: email }
         });
         if (emailAvailable) {
-            return res.status(200).json({ successful: false, message: 'email is busy.' });
+            return res.status(200).json({ successful: false, message: 'email is busy' });
         }
         const id = uuidv4();
         const password = generatePassword(16);
@@ -263,7 +266,7 @@ module.exports.createStaff = async (req, res, next) => {
         sendAccountGenerated({ first_name, last_name, email, password });
         res.status(200).json({
             successful: true,
-            message: 'Create user.'
+            message: 'user created successfully'
         });
     } catch (error) {
         res.status(400).json({ successful: false, message: error });
@@ -274,16 +277,16 @@ module.exports.editStaff = async (req, res, next) => {
     try {
         const { id, first_name, last_name, email, phone, locked } = req.body;
         if (!id) {
-            return res.status(200).json({ successful: false, message: 'Missing to enter data.' });
+            return res.status(200).json({ successful: false, message: 'missing to enter data' });
         }
         if (!validUuid(id)) {
-            return res.status(200).json({ successful: false, message: 'Invalid ID.' });
+            return res.status(200).json({ successful: false, message: 'invalid id' });
         }
         const userResult = await User.findOne({
             where: { id: id }
         });
         if (!userResult) {
-            return res.status(200).json({ successful: false, message: 'ID does not exist.' });
+            return res.status(200).json({ successful: false, message: 'id does not exist' });
         }
         userResult.first_name = first_name;
         userResult.last_name = last_name;
@@ -293,7 +296,7 @@ module.exports.editStaff = async (req, res, next) => {
         await userResult.save();
         res.status(200).json({
             successful: true,
-            message: 'Edit user successful.'
+            message: 'edit user successful'
         });
     } catch (error) {
         res.status(400).json({ successful: false, message: error });
@@ -304,21 +307,21 @@ module.exports.deleteStaff = async (req, res, next) => {
     try {
         const { id } = req.body;
         if (!id) {
-            return res.status(200).json({ successful: false, message: 'Missing to enter data.' });
+            return res.status(200).json({ successful: false, message: 'missing to enter data' });
         }
         if (!validateID(id)) {
-            return res.status(200).json({ successful: false, message: 'Invalid ID.' });
+            return res.status(200).json({ successful: false, message: 'invalid id' });
         }
         const userResult = await Staff.findOne({
             where: { id: id }
         });
         if (!userResult) {
-            return res.status(200).json({ successful: false, message: 'ID does not exist.' });
+            return res.status(200).json({ successful: false, message: 'id does not exist' });
         }
         await userResult.destroy();
         res.status(200).json({
             successful: true,
-            message: 'delete user'
+            message: 'user deleted successfully'
         });
     } catch (error) {
         res.status(400).json({ successful: false, error: error });
