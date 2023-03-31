@@ -3,8 +3,9 @@ const nodemailer = require('nodemailer');
 
 const transport = nodemailer.createTransport(nodeMailerConfig);
 
-module.exports.sendRecoverPassword = ({ tokenRecover, email }) => {
+module.exports.sendRecoverPassword = ({ id, tokenRecover, email }) => {
     try {
+        const userId = id;
         const message = {
             from: nodeMailerConfig.auth.user,
             to: email,

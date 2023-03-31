@@ -142,17 +142,27 @@ module.exports.checkToken = async (req, res, next) => {
 
 //Recover Password
 module.exports.recoverPassword = async (req, res, next) => {
-    const secret = jwtStudentConfig.secret_key;
-    const { email } = req.body;    
+    try {
+        const secret = jwtStudentConfig.secret_key;
+        const { email } = req.body;    
 
-    if (validateEmail(email)) {
-        const token = jwt.sign(email, secret);
-        sendRecoverPassword({ tokenRecover: token, email})
-        res.status(200).json({ successful: true, message: 'email enviado' });
-    } else {
-        res.status(400).json({ successful: false, message: 'input is not a valid email' });
-    }
-
+        if (validateEmail(email)) {
+            const userResult = await User.findOne({ where: { email : email } });
+            if (userResult) {
+                id = userResult.id;
+                const token = jwt.sign(email, secret);
+                sendRecoverPassword({id, tokenRecover: token, email})
+                res.status(200).json({ successful: true, message: 'email enviado' });
+            } else {
+                res.status(200).json({ successful: false, message: 'user email not found' });   
+            }
+        } else {
+            res.status(400).json({ successful: false, message: 'input is not a valid email' });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ successful: false, error: error });
+    }    
 };
 
 //Validate Email
