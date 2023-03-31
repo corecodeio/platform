@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const { jwtStudentConfig, bcryptConfig } = require('./../../config/index.js');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
-const { sendWelcome } = require('./../../helpers/email.student');
+const { sendWelcome, sendRecoverPassword } = require('./../../helpers/email.student');
 const { validateEmail } = require('./../../helpers/validators');
 
 //log In
@@ -149,7 +149,27 @@ module.exports.checkToken = async (req, res, next) => {
 
 //Recover Password
 module.exports.recoverPassword = async (req, res, next) => {
-    res.status(200).json({ successful: true, message: 'Recover Password' });
+    try {
+        const secret = jwtStudentConfig.secret_key;
+        const { email } = req.body;    
+
+        if (validateEmail(email)) {
+            const userResult = await User.findOne({ where: { email : email } });
+            if (userResult) {
+                const payload = { user : { id:userResult.id } }
+                const token = jwt.sign(payload, secret);
+                sendRecoverPassword({tokenRecover: token, email})
+                res.status(200).json({ successful: true, message: 'email enviado' });
+            } else {
+                res.status(200).json({ successful: false, message: 'user email not found' });   
+            }
+        } else {
+            res.status(400).json({ successful: false, message: 'input is not a valid email' });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ successful: false, error: error });
+    }    
 };
 
 //Validate Email
