@@ -1,0 +1,91 @@
+.main {
+    width: 100%;
+    height: 96px;
+    background-color: #233d54;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navbar {
+    width: 90%;
+    margin-top: auto;
+    margin-bottom: 16px;
+    color: #ebf3f7;
+    font-family: 'SourceSansPro-Regular', serif;
+    max-width: 1236px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.menu-left {
+}
+.menu-mobile{
+    display: none;
+}
+.logo {
+    width: 132px;
+}
+.logo:hover {
+    cursor: pointer;
+}
+.menu-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.container-icon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
+    border-radius: 4px;
+    padding: 6px;
+}
+.container-icon:hover {
+    cursor: pointer;
+    background-color: #ffffff33;
+}
+.icon {
+    width: 20px;
+    height: 20px;
+}
+.container-icon p {
+    position: absolute;
+    border-radius: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 10px;
+    top: 0px;
+    left: 14px;
+}
+.text-notifications {
+    background-color: #d16767;
+}
+.text-applications {
+    background-color: #e1a82d;
+}
+.text-messages {
+    background-color: #4799eb;
+}
+.logout:hover {
+    cursor: pointer;
+}
+@media only screen and (max-width: 800px) {
+    .main {
+        height: 60px;
+    }
+    .navbar {
+        margin: auto;
+    }
+    .menu-mobile{
+        display: block;
+        width: 30px;
+        height: 30px;
+    }
+    .logo{
+        display: none;
+    }
+}

@@ -17,25 +17,20 @@ const MainPage = () => {
         return <Navigate to="/dashboard" />;
     }
     return (
-        <>
-            <div className={Styles[`container`]}>
-                <div className={Styles[`details`]}>
-                    <img src="/images/template.png" alt="template" />
-                </div>
-                <div className={Styles[`panel`]}>
-                    <Outlet />
-                </div>
+        <div className={Styles[`main`]}>
+            <div className={Styles[`outlet`]}>
+                <Outlet />
             </div>
-            <div className={Styles[`container-footer`]}>
-                <div className={Styles[`footer`]}>
-                    <img src="/images/logo.svg" alt="core code" />
-                    <p>Core Code © 2023 | Todos los derechos reservados.</p>
-                    <p>
-                        ¿Consultas y dudas? Escríbenos a <strong>admisiones@core-code.io</strong>
-                    </p>
-                </div>
-            </div>
-        </>
+            <div
+                className={
+                    Styles[
+                        `background-${
+                            location.pathname === '/' || location.pathname === '/log-in' ? '0' : '1'
+                        }`
+                    ]
+                }
+            ></div>
+        </div>
     );
 };
 

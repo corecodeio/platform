@@ -1,13 +1,35 @@
 import React from 'react';
+import Styles from './Navbar.module.css';
 import { useDispatch } from 'react-redux';
-import { logOut } from './../../redux/authSlice';
+import { logOut } from './../../redux/actions/auth';
+import { useNavigate } from 'react-router-dom';
+//icons
+import { BiMenu } from 'react-icons/bi';
 
-const Navbar = () => {
+const Navbar = ({ setMenu }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleLogOut = () => {
+        dispatch(logOut());
+    };
     return (
-        <div>
-            <h2>Navbar</h2>
-            <button onClick={() => dispatch(logOut())}>Log Out</button>
+        <div className={Styles[`main`]}>
+            <div className={Styles[`navbar`]}>
+                <div className={Styles[`menu-left`]}>
+                    <BiMenu className={Styles[`menu-mobile`]} onClick={()=>setMenu(true)}/>
+                    <img
+                        className={Styles[`logo`]}
+                        src="/images/logo-app-dark.png"
+                        alt="core code"
+                        onClick={() => navigate('/dashboard')}
+                    />
+                </div>
+                <div className={Styles[`menu-right`]}>
+                    <p className={Styles[`logout`]} onClick={handleLogOut}>
+                        Logout
+                    </p>
+                </div>
+            </div>
         </div>
     );
 };
