@@ -156,8 +156,8 @@ module.exports.recoverPassword = async (req, res, next) => {
         if (validateEmail(email)) {
             const userResult = await User.findOne({ where: { email : email } });
             if (userResult) {
-                id = userResult.id;
-                const token = jwt.sign(id, secret);
+                const payload = { user : { id:userResult.id } }
+                const token = jwt.sign(payload, secret);
                 sendRecoverPassword({tokenRecover: token, email})
                 res.status(200).json({ successful: true, message: 'email enviado' });
             } else {
