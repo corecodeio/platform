@@ -44,19 +44,28 @@ const LogIn = () => {
             <img className={Styles[`logo`]} src="/images/logo-app.png" alt="core code" />
             <form className={Styles[`form`]} onSubmit={handleSubmit}>
                 <p className={Styles[`title`]}>Register to enter</p>
-                <input
-                    className={Styles[`form-input`]}
-                    style={
-                        !validateEmail(data.email) && data.email !== ''
-                            ? { border: '1px solid #D83341' }
-                            : {}
-                    }
-                    type="text"
-                    name="email"
-                    value={data.email}
-                    onChange={handleChange}
-                    placeholder="Email"
-                />
+                <div className='container-input'>
+                    <input
+                        className={Styles[`form-input`]}
+                        style={
+                            !validateEmail(data.email) && data.email !== ''
+                                ? { border: '1px solid #D83341' }
+                                : {}
+                        }
+                        type="email"
+                        name="email"
+                        value={data.email}
+                        onChange={handleChange}
+                        placeholder="Email"
+                    />
+                    {!validateEmail(data.email) && data.email !== '' && (
+                        <p className={Styles[`form-input-error`]}>
+                            <BiError />
+                            Invalid email. Please try again.
+                        </p>
+                    )}
+                </div>
+                
                 <div className={Styles[`full-name`]}>
                     <input
                         className={Styles[`form-input2`]}

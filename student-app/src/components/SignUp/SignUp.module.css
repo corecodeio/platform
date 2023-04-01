@@ -8,7 +8,7 @@
 .logo {
     width: 130px;
     padding-right: calc(68% - 130px);
-    margin-top: 24%;
+    margin-top: auto;
     margin-bottom: auto;
 }
 .form {
@@ -22,6 +22,10 @@
     margin-bottom: 22px;
     color: #0d1e38;
 }
+.container-input{
+    display: flex;
+    flex-direction: column;
+}
 .form-input {
     padding: 12px 16px 12px 16px;
     font-family: 'SourceSansPro-Regular', serif;
@@ -33,6 +37,18 @@
     width: calc(100% - 34px);
     margin-top: 10px;
     margin-bottom: 6px;
+}
+
+.form-input:focus{
+    outline: none;
+}
+
+.form-input-error{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #d83341;
+    font-size: 14px;
 }
 
 .form-input:placeholder-shown {
@@ -125,6 +141,10 @@
     margin-bottom: 7.5%;
 }
 @media only screen and (max-width: 1440px) and (min-width: 1281px) {
+    .additional-text {
+        width: 100%;
+        height: auto;
+    }
 }
 @media only screen and (max-width: 1280px) and (min-width: 801px) {
     .form {
@@ -155,5 +175,13 @@
     }
     .form-input2 {
         width: calc(100% - 34px);
+    }
+    .additional-text {
+        width: 100%;
+        height: auto;
+    }
+    .logo-footer {
+        margin-top: auto;
+        margin-bottom: 5%;
     }
 }
