@@ -10,8 +10,6 @@ import Loading from './views/Loading';
 import Dashboard from './views/Dashboard';
 import Authentication from './views/Authentication';
 //components
-import LogIn from './components/LogIn';
-import SignUp from './components/SignUp';
 import ProtectedRoutes from './components/ProtectedRoutes';
 
 const App = () => {
@@ -26,10 +24,7 @@ const App = () => {
     }
     return (
         <Routes>
-            <Route path="/" element={<MainPage />}>
-                <Route path="log-in" element={<LogIn />} />
-                <Route path="sign-up" element={<SignUp />} />
-            </Route>
+            <Route path="/" element={<MainPage />}/>
             <Route
                 path="/dashboard"
                 element={

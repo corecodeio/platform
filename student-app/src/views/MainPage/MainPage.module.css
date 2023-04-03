@@ -4,6 +4,12 @@
     display: flex;
     flex-direction: row;
 }
+.logo {
+    width: 130px;
+    padding-right: calc(68% - 130px);
+    margin-top: 24%;
+    margin-bottom: auto;
+}
 .background-0 {
     background-image: url('./../../../public/images/pexels-fauxels-3183148.jpg');
     background-size: cover;
@@ -25,6 +31,13 @@
 .outlet {
     width: 36.95%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.logo-footer {
+    margin-top: auto;
+    margin-bottom: 7.5%;
 }
 @media only screen and (max-width: 1440px) and (min-width: 1281px) {
 }
@@ -40,10 +53,10 @@
     .outlet {
         width: 100%;
     }
-    .background-0{
+    .background-0 {
         display: none;
     }
-    .background-1{
+    .background-1 {
         display: none;
     }
 }

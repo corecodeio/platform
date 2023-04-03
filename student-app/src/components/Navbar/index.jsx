@@ -1,22 +1,19 @@
 import React from 'react';
 import Styles from './Navbar.module.css';
-import { useDispatch } from 'react-redux';
-import { logOut } from './../../redux/actions/auth';
 import { useNavigate } from 'react-router-dom';
+import { useStytch } from '@stytch/react';
 //icons
 import { BiMenu } from 'react-icons/bi';
 
 const Navbar = ({ setMenu }) => {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const handleLogOut = () => {
-        dispatch(logOut());
-    };
+    const stytch = useStytch();
+
     return (
         <div className={Styles[`main`]}>
             <div className={Styles[`navbar`]}>
                 <div className={Styles[`menu-left`]}>
-                    <BiMenu className={Styles[`menu-mobile`]} onClick={()=>setMenu(true)}/>
+                    <BiMenu className={Styles[`menu-mobile`]} onClick={() => setMenu(true)} />
                     <img
                         className={Styles[`logo`]}
                         src="/images/logo-app-dark.png"
@@ -25,7 +22,7 @@ const Navbar = ({ setMenu }) => {
                     />
                 </div>
                 <div className={Styles[`menu-right`]}>
-                    <p className={Styles[`logout`]} onClick={handleLogOut}>
+                    <p className={Styles[`logout`]} onClick={() => stytch.session.revoke()}>
                         Logout
                     </p>
                 </div>
