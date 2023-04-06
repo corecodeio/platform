@@ -9,10 +9,6 @@ module.exports.sendRecoverPassword = ({ tokenRecover, email }) => {
             from: nodeMailerConfig.auth.user,
             to: email,
             subject: 'Password recovery',
-            // html: `
-            // <p>hola en este email encontrara un link para recuperar contraseña<p>
-            // <a href="${clientConfig.student_url}/reset-password/${tokenRecover}">link</a>
-            // `
             html: `
             <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -24,9 +20,9 @@ module.exports.sendRecoverPassword = ({ tokenRecover, email }) => {
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta content="telephone=no" name="format-detection">
                 <title></title>
-                <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
                 <link rel="preconnect" href="https://fonts.googleapis.com">
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600&family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
                 <!--[if (mso 16)]>
                 <style type="text/css">
                 a {text-decoration: none;}
@@ -104,7 +100,7 @@ module.exports.sendRecoverPassword = ({ tokenRecover, email }) => {
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td align="center" class="esd-block-text es-p5t es-p30b es-p30r es-p30l">
-                                                                                                    <p style="color: #0d1e38; font-size: 28px; font-family: 'Rubik';font-size: 32px;"><strong>Recupera tu contraseña</strong></p>
+                                                                                                    <p style="color: #0d1e38; font-size: 28px; font-family: 'Rubik'; font-weight: 600;font-size: 32px;"><strong>Recupera tu contraseña</strong></p>
                                                                                                 </td>
                                                                                             </tr>
                                                                                         </tbody>
@@ -157,7 +153,7 @@ module.exports.sendRecoverPassword = ({ tokenRecover, email }) => {
                                                                                     <table cellpadding="0" cellspacing="0" width="100%">
                                                                                         <tbody>
                                                                                             <tr>
-                                                                                                <td align="center" class="esd-block-button es-p20t es-p40b es-p15r es-p15l" style="padding: 20px 0px 60px 0px;"><span class="es-button-border" style="border-width: 0px; border-color: #2cb543; background: #6254ff;"><a href="${clientConfig.student_url}/reset-password/${tokenRecover}" class="es-button es-button-1680458315516" target="_blank" style="background: #6254ff; border-color: #6254ff; border-radius: 4px; font-family: &quot;Source Sans Pro&quot;; padding: 10px 25px; color: #ffffff; text-decoration: none;"> Recuperar contraseña </a></span></td>
+                                                                                                <td align="center" class="esd-block-button es-p20t es-p40b es-p15r es-p15l" style="padding: 20px 0px 60px 0px;"><span class="es-button-border" style="border-width: 0px; border-color: #2cb543; background: #6254ff;"><a href="${clientConfig.student_url}/reset-password/${tokenRecover}" class="es-button es-button-1680458315516" target="_blank" style="background: #6254ff; border-color: #6254ff; border-radius: 4px; font-family: 'Source Sans Pro'; font-weight: 700 ; font-size: 18px; padding: 10px 25px; color: #ffffff; text-decoration: none"> Recuperar contraseña </a></span></td>
                                                                                             </tr>
                                                                                         </tbody>
                                                                                     </table>
