@@ -16,7 +16,7 @@ router.post('/sign-up', signUp);
 //Recover Password
 router.post('/check-token', authStudent, checkToken);
 //Recover Password
-router.put('/recover-password', recoverPassword);
+router.post('/recover-password', recoverPassword);
 //Validate Email
 router.post('/validate-email', validateEmail);
 

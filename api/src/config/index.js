@@ -6,6 +6,12 @@ module.exports = {
         port: process.env.SERVER_PORT,
         mode: process.env.SERVER_MODE === 'dev' ? true : false
     },
+    stytchConfig: {
+        project_id: process.env.STYTCH_PROJECT_ID,
+        secret: process.env.STYTCH_SECRET,
+        login_magic_link_url: 'http://localhost:3500',
+        signup_magic_link_url: 'http://localhost:3500'
+    },
     postgresConfig: {
         user: process.env.SERVER_DB_USER,
         password: process.env.SERVER_DB_PASS,

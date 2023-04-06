@@ -2187,6 +2187,18 @@
   "resolved" "https://registry.npmjs.org/@stytch/react/-/react-1.0.0.tgz"
   "version" "1.0.0"
 
+"@stytch/stytch-js@^3.3.0":
+  "integrity" "sha512-8iFgLcHd/fYtWPsL3Pisw3Xwx5CgQy5OYuTksp5rQShKm7KPwdc4lET4CaZaAYNIRMF9q93D2qm9gRyy7ECP3Q=="
+  "resolved" "https://registry.npmjs.org/@stytch/stytch-js/-/stytch-js-3.3.3.tgz"
+  "version" "3.3.3"
+
+"@stytch/stytch-react@^4.1.1":
+  "integrity" "sha512-nWIwWrPoDm/qgX40gC9op0oJWS0hHxlFg14wZ9T5Mb5LPg/L0dYVQCTQaX20P0Yv2ms7qH4Mpbj6chQ0K9DDtA=="
+  "resolved" "https://registry.npmjs.org/@stytch/stytch-react/-/stytch-react-4.1.1.tgz"
+  "version" "4.1.1"
+  dependencies:
+    "@stytch/stytch-js" "^3.3.0"
+
 "@stytch/vanilla-js@^0.11.1":
   "integrity" "sha512-l0hBHPQosxipcjnMGk6e51IY9RuBZyKEzK5nuzfQ4h/yqulwTLF46eg0u4tspeqYZ4F9Wnu2RQgdNl4n27XOhA=="
   "resolved" "https://registry.npmjs.org/@stytch/vanilla-js/-/vanilla-js-0.11.1.tgz"
@@ -3189,6 +3201,7 @@
     "nodemailer" "^6.9.1"
     "pg" "^8.9.0"
     "sequelize" "^6.28.2"
+    "stytch" "^6.1.0"
     "uuid" "^9.0.0"
 
 "aproba@^1.0.3 || ^2.0.0":
@@ -6440,6 +6453,14 @@
   "resolved" "https://registry.npmjs.org/isexe/-/isexe-2.0.0.tgz"
   "version" "2.0.0"
 
+"isomorphic-unfetch@^3.1.0":
+  "integrity" "sha512-geDJjpoZ8N0kWexiwkX8F9NkTsXhetLPVbZFQ+JTW239QNOwvB0gniuR1Wc6f0AMTn7/mFGyXvHTifrCp/GH8Q=="
+  "resolved" "https://registry.npmjs.org/isomorphic-unfetch/-/isomorphic-unfetch-3.1.0.tgz"
+  "version" "3.1.0"
+  dependencies:
+    "node-fetch" "^2.6.1"
+    "unfetch" "^4.2.0"
+
 "istanbul-lib-coverage@^3.0.0", "istanbul-lib-coverage@^3.2.0":
   "integrity" "sha512-eOeJ5BHCmHYvQK7xt9GkdHuzuCGS1Y6g9Gvnx3Ym33fz/HpLRYxiS0wHNr+m/MBC8B647Xt608vCDEvhl9c6Mw=="
   "resolved" "https://registry.npmjs.org/istanbul-lib-coverage/-/istanbul-lib-coverage-3.2.0.tgz"
@@ -7390,6 +7411,11 @@
     "import-local" "^3.0.2"
     "jest-cli" "^29.5.0"
 
+"jose@^4.6.0":
+  "integrity" "sha512-MSJQC5vXco5Br38mzaQKiq9mwt7lwj2eXpgpRyQYNHYt2lq1PjkWa7DLXX0WVcQLE9HhMh3jPiufS7fhJf+CLQ=="
+  "resolved" "https://registry.npmjs.org/jose/-/jose-4.13.1.tgz"
+  "version" "4.13.1"
+
 "js-cookie@3.0.1":
   "integrity" "sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw=="
   "resolved" "https://registry.npmjs.org/js-cookie/-/js-cookie-3.0.1.tgz"
@@ -8014,7 +8040,7 @@
   "resolved" "https://registry.npmjs.org/node-addon-api/-/node-addon-api-5.1.0.tgz"
   "version" "5.1.0"
 
-"node-fetch@^2.6.7":
+"node-fetch@^2.6.1", "node-fetch@^2.6.7":
   "integrity" "sha512-DJm/CJkZkRjKKj4Zi4BsKVZh3ValV5IR5s7LVZnW+6YMh0W1BfNA8XSs6DLMGYlId5F3KnA70uu2qepcR08Qqg=="
   "resolved" "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.9.tgz"
   "version" "2.6.9"
@@ -10422,6 +10448,8 @@
   "version" "0.1.0"
   dependencies:
     "@reduxjs/toolkit" "^1.9.3"
+    "@stytch/stytch-react" "^4.1.1"
+    "@stytch/vanilla-js" "^0.11.1"
     "@testing-library/jest-dom" "^5.16.5"
     "@testing-library/react" "^13.4.0"
     "@testing-library/user-event" "^13.5.0"
@@ -10467,6 +10495,14 @@
   "integrity" "sha512-GP6WDNWf+o403jrEp9c5jibKavrtLW+/qYGhFxFrG8maXhwTBI7gLLhiBb0o7uFccWN+EOS9aMO6cGHWAO07OA=="
   "resolved" "https://registry.npmjs.org/stylis/-/stylis-4.1.3.tgz"
   "version" "4.1.3"
+
+"stytch@^6.1.0":
+  "integrity" "sha512-E+9UPSDbWe3czFwjznNutWduISmnLhteO+exLHmHvzzP0lwMj/E+aw9myyy4tq4qPihv8uHoK/6EsOVcrugX5w=="
+  "resolved" "https://registry.npmjs.org/stytch/-/stytch-6.1.0.tgz"
+  "version" "6.1.0"
+  dependencies:
+    "isomorphic-unfetch" "^3.1.0"
+    "jose" "^4.6.0"
 
 "superagent@^8.0.5":
   "integrity" "sha512-4C7Bh5pyHTvU33KpZgwrNKh/VQnvgtCSqPRfJAUdmrtSYePVzVg4E4OzsrbkhJj9O7SO6Bnv75K/F8XVZT8YHA=="
@@ -10873,6 +10909,11 @@
   "integrity" "sha512-WxONCrssBM8TSPRqN5EmsjVrsv4A8X12J4ArBiiayv3DyyG3ZlIg6yysuuSYdZsVz3TKcTg2fd//Ujd4CHV1iA=="
   "resolved" "https://registry.npmjs.org/undefsafe/-/undefsafe-2.0.5.tgz"
   "version" "2.0.5"
+
+"unfetch@^4.2.0":
+  "integrity" "sha512-F9p7yYCn6cIW9El1zi0HI6vqpeIvBsr3dSuRO6Xuppb1u5rXpCPmMvLSyECLhybr9isec8Ohl0hPekMVrEinDA=="
+  "resolved" "https://registry.npmjs.org/unfetch/-/unfetch-4.2.0.tgz"
+  "version" "4.2.0"
 
 "unicode-canonical-property-names-ecmascript@^2.0.0":
   "integrity" "sha512-yY5PpDlfVIU5+y/BSCxAJRBIS1Zc2dDG3Ujq+sR0U+JjUevW2JhocOF+soROYDSaAezOzOKuyyixhD6mBknSmQ=="

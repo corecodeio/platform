@@ -5,6 +5,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
     "@stytch/react": "^1.0.0",
+    "@stytch/stytch-react": "^4.1.1",
     "@stytch/vanilla-js": "^0.11.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

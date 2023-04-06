@@ -23,6 +23,7 @@
     "nodemailer": "^6.9.1",
     "pg": "^8.9.0",
     "sequelize": "^6.28.2",
+    "stytch": "^6.1.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

@@ -1,13 +1,11 @@
 import React from 'react';
 import Styles from './Navbar.module.css';
 import { useNavigate } from 'react-router-dom';
-import { useStytch } from '@stytch/react';
 //icons
 import { BiMenu } from 'react-icons/bi';
 
 const Navbar = ({ setMenu }) => {
     const navigate = useNavigate();
-    const stytch = useStytch();
 
     return (
         <div className={Styles[`main`]}>
@@ -22,7 +20,7 @@ const Navbar = ({ setMenu }) => {
                     />
                 </div>
                 <div className={Styles[`menu-right`]}>
-                    <p className={Styles[`logout`]} onClick={() => stytch.session.revoke()}>
+                    <p className={Styles[`logout`]} onClick={() => {}}>
                         Logout
                     </p>
                 </div>

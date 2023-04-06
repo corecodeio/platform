@@ -11,6 +11,7 @@ import Dashboard from './views/Dashboard';
 import Authentication from './views/Authentication';
 //components
 import ProtectedRoutes from './components/ProtectedRoutes';
+import LogInStytch from './components/LogInStytch';
 
 const App = () => {
     const { isLoading } = useSelector((state) => state.auth);
@@ -24,7 +25,9 @@ const App = () => {
     }
     return (
         <Routes>
-            <Route path="/" element={<MainPage />}/>
+            <Route path="/" element={<MainPage />}>
+                <Route index element={<LogInStytch />} />
+            </Route>
             <Route
                 path="/dashboard"
                 element={
