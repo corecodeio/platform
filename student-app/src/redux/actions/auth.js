@@ -1,24 +1,19 @@
 import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const signUpAsync = createAsyncThunk(
-    'auth/signUpAsync',
+export const logInAsync = createAsyncThunk(
+    'auth/logInAsync',
     async ({ data, setError }, { rejectWithValue }) => {
         try {
-            try {
-                const response = await axios.post('/api/student/user/sign-up', data);
-                if (response.data.successful) {
-                    window.localStorage.setItem('st_tk', response.data.token);
-                    axios.defaults.headers.common[
-                        'Authorization'
-                    ] = `Bearer ${response.data.token}`;
-                    return { user: response.data.user };
-                } else {
-                    setError(response.data.message);
-                    return rejectWithValue();
-                }
-            } catch (error) {
-                setError('server error');
+            const response = await axios.post('/api/student/user/log-in', data);
+            if (response.data.successful) {
+                window.localStorage.setItem('st_tk', response.data.token);
+                axios.defaults.headers.common[
+                    'Authorization'
+                ] = `Bearer ${response.data.token.session_token}`;
+                return {};
+            } else {
+                setError(response.data.message);
                 return rejectWithValue();
             }
         } catch (error) {
@@ -28,24 +23,19 @@ export const signUpAsync = createAsyncThunk(
     }
 );
 
-export const logInAsync = createAsyncThunk(
+export const signUpAsync = createAsyncThunk(
     'auth/logInAsync',
     async ({ data, setError }, { rejectWithValue }) => {
         try {
-            try {
-                const response = await axios.post('/api/student/user/log-in', data);
-                if (response.data.successful) {
-                    window.localStorage.setItem('st_tk', response.data.token);
-                    axios.defaults.headers.common[
-                        'Authorization'
-                    ] = `Bearer ${response.data.token}`;
-                    return { user: response.data.user };
-                } else {
-                    setError(response.data.message);
-                    return rejectWithValue();
-                }
-            } catch (error) {
-                setError('server error');
+            const response = await axios.post('/api/student/user/sign-up', data);
+            if (response.data.successful) {
+                window.localStorage.setItem('st_tk', response.data.token);
+                axios.defaults.headers.common[
+                    'Authorization'
+                ] = `Bearer ${response.data.token.session_token}`;
+                return {};
+            } else {
+                setError(response.data.message);
                 return rejectWithValue();
             }
         } catch (error) {
@@ -63,7 +53,7 @@ export const checkTokenAsync = createAsyncThunk(
             if (token) {
                 const response = await axios.post(
                     '/api/student/user/check-token',
-                    {},
+                    { token },
                     {
                         headers: {
                             'Content-type': 'application/json',
@@ -73,7 +63,7 @@ export const checkTokenAsync = createAsyncThunk(
                 );
                 if (response.data.successful) {
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                    return { user: response.data.user };
+                    return {};
                 } else {
                     window.localStorage.removeItem('st_tk');
                     return rejectWithValue();
@@ -82,7 +72,6 @@ export const checkTokenAsync = createAsyncThunk(
                 return rejectWithValue();
             }
         } catch (error) {
-            console.log(error);
             window.localStorage.removeItem('st_tk');
             return rejectWithValue();
         }

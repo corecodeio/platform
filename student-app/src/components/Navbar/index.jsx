@@ -1,12 +1,18 @@
 import React from 'react';
 import Styles from './Navbar.module.css';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+//actions
+import { logOut } from './../../redux/actions/auth';
 //icons
 import { BiMenu } from 'react-icons/bi';
 
 const Navbar = ({ setMenu }) => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const handleLogOut = () => {
+        dispatch(logOut());
+    };
     return (
         <div className={Styles[`main`]}>
             <div className={Styles[`navbar`]}>
@@ -20,7 +26,7 @@ const Navbar = ({ setMenu }) => {
                     />
                 </div>
                 <div className={Styles[`menu-right`]}>
-                    <p className={Styles[`logout`]} onClick={() => {}}>
+                    <p className={Styles[`logout`]} onClick={handleLogOut}>
                         Logout
                     </p>
                 </div>

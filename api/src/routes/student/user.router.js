@@ -5,18 +5,18 @@ const {
     signUp,
     recoverPassword,
     checkToken,
-    validateEmail
+    validateEmail,
 } = require('./../../controllers/student/user.controllers');
-const authStudent = require('./../../middlewares/auth.student');
+const authStytch = require('./../../middlewares/auth.stytch');
 
-//log In
-router.post('/log-in', logIn);
 //Sign Up
 router.post('/sign-up', signUp);
-//Recover Password
-router.post('/check-token', authStudent, checkToken);
+//log In
+router.post('/log-in', logIn);
 //Recover Password
 router.post('/recover-password', recoverPassword);
+//Check Token
+router.post('/check-token', authStytch, checkToken);
 //Validate Email
 router.post('/validate-email', validateEmail);
 

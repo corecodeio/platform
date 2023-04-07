@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 //actions
-import { logInAsync, signUpAsync, checkTokenAsync, logOut } from './../actions/auth';
+import { logInAsync, checkTokenAsync, logOut } from './../actions/auth';
 
 const initialState = {
     isAuth: false,
@@ -15,18 +15,9 @@ export const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(logInAsync.fulfilled, (state, action) => {
-                const { user } = action.payload;
-                state.user = user;
-                state.isAuth = true;
-            })
-            .addCase(signUpAsync.fulfilled, (state, action) => {
-                const { user } = action.payload;
-                state.user = user;
                 state.isAuth = true;
             })
             .addCase(checkTokenAsync.fulfilled, (state, action) => {
-                const { user } = action.payload;
-                state.user = user;
                 state.isAuth = true;
                 state.isLoading = false;
             })

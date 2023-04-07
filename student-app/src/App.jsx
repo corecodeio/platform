@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 //actions
 import { checkTokenAsync } from './redux/actions/auth';
@@ -8,10 +8,12 @@ import MainPage from './views/MainPage';
 import NotFound from './views/NotFound';
 import Loading from './views/Loading';
 import Dashboard from './views/Dashboard';
-import Authentication from './views/Authentication';
+import Recover from './views/Recover';
 //components
 import ProtectedRoutes from './components/ProtectedRoutes';
-import LogInStytch from './components/LogInStytch';
+import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
+import RecoverPassword from './components/RecoverPassword';
 
 const App = () => {
     const { isLoading } = useSelector((state) => state.auth);
@@ -26,7 +28,10 @@ const App = () => {
     return (
         <Routes>
             <Route path="/" element={<MainPage />}>
-                <Route index element={<LogInStytch />} />
+                <Route index element={<Navigate to="log-in" />} />
+                <Route path="log-in" element={<LogIn />} />
+                <Route path="sign-up" element={<SignUp />} />
+                <Route path="recover-password" element={<RecoverPassword />} />
             </Route>
             <Route
                 path="/dashboard"
@@ -36,7 +41,7 @@ const App = () => {
                     </ProtectedRoutes>
                 }
             ></Route>
-            <Route path="/validate-email/:activate_token" element={<Authentication />} />
+            <Route path="/recover" element={<Recover />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     );

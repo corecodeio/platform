@@ -8,7 +8,7 @@
 .logo {
     width: 130px;
     padding-right: calc(68% - 130px);
-    margin-top: 24%;
+    margin-top: auto;
     margin-bottom: auto;
 }
 .form {
@@ -22,7 +22,7 @@
     margin-bottom: 22px;
     color: #0d1e38;
 }
-.container-input{
+.container-input {
     display: flex;
     flex-direction: column;
 }
@@ -38,13 +38,12 @@
     margin-top: 10px;
     margin-bottom: 6px;
 }
-.form-input:focus{
+
+.form-input:focus {
     outline: none;
 }
-.form-input:placeholder-shown {
-    background-color: #ffffff;
-}
-.form-input-error{
+
+.form-input-error {
     display: flex;
     align-items: center;
     gap: 4px;
@@ -52,13 +51,37 @@
     font-size: 14px;
 }
 
+.form-input:placeholder-shown {
+    background-color: #ffffff;
+}
+.full-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.form-input2 {
+    padding: 12px 16px 12px 16px;
+    font-family: 'SourceSansPro-Regular', serif;
+    font-size: 18px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: 1px solid #cadbe3;
+    color: #335065;
+    width: calc(50% - 44px);
+    margin-top: 10px;
+    margin-bottom: 6px;
+}
+.form-input2:placeholder-shown {
+    background-color: #ffffff;
+}
 .form-div-password {
     position: relative;
 }
 .form-icon-eye {
     position: absolute;
+    user-select: none;
     right: 18px;
-    top: calc(50% - 10px);
+    top: 23px;
     width: 24px;
     height: 24px;
     color: #7291a0;
@@ -71,7 +94,7 @@
     color: #ffffff;
     border: 0;
     height: 47px;
-    margin-top: 25px;
+    margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 4px;
     font-family: 'SourceSansPro-Regular', serif;
@@ -86,7 +109,7 @@
 }
 .additional-text {
     width: 100%;
-    height: 160px;
+    height: 76px;
 }
 .additional-text2 {
     font-family: 'SourceSansPro-Regular', serif;
@@ -95,15 +118,25 @@
 }
 .additional-link {
     font-family: 'SourceSansPro-Bold', serif;
-    color: #2764FF;
+    color: #2764ff;
     text-decoration: none;
 }
 .form-error {
     border-radius: 5px;
     font-family: 'SourceSansPro-Regular', serif;
-    /*border: 1px solid #D83341;*/
+    font-size: 13px;
     margin-top: 10px;
     color: #d83341;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.form-successful {
+    border-radius: 5px;
+    font-family: 'SourceSansPro-Regular', serif;
+    font-size: 13px;
+    margin-top: 10px;
+    color: #0b790b;
     width: 100%;
     display: flex;
     align-items: center;
@@ -118,6 +151,10 @@
     margin-bottom: 7.5%;
 }
 @media only screen and (max-width: 1440px) and (min-width: 1281px) {
+    .additional-text {
+        width: 100%;
+        height: auto;
+    }
 }
 @media only screen and (max-width: 1280px) and (min-width: 801px) {
     .form {
@@ -142,5 +179,19 @@
         padding-right: calc(90% - 120px);
         margin-top: auto;
         margin-bottom: auto;
+    }
+    .full-name {
+        flex-direction: column;
+    }
+    .form-input2 {
+        width: calc(100% - 34px);
+    }
+    .additional-text {
+        width: 100%;
+        height: auto;
+    }
+    .logo-footer {
+        margin-top: auto;
+        margin-bottom: 5%;
     }
 }

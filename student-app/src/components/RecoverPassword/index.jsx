@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import Styles from './LogInStych.module.css';
-//import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Styles from './RecoverPassword.module.css';
 import axios from 'axios';
-//actions
-//import { logInAsync } from './../../redux/actions/auth';
 //icons
 import { BiError } from 'react-icons/bi';
+import { MdOutlineMarkEmailRead } from 'react-icons/md';
 
-const LogInStych = () => {
-    //const dispatch = useDispatch();
+const RecoverPassword = () => {
+    const [successful, setSuccessful] = useState('');
     const [data, setData] = useState({
         email: ''
     });
@@ -17,19 +16,11 @@ const LogInStych = () => {
         e.preventDefault();
         setError('');
         try {
-            try {
-                const response = await axios.post('/api/student/user/log-in', data);
-                if (response.data.successful) {
-                    //window.localStorage.setItem('st_tk', response.data.token);
-                    /*axios.defaults.headers.common[
-                        'Authorization'
-                    ] = `Bearer ${response.data.token}`;*/
-                    console.log('good');
-                } else {
-                    setError(response.data.message);
-                }
-            } catch (error) {
-                setError('server error');
+            const response = await axios.post('/api/student/user/recover-password', data);
+            if (response.data.successful) {
+                setSuccessful(response.data.message);
+            } else {
+                setError(response.data.message);
             }
         } catch (error) {
             setError('server error');
@@ -45,7 +36,7 @@ const LogInStych = () => {
     };
     return (
         <form className={Styles[`form`]} onSubmit={handleSubmit}>
-            <p className={Styles[`title`]}>Welcome back!</p>
+            <p className={Styles[`title`]}>Reset password</p>
             <div className="container-input">
                 <input
                     className={Styles[`form-input`]}
@@ -69,21 +60,33 @@ const LogInStych = () => {
             </div>
             <button
                 className={Styles[`form-button`]}
-                disabled={!data.email || !validateEmail(data.email)}
+                disabled={!data.email || !validateEmail(data.email) || successful}
                 type="submit"
             >
-                Login
+                Reset Password
             </button>
-            {error && (
-                <div className={Styles[`additional-text`]}>
+            <div className={Styles[`additional-text`]}>
+                <p className={Styles[`additional-text2`]}>
+                    Already have an account?{' '}
+                    <Link to="/log-in" className={Styles[`additional-link`]}>
+                        Login
+                    </Link>
+                </p>
+                {error && !successful && (
                     <p className={Styles[`form-error`]}>
                         <BiError className={Styles[`form-icon-error`]} />
                         {error}
                     </p>
-                </div>
-            )}
+                )}
+                {successful && (
+                    <p className={Styles[`form-successful`]}>
+                        <MdOutlineMarkEmailRead className={Styles[`form-icon-error`]} />
+                        {successful}
+                    </p>
+                )}
+            </div>
         </form>
     );
 };
 
-export default LogInStych;
+export default RecoverPassword;

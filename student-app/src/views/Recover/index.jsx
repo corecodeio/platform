@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Authentication = () => {
+const Recover = () => {
     const navigate = useNavigate();
     return (
         <>
@@ -10,4 +10,4 @@ const Authentication = () => {
     );
 };
 
-export default Authentication;
+export default Recover;
