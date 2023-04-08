@@ -7,8 +7,8 @@ const {
     checkToken,
     validateEmail,
     magicLinks
-} = require('./../../controllers/student/user.controllers');
-const authStudent = require('./../../middlewares/auth.student');
+} = require('./../../controllers/management/user.controllers');
+const authManagement = require('./../../middlewares/auth.management');
 
 //Sign Up
 router.post('/sign-up', signUp);
@@ -17,7 +17,7 @@ router.post('/log-in', logIn);
 //Recover Password
 router.post('/recover-password', recoverPassword);
 //Check Token
-router.post('/check-token', authStudent, checkToken);
+router.post('/check-token', authManagement, checkToken);
 //Validate Email
 router.post('/validate-email', validateEmail);
 //MagicLinks

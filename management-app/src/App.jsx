@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 //actions
 import { checkTokenAsync } from './redux/actions/auth';
@@ -8,12 +8,15 @@ import MainPage from './views/MainPage';
 import Dashboard from './views/Dashboard';
 import NotFound from './views/NotFound';
 import Loading from './views/Loading';
+import Recover from './views/Recover';
 //components
 import ProtectedRoutes from './components/ProtectedRoutes';
 import Statistics from './components/Statistics';
-import Course from './components/Course';
 import Permissions from './views/Dashboard/Permissions';
 import AccountSettings from './components/AccountSettings';
+import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
+import RecoverPassword from './components/RecoverPassword';
 
 const App = () => {
     const { isLoading } = useSelector((state) => state.auth);
@@ -27,7 +30,12 @@ const App = () => {
     }
     return (
         <Routes>
-            <Route path="/" element={<MainPage />} />
+            <Route path="/" element={<MainPage />}>
+                <Route index element={<Navigate to="log-in" />} />
+                <Route path="log-in" element={<LogIn />} />
+                <Route path="sign-up" element={<SignUp />} />
+                <Route path="recover-password" element={<RecoverPassword />} />
+            </Route>
             <Route
                 path="/dashboard"
                 element={
@@ -37,29 +45,10 @@ const App = () => {
                 }
             >
                 <Route index element={<Statistics />} />
-                <Route path='account-settings' element={<AccountSettings />} />
-                <Route path="users" element={<p>users</p>} />
-                <Route path="users/applicants" element={<p>applicants</p>} />
-                <Route path="users/chats" element={<p>chats</p>} />
-                <Route path="users/contracts" element={<p>contracts</p>} />
-                <Route path="staff" element={<p>staff</p>} />
-                <Route path="staff/send-invitation" element={<p>send-invitation</p>} />
-                <Route path="staff/staff-list" element={<p>staff-list</p>} />
-                <Route path="course/:page" element={<Course/>} />
-                <Route path="permissions-and-roles" element={<p>permissions and roles</p>} />
-                <Route
-                    path="permissions-and-roles/administer-powers"
-                    element={<p>administer-powers</p>}
-                />
-                <Route path="permissions-and-roles/roles" element={<p>roles</p>} />
-                <Route path="permissions-and-roles/permissions" element={<Permissions/>} />
-                <Route path="automatic-invitations" element={<p>automatic invitations</p>} />
-                <Route path="automatic-invitations/slack" element={<p>slack</p>} />
-                <Route
-                    path="automatic-invitations/google-calendar"
-                    element={<p>google-calendar</p>}
-                />
+                <Route path="account-settings" element={<AccountSettings />} />
+                <Route path="permissions-and-roles/permissions" element={<Permissions />} />
             </Route>
+            <Route path="/recover" element={<Recover />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     );

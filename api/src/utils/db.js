@@ -37,8 +37,8 @@ Survey.hasOne(User, {
     foreignKey: 'surveyID'
 });
 
-Staff.belongsToMany(Role, { as: 'roles', through: 'StaffRole' });
-Role.belongsToMany(Staff, { as: 'roles', through: 'StaffRole' });
+User.belongsToMany(Role, { as: 'roles', through: 'UserRole' });
+Role.belongsToMany(User, { as: 'roles', through: 'UserRole' });
 
 Role.belongsToMany(Permission, {
     as: 'permissions',

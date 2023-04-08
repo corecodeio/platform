@@ -15,9 +15,11 @@ export const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(logInAsync.fulfilled, (state, action) => {
+                state.user = action.payload;
                 state.isAuth = true;
             })
             .addCase(checkTokenAsync.fulfilled, (state, action) => {
+                state.user = action.payload;
                 state.isAuth = true;
                 state.isLoading = false;
             })

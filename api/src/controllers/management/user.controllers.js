@@ -1,10 +1,11 @@
 const clientStytch = require('./../../utils/stytch');
-const { User } = require('./../../utils/db');
-
+const { User, Role, Permission } = require('./../../utils/db');
+const permissionReader = require('./../../helpers/permissionReader.js');
+const { clientConfig } = require('./../../config');
 //Sign Up
 module.exports.signUp = (req, res, next) => {
     const { email, password } = req.body;
-    clientStytch.passwords
+    clientStytch.passwordss
         .create({
             email,
             password,
@@ -13,7 +14,7 @@ module.exports.signUp = (req, res, next) => {
         .then(async (resp) => {
             await User.create({
                 id: resp.session.user_id,
-                email: email
+                email
             });
             return res.status(200).json({
                 successful: true,
@@ -21,7 +22,9 @@ module.exports.signUp = (req, res, next) => {
                     first_name: '',
                     last_name: '',
                     email: email,
-                    phone: ''
+                    phone: '',
+                    roles: [],
+                    permissions: []
                 },
                 token: resp.session_token,
                 message: 'successful registration'
@@ -40,7 +43,27 @@ module.exports.logIn = (req, res, next) => {
         .then(async (resp) => {
             try {
                 const userResult = await User.findOne({
-                    where: { id: resp.session.user_id }
+                    where: { id: resp.session.user_id },
+                    include: [
+                        {
+                            model: Role,
+                            as: 'roles',
+                            attributes: ['name'],
+                            through: {
+                                attributes: []
+                            },
+                            include: [
+                                {
+                                    model: Permission,
+                                    as: 'permissions',
+                                    attributes: ['name'],
+                                    through: {
+                                        attributes: []
+                                    }
+                                }
+                            ]
+                        }
+                    ]
                 });
                 if (!userResult) {
                     return res.status(200).json({ successful: false, message: 'id not found' });
@@ -48,13 +71,16 @@ module.exports.logIn = (req, res, next) => {
                 if (userResult.locked) {
                     return res.status(200).json({ successful: false, message: 'user blocked' });
                 }
+                const rolesAndPermissions = permissionReader(userResult.roles);
                 res.status(200).json({
                     successful: true,
                     user: {
                         first_name: userResult.first_name,
                         last_name: userResult.last_name,
                         email: userResult.email,
-                        phone: userResult.phone
+                        phone: userResult.phone,
+                        roles: rolesAndPermissions[0],
+                        permissions: rolesAndPermissions[1]
                     },
                     token: resp.session_token,
                     message: 'successful login'
@@ -84,7 +110,9 @@ module.exports.checkToken = async (req, res, next) => {
                 first_name: userResult.first_name,
                 last_name: userResult.last_name,
                 email: userResult.email,
-                phone: userResult.phone
+                phone: userResult.phone,
+                roles: req.user.roles,
+                permissions: req.user.permissions
             }
         });
     } catch (error) {
@@ -97,8 +125,12 @@ module.exports.checkToken = async (req, res, next) => {
 module.exports.recoverPassword = (req, res, next) => {
     const { email } = req.body;
     clientStytch.passwords
-        .resetByEmailStart({ email })
-        .then((resp) => {
+        .resetByEmailStart({
+            email,
+            reset_password_redirect_url: `${clientConfig.management_url}/recover`,
+            login_redirect_url: `${clientConfig.management_url}/log-in`
+        })
+        .then(() => {
             return res.status(200).json({ successful: true, message: 'mail sent successfully' });
         })
         .catch((err) => {
@@ -114,7 +146,27 @@ module.exports.magicLinks = async (req, res, next) => {
         .then(async (resp) => {
             try {
                 const userResult = await User.findOne({
-                    where: { id: resp.session.user_id }
+                    where: { id: resp.session.user_id },
+                    include: [
+                        {
+                            model: Role,
+                            as: 'roles',
+                            attributes: ['name'],
+                            through: {
+                                attributes: []
+                            },
+                            include: [
+                                {
+                                    model: Permission,
+                                    as: 'permissions',
+                                    attributes: ['name'],
+                                    through: {
+                                        attributes: []
+                                    }
+                                }
+                            ]
+                        }
+                    ]
                 });
                 if (!userResult) {
                     return res.status(200).json({ successful: false, message: 'id not found' });
@@ -122,13 +174,16 @@ module.exports.magicLinks = async (req, res, next) => {
                 if (userResult.locked) {
                     return res.status(200).json({ successful: false, message: 'user blocked' });
                 }
+                const rolesAndPermissions = permissionReader(userResult.roles);
                 res.status(200).json({
                     successful: true,
                     user: {
                         first_name: userResult.first_name,
                         last_name: userResult.last_name,
                         email: userResult.email,
-                        phone: userResult.phone
+                        phone: userResult.phone,
+                        roles: rolesAndPermissions[0],
+                        permissions: rolesAndPermissions[1]
                     },
                     token: resp.session_token,
                     message: 'successful login'
@@ -152,7 +207,27 @@ module.exports.validateEmail = async (req, res, next) => {
         .then(async (resp) => {
             try {
                 const userResult = await User.findOne({
-                    where: { id: resp.session.user_id }
+                    where: { id: resp.session.user_id },
+                    include: [
+                        {
+                            model: Role,
+                            as: 'roles',
+                            attributes: ['name'],
+                            through: {
+                                attributes: []
+                            },
+                            include: [
+                                {
+                                    model: Permission,
+                                    as: 'permissions',
+                                    attributes: ['name'],
+                                    through: {
+                                        attributes: []
+                                    }
+                                }
+                            ]
+                        }
+                    ]
                 });
                 if (!userResult) {
                     return res.status(200).json({ successful: false, message: 'id not found' });
@@ -160,16 +235,19 @@ module.exports.validateEmail = async (req, res, next) => {
                 if (userResult.locked) {
                     return res.status(200).json({ successful: false, message: 'user blocked' });
                 }
+                const rolesAndPermissions = permissionReader(userResult.roles);
                 res.status(200).json({
                     successful: true,
                     user: {
                         first_name: userResult.first_name,
                         last_name: userResult.last_name,
                         email: userResult.email,
-                        phone: userResult.phone
+                        phone: userResult.phone,
+                        roles: rolesAndPermissions[0],
+                        permissions: rolesAndPermissions[1]
                     },
-                    token: resp.session_token,
-                    message: 'new password registered'
+                    message: 'new password registered',
+                    token: resp.session_token
                 });
             } catch (error) {
                 console.log(error);

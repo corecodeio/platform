@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 .logo {
     width: 130px;
@@ -12,12 +13,13 @@
     margin-bottom: auto;
 }
 .form {
-    width: 68%;
+    width: 300px;
     display: flex;
     flex-direction: column;
 }
 .title {
     font-family: 'Rubik-Bold', serif;
+    text-align: center;
     font-size: 28px;
     margin-bottom: 22px;
     color: #0d1e38;
@@ -157,9 +159,6 @@
     }
 }
 @media only screen and (max-width: 1280px) and (min-width: 801px) {
-    .form {
-        width: 80%;
-    }
     .logo {
         width: 120px;
         padding-right: calc(80% - 120px);

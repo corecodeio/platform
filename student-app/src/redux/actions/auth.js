@@ -11,7 +11,7 @@ export const logInAsync = createAsyncThunk(
                 axios.defaults.headers.common[
                     'Authorization'
                 ] = `Bearer ${response.data.token.session_token}`;
-                return {};
+                return response.data.user;
             } else {
                 setError(response.data.message);
                 return rejectWithValue();
@@ -33,13 +33,58 @@ export const signUpAsync = createAsyncThunk(
                 axios.defaults.headers.common[
                     'Authorization'
                 ] = `Bearer ${response.data.token.session_token}`;
-                return {};
+                return response.data.user;
             } else {
                 setError(response.data.message);
                 return rejectWithValue();
             }
         } catch (error) {
             setError('server error');
+            return rejectWithValue();
+        }
+    }
+);
+export const resetPasswordAsync = createAsyncThunk(
+    'auth/logInAsync',
+    async ({ data, setError }, { rejectWithValue }) => {
+        try {
+            const response = await axios.post('/api/student/user/validate-email', data);
+            if (response.data.successful) {
+                window.localStorage.setItem('st_tk', response.data.token);
+                axios.defaults.headers.common[
+                    'Authorization'
+                ] = `Bearer ${response.data.token.session_token}`;
+                return response.data.user;
+            } else {
+                setError(response.data.message);
+                return rejectWithValue();
+            }
+        } catch (error) {
+            setError('server error');
+            return rejectWithValue();
+        }
+    }
+);
+
+export const logInRecoverAsync = createAsyncThunk(
+    'auth/checkTokenAsync',
+    async (token, { rejectWithValue }) => {
+        try {
+            if (token) {
+                const response = await axios.post('/api/student/user/magic-links', { token });
+                if (response.data.successful) {
+                    window.localStorage.setItem('st_tk', response.data.token);
+                    axios.defaults.headers.common[
+                        'Authorization'
+                    ] = `Bearer ${response.data.token}`;
+                    return response.data.user;
+                } else {
+                    return rejectWithValue();
+                }
+            } else {
+                return rejectWithValue();
+            }
+        } catch (error) {
             return rejectWithValue();
         }
     }
@@ -53,7 +98,7 @@ export const checkTokenAsync = createAsyncThunk(
             if (token) {
                 const response = await axios.post(
                     '/api/student/user/check-token',
-                    { token },
+                    {},
                     {
                         headers: {
                             'Content-type': 'application/json',
@@ -63,7 +108,7 @@ export const checkTokenAsync = createAsyncThunk(
                 );
                 if (response.data.successful) {
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                    return {};
+                    return response.data.user;
                 } else {
                     window.localStorage.removeItem('st_tk');
                     return rejectWithValue();

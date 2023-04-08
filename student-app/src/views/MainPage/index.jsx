@@ -3,7 +3,7 @@ import Styles from './MainPage.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 //actions
-import { logInAsync } from './../../redux/actions/auth';
+import { logInRecoverAsync } from './../../redux/actions/auth';
 
 const MainPage = () => {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const MainPage = () => {
         const searchParams = new URLSearchParams(window.location.search);
         const token = searchParams.get('token');
         if (token) {
-            dispatch(logInAsync(token));
+            dispatch(logInRecoverAsync(token));
         }
         // eslint-disable-next-line
     }, []);
@@ -29,7 +29,9 @@ const MainPage = () => {
                 <Outlet />
                 <img className={Styles[`logo-footer`]} src="/images/group-1.png" alt="core code" />
             </div>
-            <div className={Styles[`background-${location.pathname === '/log-in' ? '0' : '1'}`]}></div>
+            <div
+                className={Styles[`background-${location.pathname === '/log-in' ? '0' : '1'}`]}
+            ></div>
         </div>
     );
 };

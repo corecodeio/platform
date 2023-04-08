@@ -1,32 +1,34 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Styles from './LogIn.module.css';
-import { useDispatch } from 'react-redux';
+import Styles from './RecoverPassword.module.css';
+import axios from 'axios';
 //icons
-import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { BiError } from 'react-icons/bi';
-//actions
-import { logInAsync } from './../../redux/actions/auth';
+import { MdOutlineMarkEmailRead } from 'react-icons/md';
 
-const LogIn = () => {
-    const dispatch = useDispatch();
-    const [hidden, setHidden] = useState(false);
+const RecoverPassword = () => {
+    const [successful, setSuccessful] = useState('');
     const [data, setData] = useState({
-        email: '',
-        password: ''
+        email: ''
     });
     const [error, setError] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-        dispatch(logInAsync({ data, setError }));
+        try {
+            const response = await axios.post('/api/management/user/recover-password', data);
+            if (response.data.successful) {
+                setSuccessful(response.data.message);
+            } else {
+                setError(response.data.message);
+            }
+        } catch (error) {
+            setError('server error');
+        }
     };
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
         setError('');
-    };
-    const handleHidden = () => {
-        setHidden(!hidden);
     };
     const validateEmail = (string) => {
         const regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
@@ -34,7 +36,7 @@ const LogIn = () => {
     };
     return (
         <form className={Styles[`form`]} onSubmit={handleSubmit}>
-            <p className={Styles[`title`]}>Welcome back!</p>
+            <p className={Styles[`title`]}>Reset password</p>
             <div className="container-input">
                 <input
                     className={Styles[`form-input`]}
@@ -56,48 +58,30 @@ const LogIn = () => {
                     </p>
                 )}
             </div>
-            <div className={Styles[`form-div-password`]}>
-                <input
-                    className={Styles[`form-input`]}
-                    type={hidden ? 'text' : 'password'}
-                    name="password"
-                    value={data.password}
-                    onChange={handleChange}
-                    placeholder="Password"
-                />
-                {hidden ? (
-                    <AiOutlineEyeInvisible
-                        className={Styles[`form-icon-eye`]}
-                        onClick={handleHidden}
-                    />
-                ) : (
-                    <AiOutlineEye className={Styles[`form-icon-eye`]} onClick={handleHidden} />
-                )}
-            </div>
             <button
                 className={Styles[`form-button`]}
-                disabled={!data.email || !data.password || !validateEmail(data.email)}
+                disabled={!data.email || !validateEmail(data.email) || successful}
                 type="submit"
             >
-                Login
+                Reset Password
             </button>
             <div className={Styles[`additional-text`]}>
                 <p className={Styles[`additional-text2`]}>
-                    Don't have an account?{' '}
-                    <Link to="/sign-up" className={Styles[`additional-link`]}>
-                        Sign up now
+                    Already have an account?{' '}
+                    <Link to="/log-in" className={Styles[`additional-link`]}>
+                        Login
                     </Link>
                 </p>
-                <p className={Styles[`additional-text2`]}>
-                    Do you need to reset your password?{' '}
-                    <Link to="/recover-password" className={Styles[`additional-link`]}>
-                        recover
-                    </Link>
-                </p>
-                {error && (
+                {error && !successful && (
                     <p className={Styles[`form-error`]}>
                         <BiError className={Styles[`form-icon-error`]} />
                         {error}
+                    </p>
+                )}
+                {successful && (
+                    <p className={Styles[`form-successful`]}>
+                        <MdOutlineMarkEmailRead className={Styles[`form-icon-error`]} />
+                        {successful}
                     </p>
                 )}
             </div>
@@ -105,4 +89,4 @@ const LogIn = () => {
     );
 };
 
-export default LogIn;
+export default RecoverPassword;
