@@ -7,7 +7,8 @@ const transport = nodemailer.createTransport(nodeMailerConfig);
 
 
 // Cargar el archivo HTML
-const html = fs.readFileSync("/emailTemplate1.html", "utf8");
+const template = fs.readFileSync("../api/src/helpers/emailTemplate.html", "utf-8")
+
 module.exports.sendWelcome = ({ id, first_name, last_name, email }) => {
     try {
         
@@ -27,8 +28,7 @@ module.exports.sendWelcome = ({ id, first_name, last_name, email }) => {
             from: nodeMailerConfig.auth.user,
             to: email,
             subject: 'Welcome to Core Code',
-            html: html
-            ``
+            html: template
         };
         transport.sendMail(message);
     } catch (error) {
