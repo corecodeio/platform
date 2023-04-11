@@ -6,7 +6,7 @@ const fs = require("fs");
 const transport = nodemailer.createTransport(nodeMailerConfig);
 
 
-// Cargar el archivo HTML
+// load the HTML file
 const template = fs.readFileSync("../api/src/helpers/emailTemplate.html", "utf-8")
 
 module.exports.sendWelcome = ({ id, first_name, last_name, email }) => {
