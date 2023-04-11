@@ -28,5 +28,8 @@
     "bugs": {
         "url": "https://github.com/corecodeio/platform/issues"
     },
-    "homepage": "https://github.com/corecodeio/platform#readme"
+    "homepage": "https://github.com/corecodeio/platform#readme",
+    "dependencies": {
+        "fs": "^0.0.1-security"
+    }
 }

@@ -1,9 +1,13 @@
 const { nodeMailerConfig, clientConfig, jwtStudentConfig } = require('./../config/index.js');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const fs = require("fs");
 
 const transport = nodemailer.createTransport(nodeMailerConfig);
 
+
+// Cargar el archivo HTML
+const html = fs.readFileSync("/emailTemplate1.html", "utf8");
 module.exports.sendWelcome = ({ id, first_name, last_name, email }) => {
     try {
         
@@ -23,11 +27,8 @@ module.exports.sendWelcome = ({ id, first_name, last_name, email }) => {
             from: nodeMailerConfig.auth.user,
             to: email,
             subject: 'Welcome to Core Code',
-            html: `
-            <p>hola ${first_name} ${last_name} ya esta registrado en nuestra plataforma<p>
-            <a href="${clientConfig.student_url}/validate-email/${tokenEmail}">  
-                <button>Validar Email</button>  
-            </a>`
+            html: html
+            ``
         };
         transport.sendMail(message);
     } catch (error) {
