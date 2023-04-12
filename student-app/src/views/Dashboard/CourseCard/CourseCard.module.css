@@ -1,0 +1,104 @@
+.details {
+    width: calc(100% - 34px);
+    background-color: #f5f9fb;
+    border: 1px solid #d1e0e7;
+    border-bottom: 0px;
+    border-radius: 4px 4px 0px 0px;
+    padding: 24px 16px;
+}
+.bookings-0 {
+    width: calc(100% - 22px);
+    background-color: #ebf3f7;
+    border: 1px solid #d1e0e7;
+    border-top: 0px;
+    border-radius: 0px 0px 4px 4px;
+    padding: 10px;
+}
+.bookings-1 {
+    width: calc(100% - 22px);
+    background-color: #FEE6DA;
+    border: 1px solid #d1e0e7;
+    color: #D83341;
+    border-top: 0px;
+    border-radius: 0px 0px 4px 4px;
+    padding: 7px 10px;
+    display: flex;
+    align-items: center;
+}
+.title {
+    color: #0d1e38;
+    font-family: 'Rubik-Bold', serif;
+    font-size: 20px;
+}
+.title2 {
+    color: #0d1e38;
+    font-family: 'Rubik-Regular', serif;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+.items {
+    display: flex;
+    margin-bottom: 24px;
+}
+.items p {
+    background-color: #cadbe3;
+    margin-right: 4px;
+    border-radius: 100px;
+    padding: 6px 12px;
+    color: #335065;
+    font-family: 'SourceSansPro-Regular', serif;
+    font-size: 14px;
+}
+.text {
+    color: #335065;
+    font-family: 'SourceSansPro-Regular', serif;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+.text strong {
+    font-family: 'SourceSansPro-Bold', serif;
+}
+.text2 {
+    font-family: 'SourceSansPro-Bold', serif;
+    font-size: 14px;
+}
+.icon-alert{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    margin-top: 4px;
+}
+.buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+.button-details {
+    margin-top: 16px;
+    border-radius: 4px;
+    border: 1px solid #6254ff;
+    color: #ffffff;
+    padding: 12px 24px;
+    background-color: #6254ff;
+    margin-left: 12px;
+    font-family: 'SourceSansPro-SemiBold', serif;
+    font-size: 18px;
+}
+.button-details:hover {
+    cursor: pointer;
+}
+.button-details2 {
+    margin-top: 16px;
+    border-radius: 4px;
+    border: 1px solid #6254ff;
+    color: #6254ff;
+    padding: 12px 24px;
+    background-color: #00000000;
+    margin-left: 12px;
+    font-family: 'SourceSansPro-SemiBold', serif;
+    font-size: 18px;
+}
+.button-details2:hover {
+    cursor: pointer;
+}

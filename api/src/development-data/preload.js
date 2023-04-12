@@ -54,8 +54,42 @@ const preload = async () => {
             await rolesCreated[1].addPermission(permissionsCreated[11].id);
             // Role: techlead add permissions:
             await rolesCreated[2].addPermission(permissionsCreated[8].id);
-            //-------------- Courses --------------
+            //-------------- Courses -------------
             const coursesCreated = await Course.bulkCreate(courses);
+            //------------ Course DEV-------------
+            if (process.env.SERVER_DEVELOPMENT_COURSE_NAME) {
+                const courseCreated = await Course.create({
+                    name: process.env.SERVER_DEVELOPMENT_COURSE_NAME,
+                    slack_id: process.env.SERVER_DEVELOPMENT_COURSE_SLACK_ID
+                        ? process.env.SERVER_DEVELOPMENT_COURSE_SLACK_ID
+                        : null,
+                    slack_name:
+                        process.env.SERVER_DEVELOPMENT_COURSE_SLACK_ID &&
+                        process.env.SERVER_DEVELOPMENT_COURSE_NAME_SLACK
+                            ? process.env.SERVER_DEVELOPMENT_COURSE_NAME_SLACK
+                            : null,
+                    google_calendar_id: process.env.SERVER_DEVELOPMENT_COURSE_CALENDAR_ID
+                        ? process.env.SERVER_DEVELOPMENT_COURSE_CALENDAR_ID
+                        : null,
+                    google_calendar_name:
+                        process.env.SERVER_DEVELOPMENT_COURSE_CALENDAR_ID &&
+                        process.env.SERVER_DEVELOPMENT_COURSE_CALENDAR_NAME
+                            ? process.env.SERVER_DEVELOPMENT_COURSE_CALENDAR_NAME
+                            : null,
+                    title: 'Full Stack Bootcamp',
+                    title_extra: '(React&Node)',
+                    type: 'Especialización',
+                    duration: '2 meses',
+                    status: 'open',
+                    level: 2,
+                    technologies: 'JReact, Redux, Node, SQL, Docker & Kubernetes.',
+                    price: 'Solo pagas si obtienes un empleo.',
+                    minimum: 60,
+                    extra_alert: false
+                });
+                // Add Course to a user:
+                await userCreated.addCourse(courseCreated);
+            }
             console.log('development data uploaded successfully');
         }
     } catch (error) {

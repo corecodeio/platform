@@ -1,24 +1,53 @@
 const courses = [
     {
-        id: 'fcba7807-2176-486c-89c3-909a42a88a4f',
-        name: process.env.SERVER_DEVELOPMENT_COURSE_NAME
-            ? process.env.SERVER_DEVELOPMENT_COURSE_NAME
-            : 'Fullstack 25.5',
-        slack_id: process.env.SERVER_DEVELOPMENT_COURSE_SLACK_ID
-            ? process.env.SERVER_DEVELOPMENT_COURSE_SLACK_ID
-            : null,
-        slack_name: process.env.SERVER_DEVELOPMENT_COURSE_NAME_SLACK
-            ? process.env.SERVER_DEVELOPMENT_COURSE_NAME_SLACK
-            : null,
-        google_calendar_id: process.env.SERVER_DEVELOPMENT_COURSE_CALENDAR_ID
-            ? process.env.SERVER_DEVELOPMENT_COURSE_CALENDAR_ID
-            : null,
-        google_calendar_name: process.env.SERVER_DEVELOPMENT_COURSE_CALENDAR_NAME
-            ? process.env.SERVER_DEVELOPMENT_COURSE_CALENDAR_NAME
-            : null,
-        zoom_url: 'https://zoom.us/testing',
-        zoom_code: '123456',
-        status: 'pending'
+        title: 'Software Development desde cero',
+        title_extra: '(Javascript&Node)',
+        type: 'Fundamentos',
+        duration: '3 meses',
+        status: 'open',
+        level: 1,
+        technologies: 'JavaScript y Lógica de Programación, React & Node.',
+        price: 'Gratis.',
+        minimum: 60,
+        start: null,
+        extra_alert: false
+    },
+    {
+        title: 'Full Stack Bootcamp',
+        title_extra: '(React&Node)',
+        type: 'Especialización',
+        duration: '2 meses',
+        status: 'open',
+        level: 2,
+        technologies: 'JReact, Redux, Node, SQL, Docker & Kubernetes.',
+        price: 'Solo pagas si obtienes un empleo.',
+        minimum: 60,
+        extra_alert: false
+    },
+    {
+        title: 'Boost',
+        title_second: 'Bootcamp',
+        type: 'Especialización',
+        duration: '2 semanas',
+        status: 'open',
+        level: 2,
+        technologies:
+            'Preparación para entrevistas y pruebas técnicas, validación de tu nivel de inglés técnico y más.',
+        price: 'Solo pagas si obtienes un empleo.',
+        minimum: 60,
+        extra_alert: true
+    },
+    {
+        title: 'Full Stack Bootcamp',
+        title_extra: '(React&Node)',
+        type: 'Especialización',
+        duration: '2 meses',
+        status: 'open',
+        level: 2,
+        technologies: 'JReact, Redux, Node, SQL, Docker & Kubernetes.',
+        price: 'Solo pagas si obtienes un empleo.',
+        minimum: 60,
+        extra_alert: false
     }
 ];
 

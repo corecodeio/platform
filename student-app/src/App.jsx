@@ -14,6 +14,8 @@ import ProtectedRoutes from './components/ProtectedRoutes';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import RecoverPassword from './components/RecoverPassword';
+import MyCourses from './views/Dashboard/MyCourses';
+import AvailableCourses from './views/Dashboard/AvailableCourses';
 
 const App = () => {
     const { isLoading } = useSelector((state) => state.auth);
@@ -40,7 +42,15 @@ const App = () => {
                         <Dashboard />
                     </ProtectedRoutes>
                 }
-            ></Route>
+            >
+                <Route index element={<Navigate to="my-courses" />} />
+                <Route path="my-courses" element={<MyCourses />} />
+                <Route path="available-courses" element={<AvailableCourses/>} />
+                <Route path="applications" element={<p>Postulaciones</p>} />
+                <Route path="community" element={<p>Comunidad</p>} />
+                <Route path="setting" element={<p>Configuración</p>} />
+            </Route>
+
             <Route path="/recover" element={<Recover />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
