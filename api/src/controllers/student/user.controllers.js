@@ -21,7 +21,9 @@ module.exports.signUp = (req, res, next) => {
                     first_name: '',
                     last_name: '',
                     email: email,
-                    phone: ''
+                    confirmed_email: false,
+                    phone: '',
+                    confirmed_phone: false
                 },
                 token: resp.session_token,
                 message: 'successful registration'
@@ -54,7 +56,9 @@ module.exports.logIn = (req, res, next) => {
                         first_name: userResult.first_name,
                         last_name: userResult.last_name,
                         email: userResult.email,
-                        phone: userResult.phone
+                        confirmed_email: userResult.confirmed_email,
+                        phone: userResult.phone,
+                        confirmed_phone: userResult.confirmed_phone
                     },
                     token: resp.session_token,
                     message: 'successful login'
@@ -84,7 +88,9 @@ module.exports.checkToken = async (req, res, next) => {
                 first_name: userResult.first_name,
                 last_name: userResult.last_name,
                 email: userResult.email,
-                phone: userResult.phone
+                confirmed_email: userResult.confirmed_email,
+                phone: userResult.phone,
+                confirmed_phone: userResult.confirmed_phone
             }
         });
     } catch (error) {
@@ -128,7 +134,9 @@ module.exports.magicLinks = async (req, res, next) => {
                         first_name: userResult.first_name,
                         last_name: userResult.last_name,
                         email: userResult.email,
-                        phone: userResult.phone
+                        confirmed_email: userResult.confirmed_email,
+                        phone: userResult.phone,
+                        confirmed_phone: userResult.confirmed_phone
                     },
                     token: resp.session_token,
                     message: 'successful login'
@@ -166,7 +174,9 @@ module.exports.validateEmail = async (req, res, next) => {
                         first_name: userResult.first_name,
                         last_name: userResult.last_name,
                         email: userResult.email,
-                        phone: userResult.phone
+                        confirmed_email: userResult.confirmed_email,
+                        phone: userResult.phone,
+                        confirmed_phone: userResult.confirmed_phone
                     },
                     token: resp.session_token,
                     message: 'new password registered'

@@ -6,10 +6,10 @@ const Footer = () => {
         <div className={Styles[`main`]}>
             <div className={Styles[`footer`]}>
                 <p>
-                    <strong>Management</strong> powered by Core Code
+                    <strong>Core Code © 2023</strong> | Todos los derechos reservados.
                 </p>
                 <p>
-                    For inquiries contact <strong>techlead@core-code.io</strong>
+                    ¿Consultas y dudas? Escríbenos a <strong>admisiones@core-code.io</strong>
                 </p>
             </div>
         </div>

@@ -16,9 +16,9 @@
 }
 .bookings-1 {
     width: calc(100% - 22px);
-    background-color: #FEE6DA;
+    background-color: #fee6da;
     border: 1px solid #d1e0e7;
-    color: #D83341;
+    color: #d83341;
     border-top: 0px;
     border-radius: 0px 0px 4px 4px;
     padding: 7px 10px;
@@ -49,11 +49,16 @@
     font-family: 'SourceSansPro-Regular', serif;
     font-size: 14px;
 }
+.texts {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    height: 90px;
+}
 .text {
     color: #335065;
     font-family: 'SourceSansPro-Regular', serif;
     font-size: 14px;
-    margin-bottom: 8px;
 }
 .text strong {
     font-family: 'SourceSansPro-Bold', serif;
@@ -62,7 +67,7 @@
     font-family: 'SourceSansPro-Bold', serif;
     font-size: 14px;
 }
-.icon-alert{
+.icon-alert {
     width: 20px;
     height: 20px;
     margin-right: 10px;
@@ -72,7 +77,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .button-details {
     margin-top: 16px;
@@ -85,7 +90,18 @@
     font-family: 'SourceSansPro-SemiBold', serif;
     font-size: 18px;
 }
-.button-details:hover {
+.button-details:disabled {
+    margin-top: 16px;
+    border-radius: 4px;
+    border: 1px solid #9f98ee;
+    color: #ffffff;
+    padding: 12px 24px;
+    background-color: #9f98ee;
+    margin-left: 12px;
+    font-family: 'SourceSansPro-SemiBold', serif;
+    font-size: 18px;
+}
+.button-details:enabled:hover {
     cursor: pointer;
 }
 .button-details2 {
@@ -101,4 +117,42 @@
 }
 .button-details2:hover {
     cursor: pointer;
+}
+@media only screen and (max-width: 1440px) and (min-width: 1281px) {
+    .texts {
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
+        height: 90px;
+    }
+    .title {
+        font-size: 19px;
+    }
+    .title2 {
+        font-size: 19px;
+    }
+}
+@media only screen and (max-width: 1280px) and (min-width: 801px) {
+    .texts {
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
+        height: 100px;
+    }
+    .title {
+        font-size: 18.4px;
+    }
+    .title2 {
+        font-size: 18.4px;
+    }
+    .details {
+        width: calc(100% - 30px);
+        background-color: #f5f9fb;
+        border: 1px solid #d1e0e7;
+        border-bottom: 0px;
+        border-radius: 4px 4px 0px 0px;
+        padding: 24px 14px;
+    }
+}
+@media only screen and (max-width: 800px) {
 }

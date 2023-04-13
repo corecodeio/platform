@@ -11,11 +11,12 @@ import Dashboard from './views/Dashboard';
 import Recover from './views/Recover';
 //components
 import ProtectedRoutes from './components/ProtectedRoutes';
-import LogIn from './components/LogIn';
-import SignUp from './components/SignUp';
-import RecoverPassword from './components/RecoverPassword';
+import LogIn from './views/MainPage/LogIn';
+import SignUp from './views/MainPage/SignUp';
+import RecoverPassword from './views/MainPage/RecoverPassword';
 import MyCourses from './views/Dashboard/MyCourses';
 import AvailableCourses from './views/Dashboard/AvailableCourses';
+import Setting from './views/Dashboard/Setting';
 
 const App = () => {
     const { isLoading } = useSelector((state) => state.auth);
@@ -45,10 +46,10 @@ const App = () => {
             >
                 <Route index element={<Navigate to="my-courses" />} />
                 <Route path="my-courses" element={<MyCourses />} />
-                <Route path="available-courses" element={<AvailableCourses/>} />
+                <Route path="available-courses" element={<AvailableCourses />} />
                 <Route path="applications" element={<p>Postulaciones</p>} />
                 <Route path="community" element={<p>Comunidad</p>} />
-                <Route path="setting" element={<p>Configuración</p>} />
+                <Route path="setting" element={<Setting/>} />
             </Route>
 
             <Route path="/recover" element={<Recover />} />

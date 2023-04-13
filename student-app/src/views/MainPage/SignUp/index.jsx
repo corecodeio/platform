@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Styles from './LogIn.module.css';
+import Styles from './../Form.module.css';
 import { useDispatch } from 'react-redux';
 //icons
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { BiError } from 'react-icons/bi';
 //actions
-import { logInAsync } from './../../redux/actions/auth';
+import { signUpAsync } from './../../../redux/actions/auth';
 
-const LogIn = () => {
+const SignUp = () => {
     const dispatch = useDispatch();
     const [hidden, setHidden] = useState(false);
     const [data, setData] = useState({
@@ -19,7 +19,7 @@ const LogIn = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-        dispatch(logInAsync({ data, setError }));
+        dispatch(signUpAsync({ data, setError }));
     };
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
@@ -34,7 +34,8 @@ const LogIn = () => {
     };
     return (
         <form className={Styles[`form`]} onSubmit={handleSubmit}>
-            <p className={Styles[`title`]}>Welcome back!</p>
+            <p className={Styles[`title`]}>Despega tu futuro 🚀</p>
+            <p className={Styles[`subtitle`]}>Regístrate para ingresar a nuestra plataforma</p>
             <div className="container-input">
                 <input
                     className={Styles[`form-input`]}
@@ -79,19 +80,13 @@ const LogIn = () => {
                 disabled={!data.email || !data.password || !validateEmail(data.email)}
                 type="submit"
             >
-                Login
+                Registrarme
             </button>
             <div className={Styles[`additional-text`]}>
-                <p className={Styles[`additional-text2`]}>
-                    Don't have an account?{' '}
-                    <Link to="/sign-up" className={Styles[`additional-link`]}>
-                        Sign up now
-                    </Link>
-                </p>
-                <p className={Styles[`additional-text2`]}>
-                    Do you need to reset your password?{' '}
-                    <Link to="/recover-password" className={Styles[`additional-link`]}>
-                        recover
+                <p className={Styles[`additional-text3`]}>
+                    ¿Ya tienes una cuenta?{' '}
+                    <Link to="/log-in" className={Styles[`additional-link`]}>
+                        Ingresa aquí
                     </Link>
                 </p>
                 {error && (
@@ -105,4 +100,4 @@ const LogIn = () => {
     );
 };
 
-export default LogIn;
+export default SignUp;

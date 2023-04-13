@@ -19,10 +19,18 @@ module.exports = (sequelize) => {
                 type: DataTypes.STRING,
                 unique: true
             },
+            confirmed_email: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: false
+            },
             phone: {
                 type: DataTypes.STRING
             },
-            slack_id:{
+            confirmed_phone: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: false
+            },
+            slack_id: {
                 type: DataTypes.STRING
             },
             locked: {

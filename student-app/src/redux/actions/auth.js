@@ -8,9 +8,7 @@ export const logInAsync = createAsyncThunk(
             const response = await axios.post('/api/student/user/log-in', data);
             if (response.data.successful) {
                 window.localStorage.setItem('st_tk', response.data.token);
-                axios.defaults.headers.common[
-                    'Authorization'
-                ] = `Bearer ${response.data.token.session_token}`;
+                axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
                 return response.data.user;
             } else {
                 setError(response.data.message);
@@ -30,9 +28,7 @@ export const signUpAsync = createAsyncThunk(
             const response = await axios.post('/api/student/user/sign-up', data);
             if (response.data.successful) {
                 window.localStorage.setItem('st_tk', response.data.token);
-                axios.defaults.headers.common[
-                    'Authorization'
-                ] = `Bearer ${response.data.token.session_token}`;
+                axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
                 return response.data.user;
             } else {
                 setError(response.data.message);
@@ -51,9 +47,7 @@ export const resetPasswordAsync = createAsyncThunk(
             const response = await axios.post('/api/student/user/validate-email', data);
             if (response.data.successful) {
                 window.localStorage.setItem('st_tk', response.data.token);
-                axios.defaults.headers.common[
-                    'Authorization'
-                ] = `Bearer ${response.data.token.session_token}`;
+                axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
                 return response.data.user;
             } else {
                 setError(response.data.message);

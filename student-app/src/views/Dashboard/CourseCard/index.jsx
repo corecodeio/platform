@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 //icons
 import { TbAlertTriangle } from 'react-icons/tb';
 
-const CourseCard = ({ data, text, url, text2, url2 }) => {
+const CourseCard = ({ data, text, url, text2, url2, subscribed = true }) => {
     const navigate = useNavigate();
     return (
         <>
@@ -18,15 +18,18 @@ const CourseCard = ({ data, text, url, text2, url2 }) => {
                     <p>{data.duration}</p>
                     <p>Nivel {data.level}</p>
                 </div>
-                <p className={Styles[`text`]}>
-                    <strong>Dominarás:</strong> {data.technologies}
-                </p>
-                <p className={Styles[`text`]}>
-                    <strong>Precio:</strong> {data.price}
-                </p>
-                <p className={Styles[`text`]}>
-                    <strong>Inicia:</strong> Al llegar a {data.minimum} aplicaciones daremos fecha.
-                </p>
+                <div className={Styles[`texts`]}>
+                    <p className={Styles[`text`]}>
+                        <strong>Dominarás:</strong> {data.technologies}
+                    </p>
+                    <p className={Styles[`text`]}>
+                        <strong>Precio:</strong> {data.price}
+                    </p>
+                    <p className={Styles[`text`]}>
+                        <strong>Inicia:</strong> Al llegar a {data.minimum} aplicaciones daremos
+                        fecha.
+                    </p>
+                </div>
                 <div className={Styles[`buttons`]}>
                     {text2 && url2 && (
                         <button
@@ -37,7 +40,11 @@ const CourseCard = ({ data, text, url, text2, url2 }) => {
                         </button>
                     )}
                     {text && url && (
-                        <button className={Styles[`button-details`]} onClick={() => navigate(url)}>
+                        <button
+                            className={Styles[`button-details`]}
+                            onClick={() => navigate(url)}
+                            disabled={!subscribed}
+                        >
                             {text}
                         </button>
                     )}

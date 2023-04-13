@@ -9,6 +9,7 @@ module.exports = async (req, res, next) => {
         });
     }
     const sessionToken = req.headers.authorization.split('Bearer ')[1];
+    console.log(sessionToken)
     clientStytch.sessions
         .authenticate({ session_token: sessionToken })
         .then(async (data) => {
