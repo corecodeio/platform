@@ -10,10 +10,12 @@ module.exports = (sequelize) => {
                 unique: true
             },
             first_name: {
-                type: DataTypes.STRING
+                type: DataTypes.STRING,
+                defaultValue: ''
             },
             last_name: {
-                type: DataTypes.STRING
+                type: DataTypes.STRING,
+                defaultValue: ''
             },
             email: {
                 type: DataTypes.STRING,
@@ -24,11 +26,24 @@ module.exports = (sequelize) => {
                 defaultValue: false
             },
             phone: {
-                type: DataTypes.STRING
+                type: DataTypes.STRING,
+                defaultValue: ''
             },
-            confirmed_phone: {
-                type: DataTypes.BOOLEAN,
-                defaultValue: false
+            country: {
+                type: DataTypes.STRING,
+                defaultValue: ''
+            },
+            city: {
+                type: DataTypes.STRING,
+                defaultValue: ''
+            },
+            address: {
+                type: DataTypes.STRING,
+                defaultValue: ''
+            },
+            linkedin_url: {
+                type: DataTypes.STRING,
+                defaultValue: ''
             },
             slack_id: {
                 type: DataTypes.STRING

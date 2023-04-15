@@ -1,7 +1,7 @@
 .main {
     width: 100%;
-    height: calc(100% - 144px);
-    background: linear-gradient(to right, #f5f9fb 0, #f5f9fb 30%, #ffffff 30%, #ffffff);
+    min-height: calc(100% - 144px);
+    background-color: #ffffff;
 }
 .container {
     width: 90%;
@@ -28,7 +28,7 @@
     }
     .main {
         width: 100%;
-        height: calc(100% - 108px);
+        min-height: calc(100% - 108px);
         background: #ffffff;
     }
 }

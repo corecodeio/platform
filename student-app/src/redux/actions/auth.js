@@ -122,3 +122,21 @@ export const logOut = createAction('auth/logOut', () => {
     window.localStorage.removeItem('st_tk');
     return {};
 });
+
+export const updateProfile = createAction('auth/updateProfile', (data) => {
+    return {
+        payload: data
+    };
+});
+
+export const updateAccount = createAction('auth/updateAccount', (data) => {
+    return {
+        payload: data
+    };
+});
+
+export const updatePhone = createAction('auth/updatePhone', (data) => {
+    return {
+        payload: data
+    };
+});

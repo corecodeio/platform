@@ -1,27 +1,24 @@
 const permissions = [
     {
+        name: 'read:dashboard'
+    },
+    {
         name: 'read:role'
     },
     {
         name: 'write:role'
     },
     {
-        name: 'edit:role'
-    },
-    {
         name: 'delete:role'
     },
     {
-        name: 'read:staff'
+        name: 'read:permission'
     },
     {
-        name: 'write:staff'
+        name: 'write:permission'
     },
     {
-        name: 'edit:staff'
-    },
-    {
-        name: 'delete:staff'
+        name: 'delete:permission'
     },
     {
         name: 'read:course'
@@ -30,10 +27,16 @@ const permissions = [
         name: 'write:course'
     },
     {
-        name: 'edit:course'
+        name: 'delete:course'
     },
     {
-        name: 'delete:course'
+        name: 'read:event'
+    },
+    {
+        name: 'write:event'
+    },
+    {
+        name: 'delete:event'
     }
 ];
 

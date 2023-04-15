@@ -1,0 +1,73 @@
+.title {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 36px;
+    align-items: flex-end;
+    margin-bottom: 32px;
+}
+.title p {
+    font-family: 'Rubik-Bold', serif;
+    font-size: 32px;
+}
+.title button {
+    background-color: #6254ff;
+    border: 0px;
+    border-radius: 4px;
+    color: #ffffff;
+    padding: 12px 24px 12px 24px;
+    font-family: 'SourceSansPro-SemiBold', serif;
+    font-size: 18px;
+}
+
+.title button:enabled:hover {
+    cursor: pointer;
+}
+.title button:disabled {
+    background-color: #f0f0f0;
+    border: 1px solid #f0f0f0;
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.thead {
+    background-color: #ebf3f7;
+    height: 75px;
+    font-family: 'Rubik-Bold', serif;
+    font-size: 18px;
+}
+.tbody .tr:nth-of-type(2n) {
+    background-color: #ebf3f7;
+}
+.name {
+    width: 200px;
+}
+.permissions {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 10px;
+}
+.add {
+    width: 100px;
+}
+.delete {
+    width: 100px;
+}
+.permission-item {
+    background-color: #6254ff;
+    border-radius: 4px;
+    padding: 6px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-family: 'Rubik-Bold', serif;
+    font-size: 14px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+}
+.icon-delete {
+    width: 16px;
+    height: 16px;
+    margin-left: 6px;
+    cursor: pointer;
+}

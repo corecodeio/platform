@@ -17,6 +17,7 @@ import RecoverPassword from './views/MainPage/RecoverPassword';
 import MyCourses from './views/Dashboard/MyCourses';
 import AvailableCourses from './views/Dashboard/AvailableCourses';
 import Setting from './views/Dashboard/Setting';
+import Apply from './views/Dashboard/AvailableCourses/Apply';
 
 const App = () => {
     const { isLoading } = useSelector((state) => state.auth);
@@ -46,10 +47,12 @@ const App = () => {
             >
                 <Route index element={<Navigate to="my-courses" />} />
                 <Route path="my-courses" element={<MyCourses />} />
-                <Route path="available-courses" element={<AvailableCourses />} />
+                <Route path="available-courses" element={<AvailableCourses />}>
+                    <Route path="apply/:id" element={<Apply />} />
+                </Route>
                 <Route path="applications" element={<p>Postulaciones</p>} />
                 <Route path="community" element={<p>Comunidad</p>} />
-                <Route path="setting" element={<Setting/>} />
+                <Route path="setting" element={<Setting />} />
             </Route>
 
             <Route path="/recover" element={<Recover />} />

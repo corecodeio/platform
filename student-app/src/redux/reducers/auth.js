@@ -1,6 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 //actions
-import { logInAsync, checkTokenAsync, logOut } from './../actions/auth';
+import {
+    logInAsync,
+    checkTokenAsync,
+    logOut,
+    updateAccount,
+    updateProfile,
+    updatePhone
+} from './../actions/auth';
 
 const initialState = {
     isAuth: false,
@@ -29,6 +36,32 @@ export const authSlice = createSlice({
             .addCase(logOut, (state, action) => {
                 state.isAuth = false;
                 state.user = {};
+            })
+            .addCase(updateAccount, (state, action) => {
+                const { payload } = action;
+                state.user = {
+                    ...state.user,
+                    first_name: payload.first_name,
+                    last_name: payload.last_name
+                };
+            })
+            .addCase(updateProfile, (state, action) => {
+                const { payload } = action;
+                state.user = {
+                    ...state.user,
+                    country: payload.country,
+                    city: payload.city,
+                    address: payload.address,
+                    linkedin_url: payload.linkedin_url
+                };
+            })
+            .addCase(updatePhone, (state, action) => {
+                const { payload } = action;
+                state.user = {
+                    ...state.user,
+                    phone: payload.phone,
+                    confirmed_phone: false
+                };
             });
     }
 });

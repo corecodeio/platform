@@ -37,3 +37,9 @@ body {
     font-style: normal;
     font-display: swap;
 }
+@font-face {
+    font-family: 'Rubik-SemiBold';
+    src: url('./../public/fonts/Rubik-SemiBold.ttf');
+    font-style: normal;
+    font-display: swap;
+}

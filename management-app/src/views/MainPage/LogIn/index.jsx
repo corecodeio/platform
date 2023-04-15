@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { BiError } from 'react-icons/bi';
 //actions
-import { logInAsync } from './../../redux/actions/auth';
+import { logInAsync } from './../../../redux/actions/auth';
 
 const LogIn = () => {
     const dispatch = useDispatch();

@@ -11,13 +11,16 @@ import { IoCloseCircleOutline } from 'react-icons/io5';
 
 const Dashboard = () => {
     const { user } = useSelector((state) => state.auth);
-    const [alert, setAlert] = useState(!user.firt_name || !user.last_name || !user.confirmed_email);
+    const [alert, setAlert] = useState(!user.first_name || !user.last_name);
     return (
         <>
             <Navbar />
             {alert && (
                 <p className={Styles[`validate-information`]}>
-                    <IoCloseCircleOutline className={Styles[`validate-icon`]} onClick={()=>setAlert(false)}/>
+                    <IoCloseCircleOutline
+                        className={Styles[`validate-icon`]}
+                        onClick={() => setAlert(false)}
+                    />
                     Recuerda que para utilizar la plataforma es necesario completar algunos datos en
                     configuración y validar tu correo electrónico.
                 </p>

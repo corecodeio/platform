@@ -6,7 +6,11 @@ const {
     recoverPassword,
     checkToken,
     validateEmail,
-    magicLinks
+    magicLinks,
+    updateAccount,
+    addPhone,
+    confirmedEmail,
+    updateProfile
 } = require('./../../controllers/student/user.controllers');
 const authStudent = require('./../../middlewares/auth.student');
 
@@ -22,5 +26,13 @@ router.post('/check-token', authStudent, checkToken);
 router.post('/validate-email', validateEmail);
 //MagicLinks
 router.post('/magic-links', magicLinks);
+//Update Account
+router.post('/update-account', authStudent, updateAccount);
+//Add Phone
+router.post('/add-phone', authStudent, addPhone);
+//Confirmed Email
+router.post('/confirmed-email', authStudent, confirmedEmail);
+//Update Profile
+router.post('/update-profile', authStudent, updateProfile);
 
 module.exports = router;

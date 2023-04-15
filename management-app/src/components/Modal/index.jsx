@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Styles from './Portal.module.css';
+import Styles from './Modal.module.css';
 
-const Portal = ({ isShown, element }) => {
+const Modal = ({ isShown, element }) => {
     return isShown
         ? ReactDOM.createPortal(
               <div className={Styles[`main`]}>
@@ -13,4 +13,4 @@ const Portal = ({ isShown, element }) => {
         : null;
 };
 
-export default Portal;
+export default Modal;

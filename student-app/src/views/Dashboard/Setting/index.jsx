@@ -1,37 +1,152 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { enqueueSnackbar } from 'notistack';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 //styles
 import Styles from './Setting.module.css';
+//actions
+import { updateAccount, updateProfile, updatePhone } from './../../../redux/actions/auth';
 //icons
 import { MdOutlineEdit, MdOutlineEditOff } from 'react-icons/md';
 import { AiOutlineCheck } from 'react-icons/ai';
+import { GiConfirmed, GiCancel } from 'react-icons/gi';
+//components
+import Modal from './../../../components/Modal';
 
 const Setting = () => {
     const { user } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
     const [first_name, setFirst_name] = useState(false);
+    const [modalPhone, setModalPhone] = useState(false);
     const [last_name, setLast_name] = useState(false);
     const [edit, setEdit] = useState(false);
-    const [data, setData] = useState({
-        first_name: user.first_name,
-        last_name: user.last_name
+    const [account, setAccount] = useState({
+        first_name: '',
+        last_name: ''
     });
+    const [profile, setProfile] = useState({
+        country: '',
+        city: '',
+        address: '',
+        linkedin_url: ''
+    });
+    const [phone, setPhone] = useState(user.phone);
+    const [editPhone, setEditPhone] = useState(false);
     const handleChangeAccount = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value });
+        setAccount({ ...account, [e.target.name]: e.target.value });
     };
     const handleChangeProfile = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value });
+        setProfile({ ...profile, [e.target.name]: e.target.value });
+    };
+    const handleSubmitAccount = async (e) => {
+        e.preventDefault();
+        try {
+            const data = {
+                first_name: first_name ? account.first_name : user.first_name,
+                last_name: last_name ? account.last_name : user.last_name
+            };
+            const response = await axios.post('/api/student/user/update-account', data);
+            if (response.data.successful) {
+                dispatch(updateAccount(response.data.user));
+                handleCancelAccount();
+                enqueueSnackbar(response.data.message, { variant: 'success' });
+            } else {
+                enqueueSnackbar(response.data.message, { variant: 'error' });
+            }
+        } catch (error) {
+            enqueueSnackbar('500 server error', { variant: 'error' });
+        }
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
     };
+    const handleUpdateProfile = async (e) => {
+        try {
+            const response = await axios.post('/api/student/user/update-profile', profile);
+            if (response.data.successful) {
+                dispatch(updateProfile(response.data.user));
+                handleCancelProfile();
+                enqueueSnackbar(response.data.message, { variant: 'success' });
+            } else {
+                enqueueSnackbar(response.data.message, { variant: 'error' });
+            }
+        } catch (error) {
+            enqueueSnackbar('500 server error', { variant: 'error' });
+        }
+    };
+    const handlePhone = (e) => {
+        setPhone(e.target.value);
+    };
+    const handleAddPhone = async () => {
+        try {
+            const data = {
+                phone: phone
+            };
+            const response = await axios.post('/api/student/user/add-phone', data);
+            if (response.data.successful) {
+                dispatch(updatePhone(response.data.user));
+                setEditPhone(false);
+                enqueueSnackbar(response.data.message, { variant: 'success' });
+            } else {
+                enqueueSnackbar(response.data.message, { variant: 'error' });
+            }
+        } catch (error) {
+            enqueueSnackbar('500 server error', { variant: 'error' });
+        }
+    };
+    const handleOpenPhone = () => {
+        setPhone('');
+        setEditPhone(true);
+    };
+    const handleOpenProfile = () => {
+        setProfile({
+            country: user.country,
+            city: user.city,
+            address: user.address,
+            linkedin_url: user.linkedin_url
+        });
+        setEdit(true);
+    };
+    const handleCancelProfile = () => {
+        setEdit(false);
+    };
+    const handleOpenAccountFirstName = () => {
+        setAccount({ ...account, first_name: user.first_name });
+        setFirst_name(true);
+    };
+    const handleOpenAccountLastName = () => {
+        setAccount({ ...account, last_name: user.last_name });
+        setLast_name(true);
+    };
+    const handleCancelAccount = () => {
+        setFirst_name(false);
+        setLast_name(false);
+    };
+    useEffect(() => {
+        setAccount({ ...account, first_name: user.first_name, last_name: user.last_name });
+        setProfile({
+            ...profile,
+            country: user.country,
+            city: user.city,
+            address: user.address,
+            linkedin_url: user.linkedin_url
+        });
+        // eslint-disable-next-line
+    }, []);
+
     return (
         <>
+            <Modal isShow={modalPhone}>
+                <button onClick={() => setModalPhone(false)}>cerrar</button>
+                <p>sssssssssssss</p>
+            </Modal>
             <form className={Styles[`main`]} onSubmit={handleSubmit}>
                 <div className={Styles[`head`]}>
                     <p className={Styles[`title`]}>Información de cuenta</p>
                     <button
                         className={Styles[`form-button`]}
                         type="submit"
+                        onClick={handleSubmitAccount}
                         disabled={!first_name && !last_name}
                     >
                         Guardar
@@ -50,24 +165,21 @@ const Setting = () => {
                                         type="text"
                                         id="first_name"
                                         name="first_name"
-                                        value={data.first_name}
+                                        value={account.first_name}
                                         onChange={handleChangeAccount}
                                         placeholder="First name"
                                     />
                                     <MdOutlineEditOff
                                         className={Styles[`form-icon`]}
-                                        onClick={() => {
-                                            setData({ ...data, first_name: user.first_name });
-                                            setFirst_name(false);
-                                        }}
+                                        onClick={() => setFirst_name(false)}
                                     />
                                 </>
                             ) : (
                                 <>
-                                    <p>{data.first_name ? data.first_name : 'First name'}</p>
+                                    <p>{user.first_name ? user.first_name : 'First name'}</p>
                                     <MdOutlineEdit
                                         className={Styles[`form-icon`]}
-                                        onClick={() => setFirst_name(true)}
+                                        onClick={handleOpenAccountFirstName}
                                     />
                                 </>
                             )}
@@ -85,24 +197,21 @@ const Setting = () => {
                                         type="text"
                                         id="last_name"
                                         name="last_name"
-                                        value={data.last_name}
+                                        value={account.last_name}
                                         onChange={handleChangeAccount}
                                         placeholder="Last name"
                                     />
                                     <MdOutlineEditOff
                                         className={Styles[`form-icon`]}
-                                        onClick={() => {
-                                            setData({ ...data, last_name: user.last_name });
-                                            setLast_name(false);
-                                        }}
+                                        onClick={() => setLast_name(false)}
                                     />
                                 </>
                             ) : (
                                 <>
-                                    <p>{data.last_name ? data.last_name : 'Last name'}</p>
+                                    <p>{user.last_name ? user.last_name : 'Last name'}</p>
                                     <MdOutlineEdit
                                         className={Styles[`form-icon`]}
-                                        onClick={() => setLast_name(true)}
+                                        onClick={handleOpenAccountLastName}
                                     />
                                 </>
                             )}
@@ -111,7 +220,7 @@ const Setting = () => {
                 </div>
                 <div className={Styles[`row2`]}>
                     <div className={Styles[`form-data-2`]}>
-                        <p className={Styles[`form-data-description`]}>Email:</p>
+                        <p className={Styles[`form-data-description`]}>Email*:</p>
                         <div className={Styles[`form-data-container`]}>
                             <p>{user.email}</p>
                             {user.confirmed_email ? (
@@ -127,9 +236,19 @@ const Setting = () => {
                 </div>
                 <div className={Styles[`row1`]}>
                     <div className={Styles[`form-data-2`]}>
-                        <p className={Styles[`form-data-description`]}>Telefono:</p>
+                        <label htmlFor="phone" className={Styles[`form-data-description`]}>
+                            Telefono:
+                        </label>
                         <div className={Styles[`form-data-container`]}>
-                            {user.phone ? user.phone : <button>Agregar Numero</button>}
+                            {user.phone ? (
+                                <>
+                                    <AiOutlineCheck className={Styles[`form-check`]} />
+                                    <p className={Styles[`form-text-check`]}>(Verificado)</p>
+                                    <button>eliminar</button>
+                                </>
+                            ) : (
+                                <button onClick={handleOpenPhone}>Agregar Numero</button>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -142,73 +261,129 @@ const Setting = () => {
                             <>
                                 <button
                                     className={Styles[`form-button2`]}
-                                    onClick={() => setEdit(false)}
+                                    onClick={handleCancelProfile}
                                 >
                                     Cancelar
                                 </button>
-                                <button className={Styles[`form-button`]} type="submit">
+                                <button
+                                    className={Styles[`form-button`]}
+                                    onClick={handleUpdateProfile}
+                                >
                                     Guardar
                                 </button>
                             </>
                         ) : (
-                            <button className={Styles[`form-button`]} onClick={() => setEdit(true)}>
+                            <button
+                                className={Styles[`form-button`]}
+                                type="button"
+                                onClick={handleOpenProfile}
+                            >
                                 Editar
                             </button>
                         )}
                     </div>
                 </div>
                 <div className={Styles[`row1`]}>
-                    <input
-                        className={Styles[`form-input`]}
-                        type="text"
-                        name="first_name"
-                        value={data.first_name}
-                        onChange={handleChangeProfile}
-                        placeholder="First name"
-                    />
+                    <div className={Styles[`form-data`]}>
+                        <label htmlFor="country" className={Styles[`form-data-description`]}>
+                            País:
+                        </label>
+                        <div className={Styles[`form-data-container`]}>
+                            {edit ? (
+                                <>
+                                    <input
+                                        className={Styles[`form-input`]}
+                                        type="text"
+                                        id="country"
+                                        name="country"
+                                        value={profile.country}
+                                        onChange={handleChangeProfile}
+                                        placeholder="País"
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <p>{user.country}</p>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                    <div className={Styles[`form-data`]}>
+                        <label htmlFor="city" className={Styles[`form-data-description`]}>
+                            Ciudad:
+                        </label>
+                        <div className={Styles[`form-data-container`]}>
+                            {edit ? (
+                                <>
+                                    <input
+                                        className={Styles[`form-input`]}
+                                        type="text"
+                                        id="city"
+                                        name="city"
+                                        value={profile.city}
+                                        onChange={handleChangeProfile}
+                                        placeholder="Ciudad"
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <p>{user.city}</p>
+                                </>
+                            )}
+                        </div>
+                    </div>
                 </div>
                 <div className={Styles[`row2`]}>
-                    <input
-                        className={Styles[`form-input`]}
-                        type="text"
-                        name="first_name"
-                        value={data.first_name}
-                        onChange={handleChangeProfile}
-                        placeholder="First name"
-                    />
+                    <div className={Styles[`form-data-2`]}>
+                        <label htmlFor="city" className={Styles[`form-data-description`]}>
+                            Dirección:
+                        </label>
+                        <div className={Styles[`form-data-container`]}>
+                            {edit ? (
+                                <>
+                                    <input
+                                        className={Styles[`form-input`]}
+                                        type="text"
+                                        id="address"
+                                        name="address"
+                                        value={profile.address}
+                                        onChange={handleChangeProfile}
+                                        placeholder="Dirección"
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <p>{user.address}</p>
+                                </>
+                            )}
+                        </div>
+                    </div>
                 </div>
                 <div className={Styles[`row1`]}>
-                    <p>{user.email}</p>
-                </div>
-                <div className={Styles[`row2`]}>
-                    <input
-                        className={Styles[`form-input`]}
-                        type="text"
-                        name="first_name"
-                        value={data.first_name}
-                        onChange={handleChangeProfile}
-                        placeholder="First name"
-                    />
-                </div>
-                <div className={Styles[`row1`]}>
-                    <input
-                        className={Styles[`form-input`]}
-                        type="text"
-                        name="first_name"
-                        value={data.first_name}
-                        onChange={handleChangeProfile}
-                        placeholder="First name"
-                    />
-                </div>
-                <div className={Styles[`row2`]}>
-                    <input
-                        className={Styles[`form-input`]}
-                        type="text"
-                        name="first_name"
-                        value={data.first_name}
-                        onChange={handleChangeProfile}
-                        placeholder="First name"
-                    />
+                    <div className={Styles[`form-data-2`]}>
+                        <label htmlFor="linkedin_url" className={Styles[`form-data-description`]}>
+                            Linkedin:
+                        </label>
+                        <div className={Styles[`form-data-container`]}>
+                            {edit ? (
+                                <>
+                                    <input
+                                        className={Styles[`form-input`]}
+                                        type="text"
+                                        id="linkedin_url"
+                                        name="linkedin_url"
+                                        value={profile.linkedin_url}
+                                        onChange={handleChangeProfile}
+                                        placeholder="Linkedin"
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <p>{user.linkedin_url}</p>
+                                </>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </form>
         </>
