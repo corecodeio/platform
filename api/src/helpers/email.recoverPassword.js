@@ -133,7 +133,7 @@ module.exports.sendRecoverPassword = ({ tokenRecover, email }) => {
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td align="left" class="esd-block-text es-p40l" style="padding: 0px 10px 0px 50px;">
-                                                                                                    <p style="color: #0d1e38; font-family: 'Source Sans Pro'; font-weight: 400; font-size: 18px;">¡Hola ${ first_name }! Esperamos que estés muy bien<br>Recibimos correctamente tu pedido de reseteo de contraseña.<br><br>Ingresa al siguiente <a href="${clientConfig.student_url}/reset-password/${tokenRecover}" style="color:#2764FF; font-weight:700; font-size: 18px; text-decoration: none;">link </a>y podrás cambiarla:</p>
+                                                                                                    <p style="color: #0d1e38; font-family: 'Source Sans Pro'; font-weight: 400; font-size: 18px;">¡Hola! Esperamos que estés muy bien<br>Recibimos correctamente tu pedido de reseteo de contraseña.<br><br>Ingresa al siguiente <a href="${clientConfig.student_url}/reset-password/${tokenRecover}" style="color:#2764FF; font-weight:700; font-size: 18px; text-decoration: none;">link </a>y podrás cambiarla:</p>
                                                                                                 </td>
                                                                                             </tr>
                                                                                         </tbody>
