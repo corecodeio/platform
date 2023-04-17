@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { SnackbarProvider } from 'notistack';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -13,11 +14,13 @@ axios.defaults.baseURL = process.env.BACKEND_URL || 'http://localhost:3001';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </Provider>
+    <SnackbarProvider>
+        <Provider store={store}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Provider>
+    </SnackbarProvider>
 );
 
 reportWebVitals();

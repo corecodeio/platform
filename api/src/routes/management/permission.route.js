@@ -5,6 +5,6 @@ const authManagement = require('./../../middlewares/auth.management');
 const checkPermissionAuth = require('./../../middlewares/auth.permissions.js');
 
 //List Permissions
-router.get('/', authManagement, checkPermissionAuth('read:permission'), listPermissions);
+router.get('/', authManagement, checkPermissionAuth(['read:permission']), listPermissions);
 
 module.exports = router;

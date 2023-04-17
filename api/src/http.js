@@ -4,7 +4,7 @@ const server = express();
 const http = require('http').createServer(server);
 const studentRoutes = require('./routes/student/index.js');
 const managementsRoutes = require('./routes/management/index.js');
-const { serverConfig } = require('./config/index.js');
+const { serverConfig, clientConfig } = require('./config/index.js');
 
 /************* SERVER CONFIG ***********************/
 server.use(express.urlencoded({ extended: true, limit: '8MB' }));
@@ -20,20 +20,8 @@ if (serverConfig.mode) {
 /*********** CORS CONFIG **********************/
 if (serverConfig.mode) {
     server.use(
-        cors({
-            origin: '*'
-        })
+        cors({ origin: [clientConfig.student_url, clientConfig.management_url], credentials: true })
     );
-    server.use((req, res, next) => {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Credentials', 'true');
-        res.header(
-            'Access-Control-Allow-Headers',
-            'Origin, X-Requested-With, Content-Type, Accept'
-        );
-        res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-        next();
-    });
 }
 //////////////// ENDS CORS CONFIG ///////////////////////
 

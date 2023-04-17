@@ -109,16 +109,6 @@ for each project individually:
     #Frontend configurations
     CLIENT_STUDENT_URL=http://localhost:3500
     CLIENT_MANAGEMENT_URL=http://localhost:4000
-    #jwt configurations
-    JWT_SECRET_KEY_STUDENT=
-    JWT_EXPIRES_STUDENT=
-    JWT_SECRET_KEY_MANAGEMENT=
-    JWT_EXPIRES_MANAGEMENT=
-    #nodemailer configurations
-    NODE_MAILER_HOST=
-    NODE_MAILER_PORT=
-    NODE_MAILER_USER=
-    NODE_MAILER_PASSWORD=
     #slack configurations
     SLACK_BOT_USER_OAUTH_TOKEN=
     SLACK_APP_LEVEL_TOKEN=

@@ -5,31 +5,47 @@ module.exports = (sequelize) => {
         'User',
         {
             id: {
-                type: DataTypes.UUID,
+                type: DataTypes.STRING,
                 primaryKey: true,
                 unique: true
             },
             first_name: {
-                type: DataTypes.STRING
+                type: DataTypes.STRING,
+                defaultValue: ''
             },
             last_name: {
-                type: DataTypes.STRING
+                type: DataTypes.STRING,
+                defaultValue: ''
             },
             email: {
                 type: DataTypes.STRING,
                 unique: true
             },
-            validate_email: {
+            confirmed_email: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false
             },
-            country: {
-                type: DataTypes.STRING
-            },
             phone: {
-                type: DataTypes.STRING
+                type: DataTypes.STRING,
+                defaultValue: ''
             },
-            password: {
+            country: {
+                type: DataTypes.STRING,
+                defaultValue: ''
+            },
+            city: {
+                type: DataTypes.STRING,
+                defaultValue: ''
+            },
+            address: {
+                type: DataTypes.STRING,
+                defaultValue: ''
+            },
+            linkedin_url: {
+                type: DataTypes.STRING,
+                defaultValue: ''
+            },
+            slack_id: {
                 type: DataTypes.STRING
             },
             locked: {

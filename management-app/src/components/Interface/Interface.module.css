@@ -35,6 +35,7 @@
 .table {
     width: 100%;
     border-collapse: collapse;
+    color: #0D1E38;
 }
 .thead {
     background-color: #cadbe3;

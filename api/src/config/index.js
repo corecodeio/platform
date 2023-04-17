@@ -6,6 +6,12 @@ module.exports = {
         port: process.env.SERVER_PORT,
         mode: process.env.SERVER_MODE === 'dev' ? true : false
     },
+    stytchConfig: {
+        project_id: process.env.STYTCH_PROJECT_ID,
+        secret: process.env.STYTCH_SECRET,
+        login_magic_link_url: 'http://localhost:3500',
+        signup_magic_link_url: 'http://localhost:3500'
+    },
     postgresConfig: {
         user: process.env.SERVER_DB_USER,
         password: process.env.SERVER_DB_PASS,
@@ -16,30 +22,6 @@ module.exports = {
     clientConfig: {
         student_url: process.env.CLIENT_STUDENT_URL,
         management_url: process.env.CLIENT_MANAGEMENT_URL
-    },
-    jwtStudentConfig: {
-        algorithms: ['HS256'],
-        secret_key: process.env.JWT_SECRET_KEY_STUDENT,
-        expiresIn: process.env.JWT_EXPIRES_STUDENT,
-        rounds: 8
-    },
-    jwtManagementConfig: {
-        algorithms: ['HS256'],
-        secret_key: process.env.JWT_SECRET_KEY_MANAGEMENT,
-        expiresIn: process.env.JWT_EXPIRES_MANAGEMENT,
-        rounds: 8
-    },
-    bcryptConfig: {
-        rounds: 8
-    },
-    nodeMailerConfig: {
-        host: process.env.NODE_MAILER_HOST,
-        port: process.env.NODE_MAILER_PORT,
-        auth: {
-            user: process.env.NODE_MAILER_USER,
-            pass: process.env.NODE_MAILER_PASSWORD
-        },
-        validateEmailExpiresIn: '20m'
     },
     slackConfig: {
         token: process.env.SLACK_BOT_USER_OAUTH_TOKEN,
