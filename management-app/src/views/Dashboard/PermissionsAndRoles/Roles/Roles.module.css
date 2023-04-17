@@ -71,3 +71,8 @@
     margin-left: 6px;
     cursor: pointer;
 }
+.table-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}

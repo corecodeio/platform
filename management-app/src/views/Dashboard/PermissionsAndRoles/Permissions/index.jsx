@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 //styles
 import Styles from './Permissions.module.css';
 //icons
@@ -7,7 +8,21 @@ import { RiDeleteBinLine } from 'react-icons/ri';
 
 const Permissions = () => {
     const { user } = useSelector((state) => state.auth);
-    const [roles, setRoles] = useState([]);
+    const [permissions, setPermissions] = useState([]);
+    const getPermissions = async () => {
+        try {
+            const response = await axios.get('/api/management/permission');
+            if (response.data.successful) {
+                setPermissions(response.data.list);
+            } else {
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        getPermissions();
+    }, []);
     return (
         <>
             <div className={Styles[`title`]}>
@@ -33,12 +48,18 @@ const Permissions = () => {
                     </tr>
                 </thead>
                 <tbody className={Styles[`tbody`]}>
-                    {roles.map((role) => {
+                    {permissions.map((permision) => {
                         return (
-                            <tr key={role.id} className={Styles[`tr`]}>
-                                <th>{role}</th>
+                            <tr key={permision.id} className={Styles[`tr`]}>
+                                <th>{permision.name}</th>
                                 <th className={Styles[`permissions`]}>
-                                    <p className={Styles[`permission-item`]}>{'demo:demo'}</p>
+                                    {permision.permissions.map((role) => {
+                                        return (
+                                            <p key={role.id} className={Styles[`permission-item`]}>
+                                                {role.name}
+                                            </p>
+                                        );
+                                    })}
                                 </th>
                                 {['delete:permission'].every((permission) =>
                                     user.permissions.includes(permission)

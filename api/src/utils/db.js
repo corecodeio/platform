@@ -31,11 +31,7 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Survey, Role, Permission, Course } = sequelize.models;
-
-Survey.hasOne(User, {
-    foreignKey: 'surveyID'
-});
+const { User, Role, Permission, Course } = sequelize.models;
 
 User.belongsToMany(Course, { as: 'courses', through: 'UserCourse' });
 Course.belongsToMany(User, { as: 'courses', through: 'UserCourse' });

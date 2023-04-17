@@ -10,7 +10,7 @@ export const logInAsync = createAsyncThunk(
                 window.localStorage.setItem('mgmt_tk', response.data.token);
                 axios.defaults.headers.common[
                     'Authorization'
-                ] = `Bearer ${response.data.token.session_token}`;
+                ] = `Bearer ${response.data.token}`;
                 return response.data.user;
             } else {
                 setError(response.data.message);
@@ -32,7 +32,7 @@ export const signUpAsync = createAsyncThunk(
                 window.localStorage.setItem('mgmt_tk', response.data.token);
                 axios.defaults.headers.common[
                     'Authorization'
-                ] = `Bearer ${response.data.token.session_token}`;
+                ] = `Bearer ${response.data.token}`;
                 return response.data.user;
             } else {
                 setError(response.data.message);
@@ -53,7 +53,7 @@ export const resetPasswordAsync = createAsyncThunk(
                 window.localStorage.setItem('mgmt_tk', response.data.token);
                 axios.defaults.headers.common[
                     'Authorization'
-                ] = `Bearer ${response.data.token.session_token}`;
+                ] = `Bearer ${response.data.token}`;
                 return response.data.user;
             } else {
                 setError(response.data.message);
