@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 //styles
 import Styles from './../Grid.module.css';
+//actions
+import { logOut } from './../../../redux/actions/auth';
 //components
 import CourseCard from './../CourseCard';
 
 const AvailableCourses = () => {
+    const dispatch = useDispatch();
     const [listCourses, setListCourses] = useState([]);
     const { user } = useSelector((state) => state.auth);
+
     useEffect(() => {
         const getData = async () => {
             try {
@@ -17,7 +21,9 @@ const AvailableCourses = () => {
                 if (response.data.successful) {
                     setListCourses(response.data.data);
                 }
-            } catch (error) {}
+            } catch (error) {
+                dispatch(logOut());
+            }
         };
         getData();
     }, []);
@@ -36,7 +42,7 @@ const AvailableCourses = () => {
                                 text2="Mas Info"
                                 url2={`/dashboard/details/${course.id}`}
                                 subscribed={
-                                    course.subscribed && !(!user.first_name || !user.last_name)
+                                    !course.subscribed && !(!user.first_name || !user.last_name)
                                 }
                             />
                         </div>

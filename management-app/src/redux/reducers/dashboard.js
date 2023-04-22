@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 //actions
-import { getCoursesAsync } from './../actions/dashboard';
+import { getCoursesAsync, setPage } from './../actions/dashboard';
 
 const initialState = {
     courses: [],
@@ -13,12 +13,16 @@ export const dashboardSlice = createSlice({
     initialState: initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(getCoursesAsync.fulfilled, (state, action) => {
-            const { courses, page, totalPage } = action.payload;
-            state.courses = courses;
-            state.page = page;
-            state.totalPage = totalPage;
-        });
+        builder
+            .addCase(getCoursesAsync.fulfilled, (state, action) => {
+                const { courses, page, totalPage } = action.payload;
+                state.courses = courses;
+                state.page = page;
+                state.totalPage = totalPage;
+            })
+            .addCase(setPage, (state, action) => {
+                state.page = action.payload;
+            });
     }
 });
 

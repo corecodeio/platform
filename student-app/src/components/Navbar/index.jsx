@@ -13,7 +13,7 @@ import { BiMenu } from 'react-icons/bi';
 const options = [
     { to: 'my-courses', text: 'Mis Cursos' },
     { to: 'available-courses', text: 'Cursos Disponibles' },
-    { to: 'applications', text: 'Postulaciones' },
+    { to: 'postulations', text: 'Postulaciones' },
     { to: 'community', text: 'Comunidad' }
 ];
 const Navbar = () => {

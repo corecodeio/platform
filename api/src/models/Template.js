@@ -2,7 +2,7 @@ const { DataTypes, Sequelize } = require('sequelize');
 
 module.exports = (sequelize) => {
     sequelize.define(
-        'Course',
+        'Template',
         {
             id: {
                 type: DataTypes.UUID,
@@ -12,32 +12,8 @@ module.exports = (sequelize) => {
             },
             name: {
                 type: DataTypes.STRING,
+                allowNull: false,
                 unique: true
-            },
-            slack_id: {
-                type: DataTypes.STRING,
-                unique: true
-            },
-            slack_name: {
-                type: DataTypes.STRING,
-                unique: true
-            },
-            google_calendar_id: {
-                type: DataTypes.STRING,
-                unique: true
-            },
-            google_calendar_name: {
-                type: DataTypes.STRING
-            },
-            zoom_url: {
-                type: DataTypes.STRING
-            },
-            zoom_code: {
-                type: DataTypes.STRING
-            },
-            status: {
-                type: DataTypes.STRING,
-                defaultValue: 'Pending'
             },
             title: {
                 type: DataTypes.STRING,
@@ -73,16 +49,13 @@ module.exports = (sequelize) => {
             },
             minimum: {
                 type: DataTypes.INTEGER,
-                defaultValue: 45
-            },
-            start: {
-                type: DataTypes.DATE
+                defaultValue: 60
             },
             extra_alert: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false
             }
         },
-        { timestamps: true }
+        { timestamps: false }
     );
 };

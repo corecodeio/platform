@@ -1,43 +1,43 @@
-const { Course, CourseType, Staff } = require('./../../utils/db.js');
+const { Course, Staff } = require('./../../utils/db.js');
 const { validateID, validateNumber } = require('./../../helpers/validators');
-const { v4: uuidv4 } = require('uuid');
 const createSlackChannel = require('./../../utils/slack/controllers/create_slack_channel');
 const addUserChannel = require('./../../utils/slack/controllers/add_user_channel');
-const createCalendar = require('./../../utils/calendar/controllers/create_calendar');
+//const createCalendar = require('./../../utils/calendar/controllers/create_calendar');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 //Create Course
 module.exports.createCourse = async (req, res, next) => {
     try {
-        const { name_bootcamp, type, zoom_url, zoom_code } = req.body;
-        if (!name_bootcamp || !type) {
-            return res.status(200).json({ successful: false, message: 'missing to enter data' });
-        }
+        const {
+            name,
+            title,
+            title_second,
+            title_extra,
+            type,
+            duration,
+            level,
+            technologies,
+            price,
+            minimum
+        } = req.body;
         const nameAvailable = await Course.findOne({
-            where: { name: name_bootcamp }
+            where: { name: name }
         });
         if (nameAvailable) {
             return res.status(200).json({ successful: false, message: 'name is busy' });
         }
-        if (!validateID(type)) {
-            return res
-                .status(200)
-                .json({ successful: false, message: 'the course type id is not valid' });
-        }
-        const courseTypeAvailable = await CourseType.findOne({
-            where: { id: type }
-        });
-        if (!courseTypeAvailable) {
-            return res
-                .status(200)
-                .json({ successful: false, message: 'course type id does not exist' });
-        }
         const newCourse = await Course.create({
-            id: uuidv4(),
-            name: name_bootcamp,
-            zoom_url,
-            zoom_code
+            name,
+            title,
+            title_second,
+            title_extra,
+            type,
+            duration,
+            level,
+            technologies,
+            price,
+            minimum
         });
         res.status(200).json({
             successful: true,
@@ -48,6 +48,7 @@ module.exports.createCourse = async (req, res, next) => {
         res.status(400).json({ successful: false, message: error });
     }
 };
+
 //Create Slack
 module.exports.createSlack = async (req, res, next) => {
     try {

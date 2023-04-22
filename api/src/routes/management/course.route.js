@@ -10,12 +10,12 @@ const authManagement = require('./../../middlewares/auth.management');
 const checkPermissionAuth = require('./../../middlewares/auth.permissions.js');
 
 //List Course
-router.get('/', authManagement, checkPermissionAuth('read:course'), listCourse);
+router.get('/', authManagement, checkPermissionAuth(['read:course']), listCourse);
 //Create Course
-router.post('/', authManagement, checkPermissionAuth('write:course'), createCourse);
+router.post('/', authManagement, checkPermissionAuth(['write:course']), createCourse);
 //Create Slack
-router.post('/slack', authManagement, checkPermissionAuth('edit:course'), createSlack);
+router.post('/slack', authManagement, checkPermissionAuth(['write:course']), createSlack);
 //Edit Course
-router.put('/', authManagement, checkPermissionAuth('edit:course'), editCourse);
+router.put('/', authManagement, checkPermissionAuth(['delete:course']), editCourse);
 
 module.exports = router;

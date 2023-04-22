@@ -1,7 +1,7 @@
-const { User, Permission, Role, Course } = require('./../utils/db');
+const { User, Permission, Role, Course, Template } = require('./../utils/db');
 const roles = require('./roles');
 const permissions = require('./permissions');
-const courses = require('./courses');
+const templates = require('./templates');
 
 const preload = async () => {
     try {
@@ -52,8 +52,8 @@ const preload = async () => {
             await rolesCreated[1].addPermission(permissionsCreated[4].id);//read:permission
             // Role: techlead add permissions:
             await rolesCreated[2].addPermission(permissionsCreated[0].id);//read:dashboard
-            //-------------- Courses -------------
-            const coursesCreated = await Course.bulkCreate(courses);
+            //-------------- Templates -------------
+            const templatesCreated = await Template.bulkCreate(templates);
             //------------ Course DEV-------------
             if (process.env.SERVER_DEVELOPMENT_COURSE_NAME) {
                 const courseCreated = await Course.create({
@@ -78,15 +78,13 @@ const preload = async () => {
                     title_extra: '(React&Node)',
                     type: 'Especialización',
                     duration: '2 meses',
-                    status: 'open',
+                    status: 'Open',
                     level: 2,
                     technologies: 'JReact, Redux, Node, SQL, Docker & Kubernetes.',
                     price: 'Solo pagas si obtienes un empleo.',
                     minimum: 60,
                     extra_alert: false
                 });
-                // Add Course to a user:
-                await userCreated.addCourse(courseCreated);
             }
             console.log('development data uploaded successfully');
         }

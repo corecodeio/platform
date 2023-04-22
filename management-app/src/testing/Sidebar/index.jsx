@@ -6,7 +6,7 @@ import options from './options';
 import { AiOutlineDashboard } from 'react-icons/ai';
 import { RxCross2 } from 'react-icons/rx';
 
-const Sidebar = ({ menu, setMenu }) => {
+const Sidebar = ({ title = '', menu, setMenu }) => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
 
@@ -15,7 +15,7 @@ const Sidebar = ({ menu, setMenu }) => {
             <div className={Styles[`title`]}>
                 <AiOutlineDashboard className={Styles[`title-icon`]} />
                 <p onClick={() => navigate('/dashboard')} className={Styles[`title-text`]}>
-                    Dashboard
+                    {title}
                 </p>
                 <RxCross2 onClick={() => setMenu(false)} className={Styles[`cross`]} />
             </div>

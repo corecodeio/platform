@@ -30,7 +30,12 @@
     margin-bottom: 22px;
 }
 .form {
-    width: 400px;
-    height: 500px;
-    background-color: aqua;
+    width: 468px;
+    border: 1px solid #cadbe3;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+    gap: 40px;
 }
