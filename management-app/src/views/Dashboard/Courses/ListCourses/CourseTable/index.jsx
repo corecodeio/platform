@@ -2,6 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 //styles
 import Styles from './CourseTable.module.css';
+//components
+import CreateSlack from './CreateSlack';
+import CreateCalendar from './CreateCalendar';
 
 const CourseTable = () => {
     const { courses } = useSelector((state) => state.dashboard);
@@ -36,8 +39,15 @@ const CourseTable = () => {
                             <th className={Styles[`td`]}>
                                 {new Date(item.createdAt).toLocaleDateString('en-US')}
                             </th>
-                            <th className={Styles[`td`]}>{item.slack_id}</th>
-                            <th className={Styles[`td`]}>{item.google_calendar_id}</th>
+                            <th className={Styles[`td`]}>
+                                <CreateSlack slackID={item.slack_id} courseData={item} />
+                            </th>
+                            <th className={Styles[`td`]}>
+                                <CreateCalendar
+                                    calendarID={item.google_calendar_id}
+                                    courseData={item}
+                                />
+                            </th>
                             <th className={Styles[`td`]}>{item.status}</th>
 
                             <th className={Styles[`td`]}>More...</th>

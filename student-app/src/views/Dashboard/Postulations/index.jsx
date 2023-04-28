@@ -22,11 +22,12 @@ const Postulations = () => {
                     setPostulations(response.data.data);
                 }
             } catch (error) {
-               // dispatch(logOut());
-               console.log(error)
+                dispatch(logOut());
+                console.log(error);
             }
         };
         getData();
+        // eslint-disable-next-line
     }, []);
     return (
         <>

@@ -4,7 +4,8 @@ dotenv.config();
 module.exports = {
     serverConfig: {
         port: process.env.SERVER_PORT,
-        mode: process.env.SERVER_MODE === 'dev' ? true : false
+        mode: process.env.SERVER_MODE === 'dev' ? true : false,
+        client_url:process.env.CLIENT_URL
     },
     stytchConfig: {
         project_id: process.env.STYTCH_PROJECT_ID,
@@ -18,10 +19,6 @@ module.exports = {
         host: process.env.SERVER_DB_HOST,
         port: process.env.SERVER_DB_PORT,
         name: process.env.SERVER_DB_NAME
-    },
-    clientConfig: {
-        student_url: process.env.CLIENT_STUDENT_URL,
-        management_url: process.env.CLIENT_MANAGEMENT_URL
     },
     slackConfig: {
         token: process.env.SLACK_BOT_USER_OAUTH_TOKEN,
