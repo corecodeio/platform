@@ -1,8 +1,10 @@
 const clientStytch = require('./../../utils/stytch');
 const { User } = require('./../../utils/db');
+const { idSlackFinder, updateRecord } = require('./../../utils/slack/controllers/userEmalHandler.js')
 //Sign Up
-module.exports.signUp = (req, res, next) => {
+module.exports.signUp = async (req, res, next) => {
     const { email, password } = req.body;
+    let slackId = await idSlackFinder(email);
     clientStytch.passwords
         .create({
             email,
@@ -12,14 +14,20 @@ module.exports.signUp = (req, res, next) => {
         .then(async (resp) => {
             await User.create({
                 id: resp.session.user_id,
-                email: email
+                email, 
+                slackId
             });
+            if (slackId !== null) {                
+                updateRecord(email, slackId)
+ 
+             } else {slackId='' }
             return res.status(200).json({
                 successful: true,
                 user: {
                     first_name: '',
                     last_name: '',
                     email: email,
+                    slack_id: slackId,
                     confirmed_email: false,
                     phone: '',
                     confirmed_phone: false,
