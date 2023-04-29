@@ -4,18 +4,21 @@ const {
     createCourse,
     listCourse,
     editCourse,
-    createSlack
+    createSlack,
+    createCalendar
 } = require('./../../controllers/management/course.controllers');
 const authManagement = require('./../../middlewares/auth.management');
 const checkPermissionAuth = require('./../../middlewares/auth.permissions.js');
 
 //List Course
-router.get('/', authManagement, checkPermissionAuth('read:course'), listCourse);
+router.get('/', authManagement, checkPermissionAuth(['read:course']), listCourse);
 //Create Course
-router.post('/', authManagement, checkPermissionAuth('write:course'), createCourse);
+router.post('/', authManagement, checkPermissionAuth(['write:course']), createCourse);
 //Create Slack
-router.post('/slack', authManagement, checkPermissionAuth('edit:course'), createSlack);
+router.post('/slack', authManagement, checkPermissionAuth(['write:course']), createSlack);
+//Create Slack
+router.post('/calendar', authManagement, checkPermissionAuth(['write:course']), createCalendar);
 //Edit Course
-router.put('/', authManagement, checkPermissionAuth('edit:course'), editCourse);
+router.put('/', authManagement, checkPermissionAuth(['delete:course']), editCourse);
 
 module.exports = router;

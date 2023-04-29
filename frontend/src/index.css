@@ -1,0 +1,51 @@
+html {
+    height: 100%;
+}
+body {
+    margin: 0;
+    height: 100%;
+    font-family: 'SourceSansPro-Regular', serif;
+}
+#root {
+    height: 100%;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+@font-face {
+    font-family: 'SourceSansPro-Regular';
+    src: url('./../public/fonts/SourceSansPro-Regular.ttf');
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'SourceSansPro-SemiBold';
+    src: url('./../public/fonts/SourceSansPro-SemiBold.ttf');
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'SourceSansPro-Bold';
+    src: url('./../public/fonts/SourceSansPro-Bold.ttf');
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Rubik-Bold';
+    src: url('./../public/fonts/Rubik-Bold.ttf');
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Rubik-SemiBold';
+    src: url('./../public/fonts/Rubik-SemiBold.ttf');
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Rubik-Regular';
+    src: url('./../public/fonts/Rubik-Regular.ttf');
+    font-style: normal;
+    font-display: swap;
+}

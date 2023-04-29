@@ -31,7 +31,7 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Role, Permission, Course } = sequelize.models;
+const { User, Role, Permission, Course, Postulation, Message } = sequelize.models;
 
 User.belongsToMany(Course, { as: 'courses', through: 'UserCourse' });
 Course.belongsToMany(User, { as: 'courses', through: 'UserCourse' });
@@ -46,6 +46,15 @@ Role.belongsToMany(Permission, {
 Permission.belongsToMany(Role, {
     as: 'permissions',
     through: 'RolePermission'
+});
+
+Postulation.belongsToMany(Message, {
+    as: 'messages',
+    through: 'PostulationMessage'
+});
+Message.belongsToMany(Postulation, {
+    as: 'messages',
+    through: 'PostulationMessage'
 });
 
 module.exports = {

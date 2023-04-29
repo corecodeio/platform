@@ -1,0 +1,78 @@
+.main {
+    background-color: #f5f9fb;
+    width: 100%;
+}
+.main-title {
+    font-family: 'Rubik-Bold', serif;
+    font-size: 32px;
+    padding-top: 50px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+}
+
+.form {
+    width: calc(100% - 80px);
+    margin-left: 30px;
+    background-color: #ffffff;
+    border: 1px solid #cadbe3;
+    border-radius: 4px;
+    display: flex;
+    column-gap: 20px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 10px;
+}
+.form-input {
+    width: calc(50% - 10px);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.form-input label {
+    font-family: 'SourceSansPro-Regular', serif;
+    margin-bottom: 3px;
+}
+.form-input input {
+    height: 28px;
+    padding-left: 5px;
+}
+.form-input input {
+    height: 28px;
+    padding-left: 5px;
+}
+.form-input2 label {
+    font-family: 'SourceSansPro-Regular', serif;
+    margin-bottom: 3px;
+}
+.form-input2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.form-input2 select {
+    height: 32px;
+    padding-left: 2px;
+}
+.form-button {
+    background-color: #6254ff;
+    color: #ffffff;
+    border: 0;
+    font-family: 'SourceSansPro-Bold', serif;
+    font-size: 18px;
+    border-radius: 4px;
+    padding: 12px 24px;
+    width: 100%;
+}
+.form-button:disabled {
+    background-color: #ebf3f7;
+    color: #7291A0;
+}
+.form-button:enabled {
+    cursor: pointer;
+}
+.card {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}

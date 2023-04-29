@@ -1,6 +1,5 @@
-const { Course, CourseType, Staff } = require('./../../utils/db.js');
+const { Course, User } = require('./../../utils/db.js');
 const { validateID, validateNumber } = require('./../../helpers/validators');
-const { v4: uuidv4 } = require('uuid');
 const createSlackChannel = require('./../../utils/slack/controllers/create_slack_channel');
 const addUserChannel = require('./../../utils/slack/controllers/add_user_channel');
 const createCalendar = require('./../../utils/calendar/controllers/create_calendar');
@@ -10,34 +9,35 @@ const Op = Sequelize.Op;
 //Create Course
 module.exports.createCourse = async (req, res, next) => {
     try {
-        const { name_bootcamp, type, zoom_url, zoom_code } = req.body;
-        if (!name_bootcamp || !type) {
-            return res.status(200).json({ successful: false, message: 'missing to enter data' });
-        }
+        const {
+            name,
+            title,
+            title_second,
+            title_extra,
+            type,
+            duration,
+            level,
+            technologies,
+            price,
+            minimum
+        } = req.body;
         const nameAvailable = await Course.findOne({
-            where: { name: name_bootcamp }
+            where: { name: name }
         });
         if (nameAvailable) {
             return res.status(200).json({ successful: false, message: 'name is busy' });
         }
-        if (!validateID(type)) {
-            return res
-                .status(200)
-                .json({ successful: false, message: 'the course type id is not valid' });
-        }
-        const courseTypeAvailable = await CourseType.findOne({
-            where: { id: type }
-        });
-        if (!courseTypeAvailable) {
-            return res
-                .status(200)
-                .json({ successful: false, message: 'course type id does not exist' });
-        }
         const newCourse = await Course.create({
-            id: uuidv4(),
-            name: name_bootcamp,
-            zoom_url,
-            zoom_code
+            name,
+            title,
+            title_second,
+            title_extra,
+            type,
+            duration,
+            level,
+            technologies,
+            price,
+            minimum
         });
         res.status(200).json({
             successful: true,
@@ -48,20 +48,21 @@ module.exports.createCourse = async (req, res, next) => {
         res.status(400).json({ successful: false, message: error });
     }
 };
+
 //Create Slack
 module.exports.createSlack = async (req, res, next) => {
     try {
-        const { id, slack_name } = req.body;
-        if (!id || !slack_name) {
+        const { courseID, slack_name } = req.body;
+        if (!courseID || !slack_name) {
             return res.status(200).json({ successful: false, message: 'missing to enter data' });
         }
-        if (!validateID(id)) {
+        if (!validateID(courseID)) {
             return res
                 .status(200)
                 .json({ successful: false, message: 'the course id is not valid' });
         }
         const courseResult = await Course.findOne({
-            where: { id: id }
+            where: { id: courseID }
         });
         if (!courseResult) {
             return res
@@ -77,7 +78,7 @@ module.exports.createSlack = async (req, res, next) => {
         if (responseCreateSlack.successful) {
             await courseResult.update({ slack_id: responseCreateSlack.id, slack_name: slack_name });
             try {
-                const guestList = await Staff.findAll({
+                const guestList = await User.findAll({
                     where: {
                         invite_slack: true,
                         slack_id: {
@@ -108,6 +109,41 @@ module.exports.createSlack = async (req, res, next) => {
     } catch (error) {
         res.status(400).json({ successful: false, message: error });
     }
+};
+//Create Slack
+module.exports.createCalendar = async (req, res, next) => {
+    try {
+        const { courseID, google_calendar_name } = req.body;
+        if (!courseID || !google_calendar_name) {
+            return res.status(200).json({ successful: false, message: 'missing to enter data' });
+        }
+        if (!validateID(courseID)) {
+            return res
+                .status(200)
+                .json({ successful: false, message: 'the course id is not valid' });
+        }
+        const courseResult = await Course.findOne({
+            where: { id: courseID }
+        });
+        if (!courseResult) {
+            return res
+                .status(200)
+                .json({ successful: false, message: 'the course does not exist' });
+        }
+        if (courseResult.google_calendar_id) {
+            return res
+                .status(200)
+                .json({
+                    successful: false,
+                    message: 'the course already has an existing schedule'
+                });
+        }
+        const responseCreateCalendar = await createCalendar({
+            calendar_name: google_calendar_name,
+            calendar_description:'s'
+        });
+        console.log(responseCreateCalendar)
+    } catch (error) {}
 };
 //List Course
 module.exports.listCourse = async (req, res, next) => {

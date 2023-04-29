@@ -1,0 +1,71 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.title {
+    font-family: 'Rubik-Bold', serif;
+    font-size: 32px;
+    padding-top: 36px;
+    margin-bottom: 34px;
+}
+.data {
+    border: 1px solid #cadbe3;
+    border-radius: 4px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+.message {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+.message-author {
+    color: #335065;
+    font-family: 'Rubik-SemiBold', serif;
+    font-size: 16px;
+}
+.message-date {
+    color: #335065;
+    font-family: 'Rubik-SemiBold', serif;
+    font-size: 14px;
+    text-align: end;
+}
+.items {
+    display: flex;
+}
+.items p {
+    background-color: #cadbe3;
+    margin-right: 4px;
+    border-radius: 100px;
+    padding: 6px 12px;
+    color: #335065;
+    font-family: 'SourceSansPro-Regular', serif;
+    font-size: 14px;
+}
+.status-Pending {
+    width: max-content;
+    color: #ffffff;
+    background-color: #db8507;
+    font-family: 'SourceSansPro-Regular', serif;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 100px;
+}
+.status-Done {
+    width: max-content;
+    color: #ffffff;
+    background-color: #61af11;
+    font-family: 'SourceSansPro-Regular', serif;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 100px;
+}
+.form {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+}
