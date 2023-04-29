@@ -10,13 +10,8 @@ import MenuNavbar from './MenuNavbar';
 import { logOut } from './../../redux/actions/auth';
 //icons
 import { BiMenu } from 'react-icons/bi';
-const options = [
-    { to: 'my-courses', text: 'Mis Cursos' },
-    { to: 'available-courses', text: 'Cursos Disponibles' },
-    { to: 'postulations', text: 'Postulaciones' },
-    { to: 'community', text: 'Comunidad' }
-];
-const Navbar = () => {
+
+const Navbar = ({ options = [], path = '' }) => {
     const { user } = useSelector((state) => state.auth);
     const [menu, setMenu] = useState(false);
     const dispatch = useDispatch();
@@ -24,10 +19,9 @@ const Navbar = () => {
     const handleLogOut = () => {
         dispatch(logOut());
     };
-
     return (
         <>
-            {menu && <MenuNavbar setMenu={setMenu} options={options} />}
+            {menu && <MenuNavbar setMenu={setMenu} options={options} path={path} />}
             <div className={Styles[`main`]}>
                 <div className={Styles[`navbar`]}>
                     <div className={Styles[`menu-left`]}>
@@ -38,13 +32,18 @@ const Navbar = () => {
                             onClick={() => navigate('/dashboard')}
                         />
                         <div className={Styles[`menu-left-option`]}>
-                            {options.map((link, index) => (
-                                <LinkNavbar
-                                    to={link.to}
-                                    text={link.text}
-                                    key={`options-desk-${index}`}
-                                />
-                            ))}
+                            {options.map((link, index) => {
+                                return link.permissions.every((permission) =>
+                                    user.permissions.includes(permission)
+                                ) ? (
+                                    <LinkNavbar
+                                        path={path}
+                                        to={link.to}
+                                        text={link.text}
+                                        key={`options-desk-${index}`}
+                                    />
+                                ) : null;
+                            })}
                         </div>
                     </div>
                     <div className={Styles[`menu-right`]}>

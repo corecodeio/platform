@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 //styles
 import Styles from './MenuNavbar.module.css';
@@ -12,7 +12,8 @@ import { AiOutlineSetting } from 'react-icons/ai';
 //components
 import LinkNavbar from '../LinkNavbar';
 
-const MenuNavbar = ({ setMenu, options = [] }) => {
+const MenuNavbar = ({ setMenu, options = [], path = '' }) => {
+    const { user } = useSelector((state) => state.auth);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleLogOut = () => {
@@ -32,14 +33,19 @@ const MenuNavbar = ({ setMenu, options = [] }) => {
                 <RxCross2 onClick={handleClose} className={Styles[`close`]} />
             </div>
             <div className={Styles[`options`]}>
-                {options.map((link, index) => (
-                    <LinkNavbar
-                        to={link.to}
-                        text={link.text}
-                        key={`options-mobile-${index}`}
-                        close={handleClose}
-                    />
-                ))}
+                {options.map((link, index) => {
+                    return link.permissions.every((permission) =>
+                        user.permissions.includes(permission)
+                    ) ? (
+                        <LinkNavbar
+                            path={path}
+                            to={link.to}
+                            text={link.text}
+                            key={`options-mobile-${index}`}
+                            close={handleClose}
+                        />
+                    ) : null;
+                })}
             </div>
             <div className={Styles[`footer`]}>
                 <div className={Styles[`footer-option`]} onClick={handleSetting}>

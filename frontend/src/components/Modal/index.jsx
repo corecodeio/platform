@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//styles
 import Styles from './Modal.module.css';
 
-const Modal = ({ children, isShow = false }) => {
-    return isShow
+const Modal = ({ isShown = false, element }) => {
+    return isShown
         ? ReactDOM.createPortal(
-              <div className={Styles['modal']}>
-                  {children}
+              <div className={Styles[`main`]}>
+                  <div className={Styles[`container`]}>{element}</div>
               </div>,
               document.getElementById('modal')
           )

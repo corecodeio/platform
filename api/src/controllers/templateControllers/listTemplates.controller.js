@@ -1,6 +1,6 @@
 const { Template } = require('./../../utils/db.js');
 //List Templates
-module.exports.listTemplates = async (req, res, next) => {
+module.exports = async (req, res, next) => {
     try {
         const responseList = await Template.findAll();
         res.status(200).json({

@@ -9,17 +9,8 @@ const preload = async () => {
             //-------------- User --------------
             const userCreated = await User.create({
                 id: process.env.SERVER_DEVELOPMENT_USER_ID,
-                first_name: process.env.SERVER_DEVELOPMENT_USER_FIRST_NAME
-                    ? process.env.SERVER_DEVELOPMENT_USER_FIRST_NAME
-                    : '',
-                last_name: process.env.SERVER_DEVELOPMENT_USER_LAST_NAME
-                    ? process.env.SERVER_DEVELOPMENT_USER_LAST_NAME
-                    : '',
                 email: process.env.SERVER_DEVELOPMENT_USER_EMAIL,
                 confirmed_email: false,
-                phone: process.env.SERVER_DEVELOPMENT_USER_PHONE
-                    ? process.env.SERVER_DEVELOPMENT_USER_PHONE
-                    : '',
                 slack_id: process.env.SERVER_DEVELOPMENT_USER_SLACK_ID
                     ? process.env.SERVER_DEVELOPMENT_USER_SLACK_ID
                     : '',

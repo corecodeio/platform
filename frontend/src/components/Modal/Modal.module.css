@@ -1,13 +1,19 @@
-.modal {
-    background-color: rgb(255, 255, 255, 0.2);
-    backdrop-filter: blur(1px);
+.main {
+    background-color: #00000033;
     position: fixed;
-    z-index: 200;
-    bottom: 0;
+    z-index: 500;
+    width: 100%;
+    height: 100%;
     top: 0;
-    left: 0;
-    right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.container {
+    position: relative;
+}
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }

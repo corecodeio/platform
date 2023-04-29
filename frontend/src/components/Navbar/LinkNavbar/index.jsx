@@ -3,11 +3,11 @@ import { useNavigate, useLocation } from 'react-router-dom';
 //styles
 import Styles from './LinkNavbar.module.css';
 
-const LinkNavbar = ({ to, text, close }) => {
+const LinkNavbar = ({ to, text, close, path = '' }) => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
     const handlerClicks = () => {
-        navigate(`/dashboard/${to}`);
+        navigate(`/${path}/${to}`);
         if (close) {
             close();
         }
