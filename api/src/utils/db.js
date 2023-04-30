@@ -16,10 +16,10 @@ const basename = path.basename(__filename);
 const modelDefiners = [];
 
 // We read all the files from the Models folder, require them and add them to the modelDefiners array
-fs.readdirSync(path.join(__dirname, '../models'))
+fs.readdirSync(path.join(__dirname, '..', 'models'))
     .filter((file) => file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js')
     .forEach((file) => {
-        modelDefiners.push(require(path.join(__dirname, '../models', file)));
+        modelDefiners.push(require(path.join(__dirname, '..', 'models', file)));
     });
 
 // Inject the connection (sequelize) to all models

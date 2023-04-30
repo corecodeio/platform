@@ -10,7 +10,8 @@
     "main": "index.js",
     "scripts": {
         "build": "yarn workspace frontend build",
-        "start": "yarn workspace api start"
+        "start": "yarn workspace api start",
+        "dev:api": "yarn workspace api dev"
     },
     "repository": {
         "type": "git",
