@@ -9,12 +9,8 @@
     ],
     "main": "index.js",
     "scripts": {
-        "start": "npm run start --workspace=api",
-        "dev:api": "npm run dev --workspace=api",
-        "test:api": "npm run test --workspace=api",
-        "start:frontend": "npm run start --workspace=frontend",
-        "build:frontend": "npm run build --workspace=frontend",
-        "test:frontend": "npm run test --workspace=frontend"
+        "build": "yarn workspace frontend build",
+        "start": "yarn workspace api start"
     },
     "repository": {
         "type": "git",

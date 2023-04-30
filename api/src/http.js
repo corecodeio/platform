@@ -23,7 +23,9 @@ server.use(
 
 /********** ROUTES ****************************/
 server.use('/api', routes);
-
+server.get('/hello', (req, res) => {
+    res.send('Hello World!')
+  })
 ////////////////////////////////////////////////
 
 /*********** ERROR HANDLER ********************/
