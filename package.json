@@ -9,7 +9,7 @@
     ],
     "main": "index.js",
     "scripts": {
-        "start:api": "npm run start --workspace=api",
+        "start": "npm run start --workspace=api",
         "dev:api": "npm run dev --workspace=api",
         "test:api": "npm run test --workspace=api",
         "start:frontend": "npm run start --workspace=frontend",
