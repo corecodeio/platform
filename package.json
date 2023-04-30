@@ -5,8 +5,6 @@
     "description": "",
     "workspaces": [
         "api",
-        "management-app",
-        "student-app",
         "frontend"
     ],
     "main": "index.js",
