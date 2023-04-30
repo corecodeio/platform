@@ -3,7 +3,7 @@ const { db } = require('./utils/db.js');
 //const slackApp = require('./utils/slack/appSlack');
 const { serverConfig } = require('./config/index.js');
 
-db.sync({ force: false })
+db.sync({ force: true })
     .then(async () => {
         //await slackApp.start();
         /*if (serverConfig.mode) {
