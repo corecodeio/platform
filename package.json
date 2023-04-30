@@ -8,7 +8,7 @@
     ],
     "main": "index.js",
     "scripts": {
-        "build": "yarn workspace client build",
+        "build": "yarn workspace frontend build",
         "start": "yarn workspace api start"
     },
     "repository": {
