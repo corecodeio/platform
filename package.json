@@ -4,7 +4,8 @@
     "version": "1.0.0",
     "description": "",
     "workspaces": [
-        "api"
+        "api",
+        "frontend"
     ],
     "main": "index.js",
     "scripts": {
