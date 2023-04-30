@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const server = express();
 const path = require('path');
-const morgan = require('morgan');
+//const morgan = require('morgan');
 const http = require('http').createServer(server);
 //const routes = require('./routes');
 const { serverConfig } = require('./config/index.js');
@@ -12,7 +12,7 @@ server.use(express.urlencoded({ extended: true, limit: '8MB' }));
 server.use(express.json());
 server.use(express.json({ limit: '8MB' }));
 
-server.use(morgan('dev'));
+//server.use(morgan('dev'));
 
 /////////////// ENDS SERVER CONFIG /////////////////////
 

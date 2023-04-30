@@ -5,7 +5,7 @@ module.exports = {
     serverConfig: {
         port: process.env.PORT || '3001',
         mode: process.env.SERVER_MODE === 'dev' ? true : false,
-        client_url: process.env.CLIENT_URL
+        client_url: process.env.CLIENT_URL || 'http://localhost:3500'
     },
     stytchConfig: {
         project_id: process.env.STYTCH_PROJECT_ID,
