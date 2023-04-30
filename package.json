@@ -4,12 +4,10 @@
     "version": "1.0.0",
     "description": "",
     "workspaces": [
-        "api",
-        "frontend"
+        "api"
     ],
     "main": "index.js",
     "scripts": {
-        "build": "yarn workspace frontend build",
         "start": "yarn workspace api start"
     },
     "repository": {
