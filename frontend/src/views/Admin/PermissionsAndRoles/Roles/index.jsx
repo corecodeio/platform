@@ -13,7 +13,7 @@ const Roles = () => {
     const [roles, setRoles] = useState([]);
     const getRoles = async () => {
         try {
-            const response = await axios.get('/api/management/role');
+            const response = await axios.get('/api/role');
             if (response.data.successful) {
                 setRoles(response.data.list);
             } else {
@@ -54,7 +54,7 @@ const Roles = () => {
                     {roles.map((role) => {
                         const deleteRole = async () => {
                             try {
-                                const response = await axios.delete('/api/management/role', {
+                                const response = await axios.delete('/api/role', {
                                     data: {
                                         role_id: role.id
                                     }
@@ -78,7 +78,7 @@ const Roles = () => {
                                         const deleteAssociation = async () => {
                                             try {
                                                 const response = await axios.delete(
-                                                    '/api/management/role/association',
+                                                    '/api/role/association',
                                                     {
                                                         data: {
                                                             role_id: role.id,

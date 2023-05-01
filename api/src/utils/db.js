@@ -1,21 +1,23 @@
 const { Sequelize } = require('sequelize');
-const { postgresConfig } = require('./../config/index.js');
-
-const sequelize = new Sequelize({
+const { postgresConfig, serverConfig } = require('./../config/index.js');
+const sequelizeConfig = {
     database: postgresConfig.name,
     username: postgresConfig.user,
     password: postgresConfig.password,
     host: postgresConfig.host,
     port: postgresConfig.port,
     dialect: 'postgres',
-    logging: false,
-    dialectOptions: {
+    logging: false
+};
+if (!serverConfig.mode) {
+    sequelizeConfig.dialectOptions = {
         ssl: {
             require: true,
             rejectUnauthorized: false
         }
-    }
-});
+    };
+}
+const sequelize = new Sequelize(sequelizeConfig);
 const modelDefiners = [
     require('./../models/User'),
     require('./../models/Role'),

@@ -93,26 +93,28 @@ const NewCourse = () => {
         <div className={Styles[`main`]}>
             <p className={Styles[`main-title`]}>New Course</p>
             <form onSubmit={handleSubmit} className={Styles[`form`]}>
-                <div className={Styles[`form-input2`]}>
-                    <label htmlFor="templates">Course template*</label>
-                    <select
-                        onChange={handleTemplate}
-                        id="templates"
-                        name="templates"
-                        value={data.templates}
-                    >
-                        <option value="" disabled hidden>
-                            course template...
-                        </option>
-                        {templates.map((item) => {
-                            return (
-                                <option key={item.id} value={item.name}>
-                                    {item.name}
-                                </option>
-                            );
-                        })}
-                    </select>
-                </div>
+                {templates.length !== 0 && (
+                    <div className={Styles[`form-input2`]}>
+                        <label htmlFor="templates">Course template*</label>
+                        <select
+                            onChange={handleTemplate}
+                            id="templates"
+                            name="templates"
+                            value={data.templates}
+                        >
+                            <option value="" disabled hidden>
+                                course template...
+                            </option>
+                            {templates.map((item) => {
+                                return (
+                                    <option key={item.id} value={item.name}>
+                                        {item.name}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                    </div>
+                )}
                 <div className={Styles[`form-input`]}>
                     <label htmlFor="name">Name*</label>
                     <input

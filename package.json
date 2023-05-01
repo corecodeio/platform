@@ -11,7 +11,8 @@
     "scripts": {
         "build": "yarn workspace frontend build",
         "start": "yarn workspace api start",
-        "dev:api": "yarn workspace api dev"
+        "dev:api": "yarn workspace api dev",
+        "start:frontend": "yarn workspace frontend start"
     },
     "repository": {
         "type": "git",
