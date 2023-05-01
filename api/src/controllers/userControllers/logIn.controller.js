@@ -32,25 +32,44 @@ module.exports = (req, res, next) => {
                     ]
                 });
                 if (!userResult) {
-                    return res.status(200).json({ successful: false, message: 'id not found' });
+                    await User.create({
+                        id: resp.session.user_id,
+                        email
+                    });
+                    return res.status(200).json({
+                        successful: true,
+                        user: {
+                            first_name: '',
+                            last_name: '',
+                            email: email,
+                            confirmed_email: false,
+                            phone: '',
+                            roles: [],
+                            permissions: []
+                        },
+                        token: resp.session_token,
+                        message: 'successful login'
+                    });
+                } else {
+                    if (userResult.locked) {
+                        return res.status(200).json({ successful: false, message: 'user blocked' });
+                    }
+                    const rolesAndPermissions = permissionReader(userResult.roles);
+                    res.status(200).json({
+                        successful: true,
+                        user: {
+                            first_name: userResult.first_name,
+                            last_name: userResult.last_name,
+                            email: userResult.email,
+                            confirmed_email: userResult.confirmed_email,
+                            phone: userResult.phone,
+                            roles: rolesAndPermissions[0],
+                            permissions: rolesAndPermissions[1]
+                        },
+                        token: resp.session_token,
+                        message: 'successful login'
+                    });
                 }
-                if (userResult.locked) {
-                    return res.status(200).json({ successful: false, message: 'user blocked' });
-                }
-                const rolesAndPermissions = permissionReader(userResult.roles);
-                res.status(200).json({
-                    successful: true,
-                    user: {
-                        first_name: userResult.first_name,
-                        last_name: userResult.last_name,
-                        email: userResult.email,
-                        phone: userResult.phone,
-                        roles: rolesAndPermissions[0],
-                        permissions: rolesAndPermissions[1]
-                    },
-                    token: resp.session_token,
-                    message: 'successful login'
-                });
             } catch (error) {
                 console.log(error);
                 res.status(200).json({ successful: false, message: 'error server' });

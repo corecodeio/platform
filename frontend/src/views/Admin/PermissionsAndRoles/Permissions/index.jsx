@@ -11,7 +11,7 @@ const Permissions = () => {
     const [permissions, setPermissions] = useState([]);
     const getPermissions = async () => {
         try {
-            const response = await axios.get('/api/management/permission');
+            const response = await axios.get('/api/permission');
             if (response.data.successful) {
                 setPermissions(response.data.list);
             } else {

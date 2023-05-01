@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const server = express();
+const path = require('path');
 const morgan = require('morgan');
 const http = require('http').createServer(server);
 const routes = require('./routes');
@@ -16,13 +17,16 @@ server.use(morgan('dev'));
 /////////////// ENDS SERVER CONFIG /////////////////////
 
 /*********** CORS CONFIG **********************/
-server.use(
-    cors({ origin: [serverConfig.client_url], credentials: true })
-);
+server.use(cors({ origin: [serverConfig.client_url], credentials: true }));
 //////////////// ENDS CORS CONFIG ///////////////////////
 
 /********** ROUTES ****************************/
+server.use(express.static('../frontend/build'));
 server.use('/api', routes);
+server.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', '..', 'frontend', 'build', 'index.html'));
+});
+//server.use(express.static(path.join(__dirname, '../../frontend/build')));
 
 ////////////////////////////////////////////////
 
