@@ -48,6 +48,10 @@ module.exports = (sequelize) => {
             slack_id: {
                 type: DataTypes.STRING
             },
+            invite_slack: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: false
+            },
             locked: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false

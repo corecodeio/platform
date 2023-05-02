@@ -19,6 +19,8 @@ import Events from './views/Dashboard/Events';
 import LogIn from './views/MainPage/LogIn';
 import SignUp from './views/MainPage/SignUp';
 import RecoverPassword from './views/MainPage/RecoverPassword';
+import NewCourse from './views/Dashboard/Courses/NewCourse';
+import ListCourses from './views/Dashboard/Courses/ListCourses';
 
 const App = () => {
     const { isLoading } = useSelector((state) => state.auth);
@@ -50,35 +52,57 @@ const App = () => {
                 <Route
                     path="statistics"
                     element={
-                        <ProtectedPermission permissions={['read:dashboard']}>
-                            <Statistics />
-                        </ProtectedPermission>
+                        <ProtectedPermission
+                            permissions={['read:dashboard']}
+                            element={<Statistics />}
+                        />
                     }
                 />
                 <Route
                     path="courses"
                     element={
-                        <ProtectedPermission permissions={['read:dashboard', 'read:course']}>
-                            <Courses />
-                        </ProtectedPermission>
+                        <ProtectedPermission
+                            permissions={['read:dashboard', 'read:course']}
+                            element={<Courses />}
+                        />
                     }
-                />
+                >
+                    <Route index element={<p>courses</p>} />
+                    <Route
+                        path="list"
+                        element={
+                            <ProtectedPermission
+                                permissions={['read:course']}
+                                element={<ListCourses />}
+                            />
+                        }
+                    />
+                    <Route
+                        path="new-course"
+                        element={
+                            <ProtectedPermission
+                                permissions={['write:course']}
+                                element={<NewCourse />}
+                            />
+                        }
+                    />
+                </Route>
                 <Route
                     path="permissions-and-roles"
                     element={
                         <ProtectedPermission
                             permissions={['read:dashboard', 'read:role', 'read:permission']}
-                        >
-                            <PermissionsAndRoles />
-                        </ProtectedPermission>
+                            element={<PermissionsAndRoles />}
+                        />
                     }
                 />
                 <Route
                     path="events"
                     element={
-                        <ProtectedPermission permissions={['read:dashboard', 'read:event']}>
-                            <Events />
-                        </ProtectedPermission>
+                        <ProtectedPermission
+                            permissions={['read:dashboard', 'read:event']}
+                            element={<Events />}
+                        />
                     }
                 />
             </Route>

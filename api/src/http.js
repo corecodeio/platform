@@ -1,33 +1,32 @@
 const express = require('express');
 const cors = require('cors');
 const server = express();
+const path = require('path');
+const morgan = require('morgan');
 const http = require('http').createServer(server);
-const studentRoutes = require('./routes/student/index.js');
-const managementsRoutes = require('./routes/management/index.js');
-const { serverConfig, clientConfig } = require('./config/index.js');
+const routes = require('./routes');
+const { serverConfig } = require('./config/index.js');
 
 /************* SERVER CONFIG ***********************/
 server.use(express.urlencoded({ extended: true, limit: '8MB' }));
 server.use(express.json());
 server.use(express.json({ limit: '8MB' }));
 
-if (serverConfig.mode) {
-    server.use(require('morgan')('dev'));
-}
+server.use(morgan('dev'));
 
 /////////////// ENDS SERVER CONFIG /////////////////////
 
 /*********** CORS CONFIG **********************/
-if (serverConfig.mode) {
-    server.use(
-        cors({ origin: [clientConfig.student_url, clientConfig.management_url], credentials: true })
-    );
-}
+server.use(cors({ origin: [serverConfig.client_url], credentials: true }));
 //////////////// ENDS CORS CONFIG ///////////////////////
 
 /********** ROUTES ****************************/
-server.use('/api/student', studentRoutes);
-server.use('/api/management', managementsRoutes);
+server.use(express.static('../frontend/build'));
+server.use('/api', routes);
+server.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', '..', 'frontend', 'build', 'index.html'));
+});
+//server.use(express.static(path.join(__dirname, '../../frontend/build')));
 
 ////////////////////////////////////////////////
 

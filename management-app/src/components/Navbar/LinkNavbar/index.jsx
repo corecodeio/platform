@@ -14,7 +14,7 @@ const LinkNavbar = ({ to, text, close }) => {
     };
     return (
         <button
-            className={Styles[`link-${`/dashboard/${to}` === pathname ? '1' : '0'}`]}
+            className={Styles[`link-${to === pathname.split('/')[2] ? '1' : '0'}`]}
             onClick={handlerClicks}
         >
             {text}

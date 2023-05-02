@@ -1,0 +1,28 @@
+.main {
+    width: 100%;
+    padding-top: 45px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px;
+    row-gap: 24px;
+    padding-bottom: 10px;
+}
+.course {
+    width: calc(100% / 3 - 16px);
+}
+@media only screen and (max-width: 1440px) and (min-width: 1281px) {
+}
+@media only screen and (max-width: 1280px) and (min-width: 801px) {
+    .course {
+        width: calc(100% / 2 - 12px);
+    }
+}
+@media only screen and (max-width: 800px) {
+    .main {
+        padding-top: 30px;
+        padding-bottom: 24px;
+    }
+    .course {
+        width: 100%;
+    }
+}

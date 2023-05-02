@@ -5,18 +5,14 @@
     "description": "",
     "workspaces": [
         "api",
-        "management-app",
-        "student-app"
+        "frontend"
     ],
     "main": "index.js",
     "scripts": {
-        "start:api": "npm run start --workspace=api",
-        "dev:api": "npm run dev --workspace=api",
-        "test:api": "npm run test --workspace=api",
-        "start:student": "npm run start --workspace=student-app",
-        "build:student": "npm run build --workspace=student-app",
-        "start:management": "npm run start --workspace=management-app",
-        "build:management": "npm run build --workspace=management-app"
+        "build": "yarn workspace frontend build",
+        "start": "yarn workspace api start",
+        "dev:api": "yarn workspace api dev",
+        "start:frontend": "yarn workspace frontend start"
     },
     "repository": {
         "type": "git",

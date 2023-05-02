@@ -18,6 +18,8 @@ import MyCourses from './views/Dashboard/MyCourses';
 import AvailableCourses from './views/Dashboard/AvailableCourses';
 import Setting from './views/Dashboard/Setting';
 import Apply from './views/Dashboard/AvailableCourses/Apply';
+import Postulations from './views/Dashboard/Postulations';
+import Postulation from './views/Dashboard/Postulation';
 
 const App = () => {
     const { isLoading } = useSelector((state) => state.auth);
@@ -50,7 +52,8 @@ const App = () => {
                 <Route path="available-courses" element={<AvailableCourses />}>
                     <Route path="apply/:id" element={<Apply />} />
                 </Route>
-                <Route path="applications" element={<p>Postulaciones</p>} />
+                <Route path="postulations" element={<Postulations />} />
+                <Route path="postulation/:id" element={<Postulation />} />
                 <Route path="community" element={<p>Comunidad</p>} />
                 <Route path="setting" element={<Setting />} />
             </Route>
