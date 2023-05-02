@@ -10,7 +10,7 @@ async function idSlackFinder(email) {
     const slackId=user.id;
   return user ? slackId : null;
 }catch (error) {
-    console.error('Error al buscar usuario de Slack por correo electrónico:', error);
+    console.error('Error al buscar usuario de Slack por correo electrónico:', error.data.error);
     
   }
 }
@@ -18,10 +18,9 @@ async function idSlackFinder(email) {
 async function updateRecord(email, slackId) {
   try {
     const userRecord = await User.findOne({ where: {email: email } });
-    console.log(userRecord.dataValues)
     if (userRecord) {
       userRecord.dataValues.slack_id = slackId;
-      console.log(userRecord.dataValues)
+      
       await userRecord.save();
     }
   } catch (error) {

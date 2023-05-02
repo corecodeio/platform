@@ -18,7 +18,8 @@ module.exports.signUp = async (req, res, next) => {
                 slackId
             });
             if (slackId !== null) {                
-                updateRecord(email, slackId)
+              const newRecord = updateRecord(email, slackId);
+              
  
              } else {slackId='' }
             return res.status(200).json({
