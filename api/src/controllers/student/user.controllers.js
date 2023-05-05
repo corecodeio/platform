@@ -4,7 +4,7 @@ const { idSlackFinder, updateRecord } = require('./../../utils/slack/controllers
 //Sign Up
 module.exports.signUp = async (req, res, next) => {
     const { email, password } = req.body;
-    let slackId = await idSlackFinder(email);
+   
     clientStytch.passwords
         .create({
             email,
@@ -12,13 +12,14 @@ module.exports.signUp = async (req, res, next) => {
             session_duration_minutes: 60
         })
         .then(async (resp) => {
+            let slackId = await idSlackFinder(email);
             await User.create({
                 id: resp.session.user_id,
                 email, 
                 slackId
             });
             if (slackId !== null) {                
-              const newRecord = updateRecord(email, slackId);
+              updateRecord(email, slackId);
               
  
              } else {slackId='' }
