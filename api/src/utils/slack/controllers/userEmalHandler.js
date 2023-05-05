@@ -1,11 +1,9 @@
-const { WebClient } = require('@slack/web-api');
 const { User } = require('./../../../utils/db.js'); 
-
-const slackClient = new WebClient(process.env. SLACK_BOT_USER_OAUTH_TOKEN);
+const appSlack = require('./../appSlack');
 
 async function idSlackFinder(email) {
   try {
-    const result = await slackClient.users.lookupByEmail({ email });
+    const result = await appSlack.client.users.lookupByEmail({ email });
     const user=result.user;
     const slackId=user.id;
   return user ? slackId : null;
@@ -19,8 +17,7 @@ async function updateRecord(email, slackId) {
   try {
     const userRecord = await User.findOne({ where: {email: email } });
     if (userRecord) {
-      userRecord.dataValues.slack_id = slackId;
-      
+      userRecord.slack_id = slackId;
       await userRecord.save();
     }
   } catch (error) {
