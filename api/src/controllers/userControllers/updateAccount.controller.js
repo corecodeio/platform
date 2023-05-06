@@ -17,8 +17,8 @@ module.exports = async (req, res, next) => {
                 const userResult = await User.findOne({
                     where: { id: req.user.id }
                 });
-                userResult.first_name = first_name ? first_name : '';
-                userResult.last_name = last_name ? last_name : '';
+                userResult.first_name = first_name ? first_name : null;
+                userResult.last_name = last_name ? last_name : null;
                 await userResult.save();
                 res.status(200).json({
                     successful: true,

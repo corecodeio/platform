@@ -26,6 +26,7 @@ import Statistics from './views/Admin/Statistics';
 import Courses from './views/Admin/Courses';
 import ListCourses from './views/Admin/Courses/ListCourses';
 import NewCourse from './views/Admin/Courses/NewCourse';
+import Templates from './views/Admin/Courses/Templates';
 import PermissionsAndRoles from './views/Admin/PermissionsAndRoles';
 import Events from './views/Admin/Events';
 
@@ -97,6 +98,15 @@ const App = () => {
                             <ProtectedPermission
                                 permissions={['write:course']}
                                 element={<NewCourse />}
+                            />
+                        }
+                    />
+                    <Route
+                        path="templates"
+                        element={
+                            <ProtectedPermission
+                                permissions={['read:course']}
+                                element={<Templates />}
                             />
                         }
                     />

@@ -1,3 +1,4 @@
 const listTemplates = require('./listTemplates.controller');
+const createTemplate = require('./createTemplate.controller');
 
-module.exports = { listTemplates };
+module.exports = { createTemplate, listTemplates };

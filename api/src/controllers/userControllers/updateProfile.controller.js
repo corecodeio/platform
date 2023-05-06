@@ -6,18 +6,10 @@ module.exports = async (req, res, next) => {
         const userResult = await User.findOne({
             where: { id: req.user.id }
         });
-        if (userResult.country !== country) {
-            userResult.country = country ? country : '';
-        }
-        if (userResult.city !== city) {
-            userResult.city = city ? city : '';
-        }
-        if (userResult.address !== address) {
-            userResult.address = address ? address : '';
-        }
-        if (userResult.linkedin_url !== linkedin_url) {
-            userResult.linkedin_url = linkedin_url ? linkedin_url : '';
-        }
+        userResult.country = country ? country : null;
+        userResult.city = city ? city : null;
+        userResult.address = address ? address : null;
+        userResult.linkedin_url = linkedin_url ? linkedin_url : null;
         await userResult.save();
         res.status(200).json({
             successful: true,

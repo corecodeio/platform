@@ -11,7 +11,7 @@ import { IoCloseCircleOutline } from 'react-icons/io5';
 
 const Dashboard = () => {
     const { user } = useSelector((state) => state.auth);
-    const [alert, setAlert] = useState(!user.first_name || !user.last_name);
+    const [alert, setAlert] = useState(true);
     const options = [
         { to: 'my-courses', text: 'Mis Cursos', permissions: [] },
         { to: 'available-courses', text: 'Cursos Disponibles', permissions: [] },
@@ -21,7 +21,7 @@ const Dashboard = () => {
     return (
         <>
             <Navbar options={options} path="dashboard" />
-            {alert && (
+            {(!user.first_name || !user.last_name) && alert && (
                 <p className={Styles[`validate-information`]}>
                     <IoCloseCircleOutline
                         className={Styles[`validate-icon`]}
@@ -31,7 +31,11 @@ const Dashboard = () => {
                     configuración y validar tu correo electrónico.
                 </p>
             )}
-            <div className={Styles[`main-${alert ? '0' : '1'}`]}>
+            <div
+                className={
+                    Styles[`main-${(!user.first_name || !user.last_name) && alert ? '0' : '1'}`]
+                }
+            >
                 <div className={Styles[`container`]}>
                     <Outlet />
                 </div>

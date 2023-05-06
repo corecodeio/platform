@@ -40,36 +40,28 @@ module.exports = (sequelize) => {
                 defaultValue: 'Pending'
             },
             title: {
-                type: DataTypes.STRING,
-                defaultValue: ''
+                type: DataTypes.STRING
             },
             title_second: {
-                type: DataTypes.STRING,
-                defaultValue: ''
+                type: DataTypes.STRING
             },
             title_extra: {
-                type: DataTypes.STRING,
-                defaultValue: ''
+                type: DataTypes.STRING
             },
             type: {
-                type: DataTypes.STRING,
-                defaultValue: ''
+                type: DataTypes.STRING
             },
             duration: {
-                type: DataTypes.STRING,
-                defaultValue: ''
+                type: DataTypes.STRING
             },
             level: {
-                type: DataTypes.INTEGER,
-                defaultValue: 1
+                type: DataTypes.INTEGER
             },
             technologies: {
-                type: DataTypes.STRING,
-                defaultValue: ''
+                type: DataTypes.STRING
             },
             price: {
-                type: DataTypes.STRING,
-                defaultValue: ''
+                type: DataTypes.STRING
             },
             minimum: {
                 type: DataTypes.INTEGER,

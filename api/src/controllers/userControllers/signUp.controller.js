@@ -17,10 +17,16 @@ module.exports = (req, res, next) => {
             return res.status(200).json({
                 successful: true,
                 user: {
-                    first_name: '',
-                    last_name: '',
+                    first_name: null,
+                    last_name: null,
                     email: email,
-                    phone: '',
+                    confirmed_email: false,
+                    country: null,
+                    city: null,
+                    address: null,
+                    linkedin_url: null,
+                    slack_id: null,
+                    phone: null,
                     roles: [],
                     permissions: []
                 },

@@ -4,6 +4,7 @@ import Sidebar from './../../../components/Sidebar';
 import { ImStatsDots } from 'react-icons/im';
 import { BsReverseListColumnsReverse } from 'react-icons/bs';
 import { IoCreateOutline } from 'react-icons/io5';
+import { HiOutlineTemplate } from 'react-icons/hi';
 
 const options = [
     {
@@ -16,6 +17,12 @@ const options = [
         title: 'List',
         icon: BsReverseListColumnsReverse,
         path: '/list',
+        permissions: ['read:dashboard', 'read:course']
+    },
+    {
+        title: 'Templates',
+        icon: HiOutlineTemplate,
+        path: '/templates',
         permissions: ['read:dashboard', 'read:course']
     },
     {
