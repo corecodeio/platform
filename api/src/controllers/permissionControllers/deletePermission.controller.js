@@ -1,29 +1,16 @@
-const { Role, Permission } = require('./../../utils/db');
+const { Permission } = require('./../../utils/db');
 const { validateID } = require('./../../helpers/validators');
-//Remove Role Association
+//Delete Permission
 module.exports = async (req, res, next) => {
     try {
-        const { role_id, permission_id } = req.body;
-        if (!role_id || !permission_id) {
+        const { permission_id } = req.body;
+        if (!permission_id) {
             return res.status(200).json({ successful: false, message: 'missing data' });
-        }
-        if (!validateID(role_id)) {
-            return res.status(200).json({
-                successful: false,
-                message: 'invalid role id'
-            });
         }
         if (!validateID(permission_id)) {
             return res.status(200).json({
                 successful: false,
-                message: 'invalid permission id'
-            });
-        }
-        const RoleResult = await Role.findByPk(role_id);
-        if (RoleResult === null) {
-            return res.status(200).json({
-                successful: false,
-                message: 'role does not exist'
+                message: 'invalid id'
             });
         }
         const permissionResult = await Permission.findByPk(permission_id);
@@ -33,13 +20,12 @@ module.exports = async (req, res, next) => {
                 message: 'permission does not exist'
             });
         }
-        await RoleResult.removePermission(permission_id);
+        await permissionResult.destroy();
         res.status(200).json({
             successful: true,
-            message: 'association removed successfully'
+            message: 'permission deleted successfully'
         });
     } catch (error) {
-        console.log(error);
         res.status(400).json({ successful: false, message: error });
     }
 };

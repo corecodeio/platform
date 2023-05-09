@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {
+    createRole,
     listRoles,
     deleteRole,
     removeRoleAssociation
@@ -8,6 +9,8 @@ const {
 const auth = require('./../middlewares/auth');
 const checkPermissions = require('./../middlewares/checkPermissions');
 
+//Create Role
+router.post('/', auth, checkPermissions(['write:role']), createRole);
 //List Roles
 router.get('/', auth, checkPermissions(['read:role']), listRoles);
 //Delete Role

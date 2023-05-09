@@ -1,5 +1,5 @@
 const config = {
-    baseURL: process.env.BACKEND_URL || 'http://localhost:3001',
+    baseURL: process.env.REACT_APP_BACKEND_URL || 'http://localhostss:3001',
     tokenName: 'DemoCoreCode'
 };
 

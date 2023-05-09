@@ -26,10 +26,6 @@ router.post('/validate-email', validateEmail);
 router.post('/magic-links', magicLinks);
 //Update Account
 router.post('/update-account', auth, updateAccount);
-//Add Phone
-//router.post('/add-phone', authStudent, addPhone);
-//Confirmed Email
-//router.post('/confirmed-email', authStudent, confirmedEmail);
 //Update Profile
 router.post('/update-profile', auth, updateProfile);
 

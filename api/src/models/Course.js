@@ -29,6 +29,9 @@ module.exports = (sequelize) => {
             google_calendar_name: {
                 type: DataTypes.STRING
             },
+            calendar_description: {
+                type: DataTypes.STRING
+            },
             zoom_url: {
                 type: DataTypes.STRING
             },
@@ -40,42 +43,37 @@ module.exports = (sequelize) => {
                 defaultValue: 'Pending'
             },
             title: {
-                type: DataTypes.STRING,
-                defaultValue: ''
+                type: DataTypes.STRING
             },
             title_second: {
-                type: DataTypes.STRING,
-                defaultValue: ''
+                type: DataTypes.STRING
             },
             title_extra: {
-                type: DataTypes.STRING,
-                defaultValue: ''
+                type: DataTypes.STRING
             },
             type: {
-                type: DataTypes.STRING,
-                defaultValue: ''
+                type: DataTypes.STRING
             },
             duration: {
-                type: DataTypes.STRING,
-                defaultValue: ''
+                type: DataTypes.STRING
             },
             level: {
-                type: DataTypes.INTEGER,
-                defaultValue: 1
+                type: DataTypes.INTEGER
             },
             technologies: {
-                type: DataTypes.STRING,
-                defaultValue: ''
+                type: DataTypes.STRING
             },
             price: {
-                type: DataTypes.STRING,
-                defaultValue: ''
+                type: DataTypes.STRING
             },
             minimum: {
                 type: DataTypes.INTEGER,
                 defaultValue: 45
             },
             start: {
+                type: DataTypes.DATE
+            },
+            end: {
                 type: DataTypes.DATE
             },
             extra_alert: {
