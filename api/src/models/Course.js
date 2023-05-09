@@ -29,6 +29,9 @@ module.exports = (sequelize) => {
             google_calendar_name: {
                 type: DataTypes.STRING
             },
+            calendar_description: {
+                type: DataTypes.STRING
+            },
             zoom_url: {
                 type: DataTypes.STRING
             },
@@ -68,6 +71,9 @@ module.exports = (sequelize) => {
                 defaultValue: 45
             },
             start: {
+                type: DataTypes.DATE
+            },
+            end: {
                 type: DataTypes.DATE
             },
             extra_alert: {

@@ -4,8 +4,8 @@ const createCalendar = require('./../../utils/calendar/controllers/create_calend
 //Create Calendar
 module.exports = async (req, res, next) => {
     try {
-        const { courseID, google_calendar_name } = req.body;
-        if (!courseID || !google_calendar_name) {
+        const { courseID, google_calendar_name, calendar_description } = req.body;
+        if (!courseID || !google_calendar_name || !calendar_description) {
             return res.status(200).json({ successful: false, message: 'missing to enter data' });
         }
         if (!validateID(courseID)) {
@@ -29,8 +29,24 @@ module.exports = async (req, res, next) => {
         }
         const responseCreateCalendar = await createCalendar({
             calendar_name: google_calendar_name,
-            calendar_description: 's'
+            calendar_description: calendar_description
         });
-        console.log(responseCreateCalendar);
-    } catch (error) {}
+        if (responseCreateCalendar.successful) {
+            courseResult.google_calendar_id = responseCreateCalendar.id;
+            courseResult.google_calendar_name = google_calendar_name;
+            courseResult.calendar_description = calendar_description;
+            await courseResult.save();
+            res.status(200).json({
+                successful: true,
+                message: 'calendar created successfully'
+            });
+        } else {
+            res.status(200).json({
+                successful: false,
+                message: responseCreateCalendar.error
+            });
+        }
+    } catch (error) {
+        res.status(400).json({ successful: false, message: error });
+    }
 };
