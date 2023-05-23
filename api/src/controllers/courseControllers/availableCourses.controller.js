@@ -12,7 +12,6 @@ module.exports = async (req, res, next) => {
                 }
             ]
         });
-        console.log('aqui', coursesResult);
         const response = await Promise.all(
             coursesResult.map(async (course) => {
                 const responsePostulation = await Postulation.findOne({

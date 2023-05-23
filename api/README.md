@@ -61,33 +61,23 @@ We will create a file called .env positioned in "/api"
 
 - Server configurations: these variables are for basic configuration and development mode.
     - SERVER_PORT: api project execution port
-    - SERVER_MODE: variable to run development mode, should be filled with the value "dev" (if you use the console, it will display additional data when an endpoint is triggered and preload the information from the "development-data" folder to the database ).
-    - SERVER_DEVELOPMENT_USER: are the variables to customize the USER and STAFF registry of the development mode. If these variables are not created, the user for development mode by default will be:
-    ```json
+    - SERVER_MODE: variable to run development mode, should be filled with the value "dev".
+    - SERVER_DEVELOPMENT_USER_ID: It is the user ID of the main stytch account that will be used for development when assigning it, you can execute the preload command and give it the main role and all the permissions to be able to do tests more easily in local mode
+    ```bash
     {
-        "email" : "testing@gmail.com",
-        "password" : "123456"
+        "preload": "node ./src/development-data/index.js"
     }
     ```
-    -SERVER_DEVELOPMENT_COURSE: they are the variables to create a default course and you can make testing easier without having to create channels repeatedly
+    - CHANNEL_SLACK_CELEBRATION: Slack channel ID for celebration messages. make sure the slack app is present in the channel in order to run properly
+    - CALENDAR_CELEBRATION_ID: ID of the google calendar that will be used to schedule the celebrations
 ```bash
     #Server configurations
-    SERVER_PORT=3001
-    SERVER_MODE=
-    #User / Staff Testing
-    SERVER_DEVELOPMENT_USER_FIRST_NAME=
-    SERVER_DEVELOPMENT_USER_LAST_NAME=
-    SERVER_DEVELOPMENT_USER_COUNTRY=
-    SERVER_DEVELOPMENT_USER_EMAIL=
-    SERVER_DEVELOPMENT_USER_PASSWORD=
-    SERVER_DEVELOPMENT_USER_PHONE=
-    SERVER_DEVELOPMENT_USER_SLACK_ID=
-    #Course Testing
-    SERVER_DEVELOPMENT_COURSE_NAME=
-    SERVER_DEVELOPMENT_COURSE_SLACK_ID=
-    SERVER_DEVELOPMENT_COURSE_NAME_SLACK=
-    SERVER_DEVELOPMENT_COURSE_CALENDAR_ID=
-    SERVER_DEVELOPMENT_COURSE_CALENDAR_NAME=
+    PORT=3001
+    SERVER_MODE=dev
+    CLIENT_URL=http://localhost:3500
+    SERVER_DEVELOPMENT_USER_ID=
+    CHANNEL_SLACK_CELEBRATION=
+    CALENDAR_CELEBRATION_ID=
 ```
 
 - Database configurations: These variables are for the connection to the database, the api project is configured to use Postgresql with the "sequelize" ORM.
@@ -100,32 +90,11 @@ We will create a file called .env positioned in "/api"
     SERVER_DB_NAME=
 ```
 
-- Frontend configurations:: URLs needed to configure cors and email links.
+- stytch api access data.
 ```bash
-    #Frontend configurations
-    CLIENT_STUDENT_URL=http://localhost:3500
-    CLIENT_MANAGEMENT_URL=http://localhost:4000
-```
-
-- Jsonwebtoken configuration: variables for creating tokens.
-```bash
-    #jwt configurations
-    JWT_SECRET_KEY_STUDENT=
-    JWT_EXPIRES_STUDENT=
-    JWT_SECRET_KEY_MANAGEMENT=
-    JWT_EXPIRES_MANAGEMENT=
-```
-
-- Nodemailer configurations: necessary for sending mail with the nodemailer library.
-If you use a google mail the NODE_MAILER_HOST is "smtp.gmail.com" and its port is 587.
-You can also avoid using your private email password by creating an application password:
-![Image](../src/images/password-app.jpg)
-```bash
-    #nodemailer configurations
-    NODE_MAILER_HOST=
-    NODE_MAILER_PORT=
-    NODE_MAILER_USER=
-    NODE_MAILER_PASSWORD=
+    #Stytch configurations
+    STYTCH_PROJECT_ID=
+    STYTCH_SECRET=
 ```
 
 - Slack configurations: variable necessary for the socket connection of our slack app.
@@ -137,7 +106,7 @@ if SERVER_MODE_SLACK is filled with "dev" the console logs additional data
     SERVER_MODE_SLACK=
 ```
 
-- Google calendar configuration: variable needed for connection with google api.
+- Google calendar configuration: variable needed for connection with google api. [Here](https://www.youtube.com/watch?v=zrLf4KMs71E&t=1061s) is a video detailing how to configure the google calendar api
 ```bash
     #google configurations
     GOOGLE_CLIENT_ID=
