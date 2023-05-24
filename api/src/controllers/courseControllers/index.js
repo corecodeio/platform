@@ -4,6 +4,9 @@ const listCourse = require('./listCourse.controller');
 const createCourse = require('./createCourse.controller');
 const createSlack = require('./createSlack.controller');
 const createCalendar = require('./createCalendar.controller');
+const changeDate = require('./changeDate.controller');
+const changeStatus = require('./changeStatus.controller');
+const fullDataCourse = require('./fullDataCourse.controller');
 
 module.exports = {
     myCourses,
@@ -11,5 +14,8 @@ module.exports = {
     listCourse,
     createCourse,
     createSlack,
-    createCalendar
+    createCalendar,
+    changeDate,
+    changeStatus,
+    fullDataCourse
 };

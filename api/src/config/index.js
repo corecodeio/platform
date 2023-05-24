@@ -8,8 +8,8 @@ module.exports = {
         client_url: process.env.CLIENT_URL || 'http://localhost:3500',
         channel_slack_celebration: process.env.CHANNEL_SLACK_CELEBRATION,
         calendar_celebration_id: process.env.CALENDAR_CELEBRATION_ID,
-        daily_message_date: '0 0 2 * * *',
-        check_event_date: '0 * 2-17 * * 1-6'
+        daily_message_date: '0 0 8 * * *',
+        check_event_date: '0 * * * * *'
     },
     stytchConfig: {
         project_id: process.env.STYTCH_PROJECT_ID,

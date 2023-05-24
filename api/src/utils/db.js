@@ -25,12 +25,14 @@ const modelDefiners = [
     require('./../models/Course'),
     require('./../models/Postulation'),
     require('./../models/Message'),
-    require('./../models/Template')
+    require('./../models/Template'),
+    require('./../models/Event'),
+    require('./../models/Session')
 ];
 
 modelDefiners.forEach((model) => model(sequelize));
 
-const { User, Role, Permission, Course, Postulation, Message } = sequelize.models;
+const { User, Role, Permission, Course, Postulation, Message, Session } = sequelize.models;
 
 User.belongsToMany(Course, { as: 'courses', through: 'UserCourse' });
 Course.belongsToMany(User, { as: 'courses', through: 'UserCourse' });
@@ -54,6 +56,15 @@ Postulation.belongsToMany(Message, {
 Message.belongsToMany(Postulation, {
     as: 'messages',
     through: 'PostulationMessage'
+});
+
+Course.belongsToMany(Session, {
+    as: 'sessions',
+    through: 'CourseSession'
+});
+Session.belongsToMany(Course, {
+    as: 'sessions',
+    through: 'CourseSession'
 });
 
 module.exports = {

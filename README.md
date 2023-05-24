@@ -38,7 +38,7 @@ the folder dependencies per project folder:
 With this unification, it is only necessary to do the installation once in the main project,
 using one package.json file that unifies everything, without removing the individual package.json file from each project. this also applies to scripts.
 
-En nuestros espacios de trabajo, tendremos 3 proyectos:
+In our workspaces, we will have 2 projects:
 
 - api: general backend of the platform with different paths for each frontend:
     - endpoint for each frontend with different functionalities and validation of permissions and roles.
@@ -47,7 +47,7 @@ En nuestros espacios de trabajo, tendremos 3 proyectos:
         - Google Calendar (Google API).
         - WhatsApp (Meta for Developers).
         - Slack (Slack API).
--   student-app: frontend for students of the platform. Among its main functions will be:
+- frontend: frontend for students of the platform. Among its main functions will be:
     - sign Up and log In of new applicants.
     - Information validation:
         - Phone using WhatsApp verification code.
@@ -57,26 +57,21 @@ En nuestros espacios de trabajo, tendremos 3 proyectos:
         - States of the current process.
         - Attendance information and event schedules on Zoom and Google Calendar.
         - Generalized information of the enrolled course.
--   management-app: frontend for the administrative part. functions:
-    - Creation of new courses.
-    - System of roles and permissions for the different types of accounts.
-    - Dashboard for the administration of the different APIs and generated courses.
+    - Administration dashboard:
+        - Creation of new courses.
+        - System of roles and permissions for the different types of accounts.
+        - Dashboard for the administration of the different APIs and generated courses.
 
 ## 3. Setting environment variables
 
 In each project, you need an .env file. Here we will leave records of the name of these variables
 for each project individually:
 
-### student-app:
+### frontend:
 
 ```bash
     PORT=3500
-```
-
-### management-app:
-
-```bash
-    PORT=4000
+    REACT_APP_BACKEND_URL=http://localhost:3001
 ```
 
 ### api:
@@ -84,31 +79,21 @@ for each project individually:
 
 ```bash
     #Server configurations
-    SERVER_PORT=3001
-    SERVER_MODE=
-    #User / Staff Testing
-    SERVER_DEVELOPMENT_USER_FIRST_NAME=
-    SERVER_DEVELOPMENT_USER_LAST_NAME=
-    SERVER_DEVELOPMENT_USER_COUNTRY=
-    SERVER_DEVELOPMENT_USER_EMAIL=
-    SERVER_DEVELOPMENT_USER_PASSWORD=
-    SERVER_DEVELOPMENT_USER_PHONE=
-    SERVER_DEVELOPMENT_USER_SLACK_ID=
-    #Course Testing
-    SERVER_DEVELOPMENT_COURSE_NAME=
-    SERVER_DEVELOPMENT_COURSE_SLACK_ID=
-    SERVER_DEVELOPMENT_COURSE_NAME_SLACK=
-    SERVER_DEVELOPMENT_COURSE_CALENDAR_ID=
-    SERVER_DEVELOPMENT_COURSE_CALENDAR_NAME=
+    PORT=3001
+    SERVER_MODE=dev
+    CLIENT_URL=http://localhost:3500
+    SERVER_DEVELOPMENT_USER_ID=
+    CHANNEL_SLACK_CELEBRATION=
+    CALENDAR_CELEBRATION_ID=
+    #Stytch configurations
+    STYTCH_PROJECT_ID=
+    STYTCH_SECRET=
     #Database configurations
     SERVER_DB_USER=
     SERVER_DB_PASS=
     SERVER_DB_HOST=
     SERVER_DB_PORT=
     SERVER_DB_NAME=
-    #Frontend configurations
-    CLIENT_STUDENT_URL=http://localhost:3500
-    CLIENT_MANAGEMENT_URL=http://localhost:4000
     #slack configurations
     SLACK_BOT_USER_OAUTH_TOKEN=
     SLACK_APP_LEVEL_TOKEN=
@@ -117,39 +102,22 @@ for each project individually:
     GOOGLE_CLIENT_ID=
     GOOGLE_SECRET_CLIENT=
     GOOGLE_REFRESH_TOKEN=
+    ##react
+    REACT_APP_BACKEND_URL=http://localhost:3001
 ```
 
 ## 4. Scripts
 
 ```javascript
-        "start:api": "npm run start --workspace=api",
-        "dev:api": "npm run dev --workspace=api",
-        "start:student": "npm run start --workspace=student-app",
-        "build:student": "npm run build --workspace=student-app",
-        "start:management": "npm run start --workspace=management-app",
-        "build:management": "npm run build --workspace=management-app"
+    "build": "yarn workspace frontend build",
+    "start": "yarn workspace api start",
+    "dev:api": "yarn workspace api dev",
+    "start:frontend": "yarn workspace frontend start"
 ```
 
 ## 5. Structure styles
 
-As it is a project open to students, it was decided to use react module.css, so that each view or component has its own separate style and revisions are easier.
-
-![css module](./src/images/css-module.png 'css module')
-
-To adjust the styles to each resolution, media queries will be used:
-- default style for views larger than 1440px.
-- media query for views between 1440px and 1281px.
-- media query for views between 1280px and 801px.
-- media query for views 800px or less.
-
-```css
-@media only screen and (max-width: 1440px) and (min-width: 1281px) {
-}
-@media only screen and (max-width: 1280px) and (min-width: 801px) {
-}
-@media only screen and (max-width: 800px) {
-}
-```
+The project is currently using module.css, but will switch to Tailwinds. The dependencies to implement in the frontend project are already installed. [more information](https://tailwindcss.com)
 
 ## 6. Response structure in API
 
@@ -173,5 +141,4 @@ example:
 ## 8. README of the different projects
 
 - api: [README](/api/README.md)
-- student-app: [README](/student-app/README.md)
-- management-app: [README](/management-app/README.md)
+- frontend: [README](/frontend/README.md)
