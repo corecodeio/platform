@@ -9,5 +9,6 @@ router.use('/template', require('./template.router.js'));
 router.use('/role', require('./role.router.js'));
 router.use('/permission', require('./permission.router.js'));
 router.use('/session', require('./session.router.js'));
+router.use('/event', require('./event.router.js'));
 
 module.exports = router;
