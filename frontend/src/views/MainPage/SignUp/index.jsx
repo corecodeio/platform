@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Styles from './../Form.module.css';
 import { useDispatch } from 'react-redux';
 //icons
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { BiError } from 'react-icons/bi';
 //actions
 import { signUpAsync } from './../../../redux/actions/auth';
+
+const inputClass =
+    'mt-2.5 mb-1.5 w-full rounded border border-[#cadbe3] bg-white px-4 py-3 font-["SourceSansPro-Regular"] text-lg text-[#335065] outline-none placeholder:text-[#7291a0] focus:border-[#6254ff]';
+const invalidInputClass = 'border-[#d83341] focus:border-[#d83341]';
+const errorClass =
+    'flex items-center gap-1 font-["SourceSansPro-Regular"] text-sm text-[#d83341]';
 
 const SignUp = () => {
     const dispatch = useDispatch();
@@ -32,66 +37,77 @@ const SignUp = () => {
         const regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
         return regex.test(string);
     };
+    const isInvalidEmail = !validateEmail(data.email) && data.email !== '';
+
     return (
-        <form className={Styles[`form`]} onSubmit={handleSubmit}>
-            <p className={Styles[`title`]}>Despega tu futuro 🚀</p>
-            <p className={Styles[`subtitle`]}>Regístrate para ingresar a nuestra plataforma</p>
-            <div className="container-input">
+        <form
+            className="flex w-[90%] flex-col md:w-[80%] xl:w-[68%]"
+            onSubmit={handleSubmit}
+        >
+            <p className="mb-5 font-['Rubik-Bold'] text-[28px] leading-tight text-[#0d1e38]">
+                Despega tu futuro 🚀
+            </p>
+            <p className="mb-8 font-['SourceSansPro-SemiBold'] text-lg leading-snug text-[#0d1e38]">
+                Regístrate para ingresar a nuestra plataforma
+            </p>
+            <div className="flex flex-col">
                 <input
-                    className={Styles[`form-input`]}
-                    style={
-                        !validateEmail(data.email) && data.email !== ''
-                            ? { border: '1px solid #D83341' }
-                            : {}
-                    }
+                    className={`${inputClass} ${isInvalidEmail ? invalidInputClass : ''}`}
                     type="email"
                     name="email"
                     value={data.email}
                     onChange={handleChange}
                     placeholder="Email"
                 />
-                {!validateEmail(data.email) && data.email !== '' && (
-                    <p className={Styles[`form-input-error`]}>
+                {isInvalidEmail && (
+                    <p className={errorClass}>
                         <BiError />
                         Invalid email. Please try again.
                     </p>
                 )}
             </div>
-            <div className={Styles[`form-div-password`]}>
+            <div className="relative">
                 <input
-                    className={Styles[`form-input`]}
+                    className={`${inputClass} pr-12`}
                     type={hidden ? 'text' : 'password'}
                     name="password"
                     value={data.password}
                     onChange={handleChange}
                     placeholder="Password"
                 />
-                {hidden ? (
-                    <AiOutlineEyeInvisible
-                        className={Styles[`form-icon-eye`]}
-                        onClick={handleHidden}
-                    />
-                ) : (
-                    <AiOutlineEye className={Styles[`form-icon-eye`]} onClick={handleHidden} />
-                )}
+                <button
+                    aria-label={hidden ? 'Hide password' : 'Show password'}
+                    className="absolute right-4 top-[22px] text-[#7291a0] transition hover:text-[#335065]"
+                    type="button"
+                    onClick={handleHidden}
+                >
+                    {hidden ? (
+                        <AiOutlineEyeInvisible className="h-6 w-6" />
+                    ) : (
+                        <AiOutlineEye className="h-6 w-6" />
+                    )}
+                </button>
             </div>
             <button
-                className={Styles[`form-button`]}
+                className="my-2.5 h-[47px] rounded border-0 bg-[#6254ff] font-['SourceSansPro-Regular'] text-base text-white transition enabled:hover:cursor-pointer enabled:hover:bg-[#5145e6] disabled:bg-[#f0f0f0] disabled:text-[#7291a0]"
                 disabled={!data.email || !data.password || !validateEmail(data.email)}
                 type="submit"
             >
                 Registrarme
             </button>
-            <div className={Styles[`additional-text`]}>
-                <p className={Styles[`additional-text3`]}>
+            <div className="h-auto w-full">
+                <p className="mt-5 text-center font-['SourceSansPro-Regular'] text-sm">
                     ¿Ya tienes una cuenta?{' '}
-                    <Link to="/log-in" className={Styles[`additional-link`]}>
+                    <Link
+                        to="/log-in"
+                        className="font-['SourceSansPro-Bold'] text-[#2764ff] no-underline hover:underline"
+                    >
                         Ingresa aquí
                     </Link>
                 </p>
                 {error && (
-                    <p className={Styles[`form-error`]}>
-                        <BiError className={Styles[`form-icon-error`]} />
+                    <p className={`${errorClass} mt-2.5 w-full text-[13px]`}>
+                        <BiError className="h-5 w-5" />
                         {error}
                     </p>
                 )}
