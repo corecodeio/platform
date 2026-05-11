@@ -21,7 +21,7 @@ const MyCourses = () => {
             }
         };
         getData();
-    }, []);
+    }, [dispatch]);
     return (
         <div className="grid w-full grid-cols-1 gap-6 pb-6 pt-[30px] md:grid-cols-2 md:pb-2.5 md:pt-[45px] xl:grid-cols-3">
             {listCourses.map((course) => {
