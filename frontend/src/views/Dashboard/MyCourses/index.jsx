@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-//styles
-import Styles from './../Grid.module.css';
 //actions
 import { logOut } from './../../../redux/actions/auth';
 //components
@@ -23,12 +21,12 @@ const MyCourses = () => {
             }
         };
         getData();
-    }, []);
+    }, [dispatch]);
     return (
-        <div className={Styles[`main`]}>
+        <div className="grid w-full grid-cols-1 gap-6 pb-6 pt-[30px] md:grid-cols-2 md:pb-2.5 md:pt-[45px] xl:grid-cols-3">
             {listCourses.map((course) => {
                 return (
-                    <div key={course.id} className={Styles[`course`]}>
+                    <div key={course.id} className="min-w-0">
                         <CourseCard
                             data={course}
                             text="Ver Curso"

@@ -5,11 +5,10 @@ import axios from 'axios';
 //styles
 import Styles from './Setting.module.css';
 //actions
-import { updateAccount, updateProfile, updatePhone } from './../../../redux/actions/auth';
+import { updateAccount, updateProfile } from './../../../redux/actions/auth';
 //icons
 import { MdOutlineEdit, MdOutlineEditOff } from 'react-icons/md';
 import { AiOutlineCheck } from 'react-icons/ai';
-import { GiConfirmed, GiCancel } from 'react-icons/gi';
 //components
 import Modal from './../../../components/Modal';
 
@@ -30,8 +29,6 @@ const Setting = () => {
         address: '',
         linkedin_url: ''
     });
-    const [phone, setPhone] = useState(user.phone);
-    const [editPhone, setEditPhone] = useState(false);
     const handleChangeAccount = (e) => {
         setAccount({ ...account, [e.target.name]: e.target.value });
     };
@@ -74,29 +71,8 @@ const Setting = () => {
             enqueueSnackbar('500 server error', { variant: 'error' });
         }
     };
-    const handlePhone = (e) => {
-        setPhone(e.target.value);
-    };
-    const handleAddPhone = async () => {
-        try {
-            const data = {
-                phone: phone
-            };
-            const response = await axios.post('/api/user/add-phone', data);
-            if (response.data.successful) {
-                dispatch(updatePhone(response.data.user));
-                setEditPhone(false);
-                enqueueSnackbar(response.data.message, { variant: 'success' });
-            } else {
-                enqueueSnackbar(response.data.message, { variant: 'error' });
-            }
-        } catch (error) {
-            enqueueSnackbar('500 server error', { variant: 'error' });
-        }
-    };
     const handleOpenPhone = () => {
-        setPhone('');
-        setEditPhone(true);
+        setModalPhone(true);
     };
     const handleOpenProfile = () => {
         setProfile({

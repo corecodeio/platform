@@ -26,7 +26,7 @@ const AvailableCourses = () => {
             }
         };
         getData();
-    }, []);
+    }, [dispatch]);
 
     return (
         <>

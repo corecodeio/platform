@@ -5,7 +5,7 @@ import axios from 'axios';
 import Styles from './Templates.module.css';
 
 const Templates = () => {
-    const [error, setError] = useState('');
+    const [, setError] = useState('');
     const [send, setSend] = useState(false);
     const [data, setData] = useState({
         name: '',
