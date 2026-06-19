@@ -2,22 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { enqueueSnackbar } from 'notistack';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-//styles
-import Styles from './Setting.module.css';
 //actions
 import { updateAccount, updateProfile, updatePhone } from './../../../redux/actions/auth';
 //icons
 import { MdOutlineEdit, MdOutlineEditOff } from 'react-icons/md';
 import { AiOutlineCheck } from 'react-icons/ai';
-import { GiConfirmed, GiCancel } from 'react-icons/gi';
-//components
-import Modal from './../../../components/Modal';
+
+const primaryButton =
+    'rounded border border-[#6254ff] bg-[#6254ff] px-6 py-3 text-lg text-white transition hover:bg-[#5145d9] disabled:border-[#f0f0f0] disabled:bg-[#f0f0f0] disabled:text-[#9aa6ad]';
+const secondaryButton =
+    'rounded border border-[#6254ff] bg-white px-6 py-3 text-lg text-[#6254ff] transition hover:bg-[#6254ff]/10';
+const rowBase = 'grid w-full gap-4 px-4 py-4 md:px-6 md:py-5';
+const rowMuted = `${rowBase} bg-[#ebf3f7]`;
+const rowPair = `${rowMuted} md:grid-cols-2`;
+const rowFull = `${rowBase} bg-white`;
+const fieldBlock = 'flex min-w-0 flex-col';
+const labelClass = "mb-1 text-sm text-[#0d1e38] [font-family:'SourceSansPro-SemiBold',serif]";
+const fieldShell = 'flex min-h-[38px] min-w-0 items-center gap-2 text-[#335065]';
+const inputClass =
+    'min-h-[42px] w-full min-w-0 rounded border border-[#cadbe3] bg-white px-3 py-2 text-base text-[#335065] outline-none focus:border-[#6254ff]';
+const iconButton =
+    'inline-flex h-9 w-9 shrink-0 items-center justify-center rounded text-[#335065] transition hover:bg-[#cadbe3]/60';
+const sectionTitle = "text-2xl text-[#0d1e38] [font-family:'Rubik-SemiBold',serif] md:text-[32px]";
 
 const Setting = () => {
     const { user } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const [first_name, setFirst_name] = useState(false);
-    const [modalPhone, setModalPhone] = useState(false);
     const [last_name, setLast_name] = useState(false);
     const [edit, setEdit] = useState(false);
     const [account, setAccount] = useState({
@@ -57,10 +68,11 @@ const Setting = () => {
             enqueueSnackbar('500 server error', { variant: 'error' });
         }
     };
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
     };
     const handleUpdateProfile = async (e) => {
+        e.preventDefault();
         try {
             const response = await axios.post('/api/user/update-profile', profile);
             if (response.data.successful) {
@@ -97,6 +109,10 @@ const Setting = () => {
     const handleOpenPhone = () => {
         setPhone('');
         setEditPhone(true);
+    };
+    const handleCancelPhone = () => {
+        setPhone(user.phone || '');
+        setEditPhone(false);
     };
     const handleOpenProfile = () => {
         setProfile({
@@ -136,15 +152,11 @@ const Setting = () => {
 
     return (
         <>
-            <Modal isShow={modalPhone}>
-                <button onClick={() => setModalPhone(false)}>cerrar</button>
-                <p>sssssssssssss</p>
-            </Modal>
-            <form className={Styles[`main`]} onSubmit={handleSubmit}>
-                <div className={Styles[`head`]}>
-                    <p className={Styles[`title`]}>Información de cuenta</p>
+            <form className="flex w-full flex-col" onSubmit={handleSubmit}>
+                <div className="mt-9 mb-8 flex w-full flex-col gap-4 bg-white md:flex-row md:items-center md:justify-between">
+                    <p className={sectionTitle}>Información de cuenta</p>
                     <button
-                        className={Styles[`form-button`]}
+                        className={primaryButton}
                         type="submit"
                         onClick={handleSubmitAccount}
                         disabled={!first_name && !last_name}
@@ -152,16 +164,16 @@ const Setting = () => {
                         Guardar
                     </button>
                 </div>
-                <div className={Styles[`row1`]}>
-                    <div className={Styles[`form-data`]}>
-                        <label htmlFor="first_name" className={Styles[`form-data-description`]}>
+                <div className={rowPair}>
+                    <div className={fieldBlock}>
+                        <label htmlFor="first_name" className={labelClass}>
                             Nombre*:
                         </label>
-                        <div className={Styles[`form-data-container`]}>
+                        <div className={fieldShell}>
                             {first_name ? (
                                 <>
                                     <input
-                                        className={Styles[`form-input`]}
+                                        className={inputClass}
                                         type="text"
                                         id="first_name"
                                         name="first_name"
@@ -169,31 +181,41 @@ const Setting = () => {
                                         onChange={handleChangeAccount}
                                         placeholder="First name"
                                     />
-                                    <MdOutlineEditOff
-                                        className={Styles[`form-icon`]}
+                                    <button
+                                        className={iconButton}
                                         onClick={() => setFirst_name(false)}
-                                    />
+                                        type="button"
+                                        aria-label="Cancelar edición de nombre"
+                                    >
+                                        <MdOutlineEditOff className="h-6 w-6" aria-hidden="true" />
+                                    </button>
                                 </>
                             ) : (
                                 <>
-                                    <p>{user.first_name ? user.first_name : 'First name'}</p>
-                                    <MdOutlineEdit
-                                        className={Styles[`form-icon`]}
+                                    <p className="min-w-0 truncate">
+                                        {user.first_name ? user.first_name : 'First name'}
+                                    </p>
+                                    <button
+                                        className={iconButton}
                                         onClick={handleOpenAccountFirstName}
-                                    />
+                                        type="button"
+                                        aria-label="Editar nombre"
+                                    >
+                                        <MdOutlineEdit className="h-6 w-6" aria-hidden="true" />
+                                    </button>
                                 </>
                             )}
                         </div>
                     </div>
-                    <div className={Styles[`form-data`]}>
-                        <label htmlFor="last_name" className={Styles[`form-data-description`]}>
+                    <div className={fieldBlock}>
+                        <label htmlFor="last_name" className={labelClass}>
                             Apellido*:
                         </label>
-                        <div className={Styles[`form-data-container`]}>
+                        <div className={fieldShell}>
                             {last_name ? (
                                 <>
                                     <input
-                                        className={Styles[`form-input`]}
+                                        className={inputClass}
                                         type="text"
                                         id="last_name"
                                         name="last_name"
@@ -201,80 +223,136 @@ const Setting = () => {
                                         onChange={handleChangeAccount}
                                         placeholder="Last name"
                                     />
-                                    <MdOutlineEditOff
-                                        className={Styles[`form-icon`]}
+                                    <button
+                                        className={iconButton}
                                         onClick={() => setLast_name(false)}
-                                    />
+                                        type="button"
+                                        aria-label="Cancelar edición de apellido"
+                                    >
+                                        <MdOutlineEditOff className="h-6 w-6" aria-hidden="true" />
+                                    </button>
                                 </>
                             ) : (
                                 <>
-                                    <p>{user.last_name ? user.last_name : 'Last name'}</p>
-                                    <MdOutlineEdit
-                                        className={Styles[`form-icon`]}
+                                    <p className="min-w-0 truncate">
+                                        {user.last_name ? user.last_name : 'Last name'}
+                                    </p>
+                                    <button
+                                        className={iconButton}
                                         onClick={handleOpenAccountLastName}
-                                    />
+                                        type="button"
+                                        aria-label="Editar apellido"
+                                    >
+                                        <MdOutlineEdit className="h-6 w-6" aria-hidden="true" />
+                                    </button>
                                 </>
                             )}
                         </div>
                     </div>
                 </div>
-                <div className={Styles[`row2`]}>
-                    <div className={Styles[`form-data-2`]}>
-                        <p className={Styles[`form-data-description`]}>Email*:</p>
-                        <div className={Styles[`form-data-container`]}>
-                            <p>{user.email}</p>
+                <div className={rowFull}>
+                    <div className={fieldBlock}>
+                        <p className={labelClass}>Email*:</p>
+                        <div className={`${fieldShell} flex-wrap`}>
+                            <p className="min-w-0 break-all">{user.email}</p>
                             {user.confirmed_email ? (
                                 <>
-                                    <AiOutlineCheck className={Styles[`form-check`]} />
-                                    <p className={Styles[`form-text-check`]}>(Verificado)</p>
+                                    <AiOutlineCheck
+                                        className="h-5 w-5 shrink-0 text-green-700"
+                                        aria-hidden="true"
+                                    />
+                                    <p className="text-xs text-green-700">(Verificado)</p>
                                 </>
                             ) : (
-                                <button>confirmar email</button>
+                                <button className={secondaryButton} type="button">
+                                    confirmar email
+                                </button>
                             )}
                         </div>
                     </div>
                 </div>
-                <div className={Styles[`row1`]}>
-                    <div className={Styles[`form-data-2`]}>
-                        <label htmlFor="phone" className={Styles[`form-data-description`]}>
+                <div className={rowMuted}>
+                    <div className={fieldBlock}>
+                        <label htmlFor="phone" className={labelClass}>
                             Telefono:
                         </label>
-                        <div className={Styles[`form-data-container`]}>
-                            {user.phone ? (
+                        <div className={`${fieldShell} flex-wrap`}>
+                            {editPhone ? (
                                 <>
-                                    <AiOutlineCheck className={Styles[`form-check`]} />
-                                    <p className={Styles[`form-text-check`]}>(Verificado)</p>
-                                    <button>eliminar</button>
+                                    <input
+                                        className={inputClass}
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        value={phone || ''}
+                                        onChange={handlePhone}
+                                        placeholder="Agregar Numero"
+                                    />
+                                    <button
+                                        className={secondaryButton}
+                                        onClick={handleCancelPhone}
+                                        type="button"
+                                    >
+                                        Cancelar
+                                    </button>
+                                    <button
+                                        className={primaryButton}
+                                        onClick={handleAddPhone}
+                                        type="button"
+                                        disabled={!phone}
+                                    >
+                                        Guardar
+                                    </button>
+                                </>
+                            ) : user.phone ? (
+                                <>
+                                    <p className="min-w-0 break-all">{user.phone}</p>
+                                    <AiOutlineCheck
+                                        className="h-5 w-5 shrink-0 text-green-700"
+                                        aria-hidden="true"
+                                    />
+                                    <p className="text-xs text-green-700">(Verificado)</p>
+                                    <button className={secondaryButton} type="button">
+                                        eliminar
+                                    </button>
                                 </>
                             ) : (
-                                <button onClick={handleOpenPhone}>Agregar Numero</button>
+                                <button
+                                    className={secondaryButton}
+                                    onClick={handleOpenPhone}
+                                    type="button"
+                                >
+                                    Agregar Numero
+                                </button>
                             )}
                         </div>
                     </div>
                 </div>
             </form>
-            <form className={Styles[`main`]} onSubmit={handleSubmit}>
-                <div className={Styles[`head`]}>
-                    <p className={Styles[`title`]}>Detalles del perfil</p>
-                    <div>
+            <form className="flex w-full flex-col" onSubmit={handleSubmit}>
+                <div className="mt-9 mb-8 flex w-full flex-col gap-4 bg-white md:flex-row md:items-center md:justify-between">
+                    <p className={sectionTitle}>Detalles del perfil</p>
+                    <div className="flex flex-wrap gap-3">
                         {edit ? (
                             <>
                                 <button
-                                    className={Styles[`form-button2`]}
+                                    className={secondaryButton}
                                     onClick={handleCancelProfile}
+                                    type="button"
                                 >
                                     Cancelar
                                 </button>
                                 <button
-                                    className={Styles[`form-button`]}
+                                    className={primaryButton}
                                     onClick={handleUpdateProfile}
+                                    type="submit"
                                 >
                                     Guardar
                                 </button>
                             </>
                         ) : (
                             <button
-                                className={Styles[`form-button`]}
+                                className={primaryButton}
                                 type="button"
                                 onClick={handleOpenProfile}
                             >
@@ -283,16 +361,16 @@ const Setting = () => {
                         )}
                     </div>
                 </div>
-                <div className={Styles[`row1`]}>
-                    <div className={Styles[`form-data`]}>
-                        <label htmlFor="country" className={Styles[`form-data-description`]}>
+                <div className={rowPair}>
+                    <div className={fieldBlock}>
+                        <label htmlFor="country" className={labelClass}>
                             País:
                         </label>
-                        <div className={Styles[`form-data-container`]}>
+                        <div className={fieldShell}>
                             {edit ? (
                                 <>
                                     <input
-                                        className={Styles[`form-input`]}
+                                        className={inputClass}
                                         type="text"
                                         id="country"
                                         name="country"
@@ -303,20 +381,20 @@ const Setting = () => {
                                 </>
                             ) : (
                                 <>
-                                    <p>{user.country}</p>
+                                    <p className="min-w-0 truncate">{user.country}</p>
                                 </>
                             )}
                         </div>
                     </div>
-                    <div className={Styles[`form-data`]}>
-                        <label htmlFor="city" className={Styles[`form-data-description`]}>
+                    <div className={fieldBlock}>
+                        <label htmlFor="city" className={labelClass}>
                             Ciudad:
                         </label>
-                        <div className={Styles[`form-data-container`]}>
+                        <div className={fieldShell}>
                             {edit ? (
                                 <>
                                     <input
-                                        className={Styles[`form-input`]}
+                                        className={inputClass}
                                         type="text"
                                         id="city"
                                         name="city"
@@ -327,22 +405,22 @@ const Setting = () => {
                                 </>
                             ) : (
                                 <>
-                                    <p>{user.city}</p>
+                                    <p className="min-w-0 truncate">{user.city}</p>
                                 </>
                             )}
                         </div>
                     </div>
                 </div>
-                <div className={Styles[`row2`]}>
-                    <div className={Styles[`form-data-2`]}>
-                        <label htmlFor="city" className={Styles[`form-data-description`]}>
+                <div className={rowFull}>
+                    <div className={fieldBlock}>
+                        <label htmlFor="address" className={labelClass}>
                             Dirección:
                         </label>
-                        <div className={Styles[`form-data-container`]}>
+                        <div className={fieldShell}>
                             {edit ? (
                                 <>
                                     <input
-                                        className={Styles[`form-input`]}
+                                        className={inputClass}
                                         type="text"
                                         id="address"
                                         name="address"
@@ -353,22 +431,22 @@ const Setting = () => {
                                 </>
                             ) : (
                                 <>
-                                    <p>{user.address}</p>
+                                    <p className="min-w-0 break-words">{user.address}</p>
                                 </>
                             )}
                         </div>
                     </div>
                 </div>
-                <div className={Styles[`row1`]}>
-                    <div className={Styles[`form-data-2`]}>
-                        <label htmlFor="linkedin_url" className={Styles[`form-data-description`]}>
+                <div className={rowMuted}>
+                    <div className={fieldBlock}>
+                        <label htmlFor="linkedin_url" className={labelClass}>
                             Linkedin:
                         </label>
-                        <div className={Styles[`form-data-container`]}>
+                        <div className={fieldShell}>
                             {edit ? (
                                 <>
                                     <input
-                                        className={Styles[`form-input`]}
+                                        className={inputClass}
                                         type="text"
                                         id="linkedin_url"
                                         name="linkedin_url"
@@ -379,7 +457,7 @@ const Setting = () => {
                                 </>
                             ) : (
                                 <>
-                                    <p>{user.linkedin_url}</p>
+                                    <p className="min-w-0 break-all">{user.linkedin_url}</p>
                                 </>
                             )}
                         </div>
