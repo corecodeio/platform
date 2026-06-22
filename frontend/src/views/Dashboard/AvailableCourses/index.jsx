@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-//styles
-import Styles from './../Grid.module.css';
 //actions
 import { logOut } from './../../../redux/actions/auth';
 //components
@@ -31,10 +29,10 @@ const AvailableCourses = () => {
     return (
         <>
             <Outlet />
-            <div className={Styles[`main`]}>
+            <div className="grid w-full max-w-[342px] grid-cols-1 gap-6 pb-6 pt-[30px] md:max-w-none md:grid-cols-2 md:pt-[45px] xl:grid-cols-3">
                 {listCourses.map((course) => {
                     return (
-                        <div key={course.id} className={Styles[`course`]}>
+                        <div key={course.id} className="min-w-0 w-full">
                             <CourseCard
                                 data={course}
                                 text="Aplica"
